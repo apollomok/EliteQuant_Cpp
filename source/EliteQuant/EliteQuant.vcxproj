@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2E1B1DCB-761A-48D8-A4BC-152F1D67EAEF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>EliteQuant</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ELITEQUANT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>BOOST_PYTHON_STATIC_LIB;IB_USE_STD_STRING;DLL_EXPORT;_DEBUG;_WINDOWS;_USRDLL;ELITEQUANT_EXPORTS;TWSAPIDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)EliteQuant\;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;$(SolutionDir)ThirdParty\websocketpp\;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\rapidjson\include\;C:\Anaconda3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ShowIncludes>false</ShowIncludes>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>-D_WIN32_WINNT=0x0501 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Workspace\boost\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Anaconda3\libs\python36.lib;C:\Anaconda3\libs\python3.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thostmduserapi.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thosttraderapi.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmdd.lib;$(SolutionDir)ThirdParty\zeromq\bin\$(Platform)\$(Configuration)\v141\dynamic\libzmq.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;ELITEQUANT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>BOOST_PYTHON_STATIC_LIB;IB_USE_STD_STRING;DLL_EXPORT;NDEBUG;_WINDOWS;_USRDLL;ELITEQUANT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)EliteQuant\;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;$(SolutionDir)ThirdParty\websocketpp\;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\rapidjson\include\;C:\Anaconda3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>-D_WIN32_WINNT=0x0501 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Workspace\boost\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Anaconda3\libs\python36.lib;C:\Anaconda3\libs\python3.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thostmduserapi.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thosttraderapi.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmd.lib;$(SolutionDir)ThirdParty\zeromq\bin\$(Platform)\$(Configuration)\v141\dynamic\libzmq.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Brokers\Backtest\backtestdatafeed.cpp" />
+    <ClCompile Include="Brokers\Ctp\ctpbrokerage.cpp" />
+    <ClCompile Include="Brokers\Ctp\ctpdatafeed.cpp" />
+    <ClCompile Include="Brokers\Google\googledatafeed.cpp" />
+    <ClCompile Include="Brokers\IB\ibbrokerage.cpp" />
+    <ClCompile Include="Brokers\IB\OfficialWindows\EClientSocketBase.cpp" />
+    <ClCompile Include="Brokers\IB\OfficialWindows\EPosixClientSocket.cpp" />
+    <ClCompile Include="Brokers\Paper\paperbrokerage.cpp" />
+    <ClCompile Include="Brokers\Paper\paperdatafeed.cpp" />
+    <ClCompile Include="Brokers\Sina\sinadatafeed.cpp" />
+    <ClCompile Include="Common\Account\accountmanager.cpp" />
+    <ClCompile Include="Common\Brokerage\brokerage.cpp" />
+    <ClCompile Include="Common\Brokerage\exchange.cpp" />
+    <ClCompile Include="Common\config.cpp" />
+    <ClCompile Include="Common\Data\bar.cpp" />
+    <ClCompile Include="Common\Data\barseries.cpp" />
+    <ClCompile Include="Common\Data\datamanager.cpp" />
+    <ClCompile Include="Common\Data\marketdatafeed.cpp" />
+    <ClCompile Include="Common\Data\tick.cpp" />
+    <ClCompile Include="Common\Logger\logger.cpp" />
+    <ClCompile Include="Common\Msgq\msgq.cpp" />
+    <ClCompile Include="Common\Order\orderbook.cpp" />
+    <ClCompile Include="Common\Order\ordermanager.cpp" />
+    <ClCompile Include="Common\Order\orderstatus.cpp" />
+    <ClCompile Include="Common\Performance\performancemanager.cpp" />
+    <ClCompile Include="Common\Performance\reportmanager.cpp" />
+    <ClCompile Include="Common\Risk\marginmanager.cpp" />
+    <ClCompile Include="Common\Risk\riskmanager.cpp" />
+    <ClCompile Include="Common\Security\portfoliomanager.cpp" />
+    <ClCompile Include="Common\Security\position.cpp" />
+    <ClCompile Include="Common\Strategy\strategybase.cpp" />
+    <ClCompile Include="Common\Strategy\strategymanager.cpp" />
+    <ClCompile Include="Common\Time\getRealTime.cpp" />
+    <ClCompile Include="Common\Time\heartbeat.cpp" />
+    <ClCompile Include="Common\Time\timeutil.cpp" />
+    <ClCompile Include="Common\Util\calc.cpp" />
+    <ClCompile Include="Common\Util\consolecontrolhandler.cpp" />
+    <ClCompile Include="Common\Util\util.cpp" />
+    <ClCompile Include="Services\Api\apiservice.cpp" />
+    <ClCompile Include="Services\backtestoptimizationengine.cpp" />
+    <ClCompile Include="Services\Brokerage\brokerageservice.cpp" />
+    <ClCompile Include="Services\Data\dataservice.cpp" />
+    <ClCompile Include="Services\elitequant_.cpp" />
+    <ClCompile Include="Services\Strategy\strategyservice.cpp" />
+    <ClCompile Include="Services\tradingengine.cpp" />
+    <ClCompile Include="Strategy\smacross.cpp" />
+    <ClCompile Include="Strategy\strategyFactory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Brokers\Backtest\backtestdatafeed.h" />
+    <ClInclude Include="Brokers\Ctp\ctpbrokerage.h" />
+    <ClInclude Include="Brokers\Ctp\ctpdatafeed.h" />
+    <ClInclude Include="Brokers\Ctp\ThostFtdcMdApi.h" />
+    <ClInclude Include="Brokers\Ctp\ThostFtdcTraderApi.h" />
+    <ClInclude Include="Brokers\Ctp\ThostFtdcUserApiDataType.h" />
+    <ClInclude Include="Brokers\Ctp\ThostFtdcUserApiStruct.h" />
+    <ClInclude Include="Brokers\Google\googledatafeed.h" />
+    <ClInclude Include="Brokers\IB\ibbrokerage.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\CommissionReport.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\CommonDefs.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\Contract.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\EClient.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\EClientSocketBase.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\EClientSocketBaseImpl.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\EPosixClientSocket.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\EPosixClientSocketPlatform.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\EWrapper.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\Execution.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\IBString.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\Order.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\OrderState.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\ScannerSubscription.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\shared_ptr.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\StdAfx.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\TagValue.h" />
+    <ClInclude Include="Brokers\IB\OfficialWindows\TwsSocketClientErrors.h" />
+    <ClInclude Include="Brokers\Paper\paperbrokerage.h" />
+    <ClInclude Include="Brokers\Paper\paperdatafeed.h" />
+    <ClInclude Include="Brokers\Sina\sinadatafeed.h" />
+    <ClInclude Include="Common\Account\accountinfo.h" />
+    <ClInclude Include="Common\Account\accountmanager.h" />
+    <ClInclude Include="Common\Brokerage\brokerage.h" />
+    <ClInclude Include="Common\Brokerage\exchange.h" />
+    <ClInclude Include="Common\config.h" />
+    <ClInclude Include="Common\Data\bar.h" />
+    <ClInclude Include="Common\Data\barinterval.h" />
+    <ClInclude Include="Common\Data\barseries.h" />
+    <ClInclude Include="Common\Data\datamanager.h" />
+    <ClInclude Include="Common\Data\datatype.h" />
+    <ClInclude Include="Common\Data\marketdatafeed.h" />
+    <ClInclude Include="Common\Data\tick.h" />
+    <ClInclude Include="Common\Data\tickreader.h" />
+    <ClInclude Include="Common\Data\tickwriter.h" />
+    <ClInclude Include="Common\Logger\logger.h" />
+    <ClInclude Include="Common\Msgq\msgq.h" />
+    <ClInclude Include="Common\Order\order.h" />
+    <ClInclude Include="Common\Order\orderbook.h" />
+    <ClInclude Include="Common\Order\orderidtracker.h" />
+    <ClInclude Include="Common\Order\ordermanager.h" />
+    <ClInclude Include="Common\Order\orderstatus.h" />
+    <ClInclude Include="Common\Order\ordertype.h" />
+    <ClInclude Include="Common\Order\timeinforce.h" />
+    <ClInclude Include="Common\Order\fill.h" />
+    <ClInclude Include="Common\Performance\performancemanager.h" />
+    <ClInclude Include="Common\Performance\reportmanager.h" />
+    <ClInclude Include="Common\Risk\marginmanager.h" />
+    <ClInclude Include="Common\Risk\riskmanager.h" />
+    <ClInclude Include="Common\Security\currencytype.h" />
+    <ClInclude Include="Common\Security\portfoliomanager.h" />
+    <ClInclude Include="Common\Security\position.h" />
+    <ClInclude Include="Common\Security\security.h" />
+    <ClInclude Include="Common\Security\securitytype.h" />
+    <ClInclude Include="Common\Strategy\strategybase.h" />
+    <ClInclude Include="Common\Strategy\strategymanager.h" />
+    <ClInclude Include="Common\Time\getRealTime.h" />
+    <ClInclude Include="Common\Time\heartbeat.h" />
+    <ClInclude Include="Common\Time\timeutil.h" />
+    <ClInclude Include="Common\Util\calc.h" />
+    <ClInclude Include="Common\Util\consolecontrolhandler.h" />
+    <ClInclude Include="Common\Util\util.h" />
+    <ClInclude Include="Services\Api\apiservice.h" />
+    <ClInclude Include="Services\backtestoptimizationengine.h" />
+    <ClInclude Include="Services\Brokerage\brokerageservice.h" />
+    <ClInclude Include="Services\Data\dataservice.h" />
+    <ClInclude Include="Services\Strategy\strategyservice.h" />
+    <ClInclude Include="Services\tradingengine.h" />
+    <ClInclude Include="Strategy\smacross.h" />
+    <ClInclude Include="Strategy\strategyFactory.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

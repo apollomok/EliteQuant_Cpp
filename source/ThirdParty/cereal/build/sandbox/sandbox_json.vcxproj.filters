@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Workspace\QuantWealthCpp\Source\Vendors\cereal\sandbox\sandbox_json.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Workspace\QuantWealthCpp\Source\Vendors\cereal\sandbox\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{BE5D9DEB-012D-33B2-800B-6FFAF49EF530}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

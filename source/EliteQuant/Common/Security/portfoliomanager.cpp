@@ -1,0 +1,55 @@
+#include <Common/Security/portfoliomanager.h>
+
+namespace EliteQuant {
+	PortfolioManager* PortfolioManager::pinstance_ = nullptr;
+	mutex PortfolioManager::instancelock_;
+
+	PortfolioManager::~PortfolioManager()
+	{
+		// release all the positions
+		for (auto&& p : _positions) {
+			if (p.second != nullptr) delete p.second;
+		}
+	}
+
+	PortfolioManager& PortfolioManager::instance() {
+		if (pinstance_ == nullptr) {
+			lock_guard<mutex> g(instancelock_);
+			if (pinstance_ == nullptr) {
+				pinstance_ = new PortfolioManager();
+			}
+		}
+		return *pinstance_;
+	}
+
+	PortfolioManager::PortfolioManager() :_count(0) {
+		rebuild();
+	}
+
+	void PortfolioManager::reset() {
+		for (auto&& p : _positions) {
+			if (p.second != nullptr) delete p.second;
+		}
+
+		_positions.clear();
+		_count = 0;
+	}
+
+	void PortfolioManager::rebuild() {
+		reset();
+	}
+
+	double PortfolioManager::Adjust(Fill& fill) {
+		auto it = _positions.find(fill.fullSymbol);
+		if (it == _positions.end()) {
+			Position* pos = new Position();
+			pos->_fullsymbol = fill.fullSymbol;
+			pos->_size = 0;
+			pos->_avgprice = 0;
+			_positions.insert(std::pair<string, Position*>(fill.fullSymbol, pos));
+
+		}
+
+		return _positions[fill.fullSymbol]->Adjust(fill);
+	}
+}

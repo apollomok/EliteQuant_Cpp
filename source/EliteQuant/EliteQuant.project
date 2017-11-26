@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Project Name="EliteQuant" Version="10.0.0" InternalType="Library">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
+    </Plugin>
+  </Plugins>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="Brokers">
+    <VirtualDirectory Name="Google">
+      <File Name="Brokers/Google/googledatafeed.cpp"/>
+      <File Name="Brokers/Google/googledatafeed.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="IB">
+      <VirtualDirectory Name="Official">
+        <File Name="Brokers/IB/Official/CommissionReport.h"/>
+        <File Name="Brokers/IB/Official/CommonDefs.h"/>
+        <File Name="Brokers/IB/Official/Contract.h"/>
+        <File Name="Brokers/IB/Official/ContractCondition.cpp"/>
+        <File Name="Brokers/IB/Official/ContractCondition.h"/>
+        <File Name="Brokers/IB/Official/DefaultEWrapper.cpp"/>
+        <File Name="Brokers/IB/Official/DefaultEWrapper.h"/>
+        <File Name="Brokers/IB/Official/EClient.cpp"/>
+        <File Name="Brokers/IB/Official/EClient.h"/>
+        <File Name="Brokers/IB/Official/EClientMsgSink.h"/>
+        <File Name="Brokers/IB/Official/EClientSocket.cpp"/>
+        <File Name="Brokers/IB/Official/EClientSocket.h"/>
+        <File Name="Brokers/IB/Official/EDecoder.cpp"/>
+        <File Name="Brokers/IB/Official/EDecoder.h"/>
+        <File Name="Brokers/IB/Official/EMessage.cpp"/>
+        <File Name="Brokers/IB/Official/EMessage.h"/>
+        <File Name="Brokers/IB/Official/EMutex.cpp"/>
+        <File Name="Brokers/IB/Official/EMutex.h"/>
+        <File Name="Brokers/IB/Official/EPosixClientSocketPlatform.h"/>
+        <File Name="Brokers/IB/Official/EReader.cpp"/>
+        <File Name="Brokers/IB/Official/EReader.h"/>
+        <File Name="Brokers/IB/Official/EReaderOSSignal.cpp"/>
+        <File Name="Brokers/IB/Official/EReaderOSSignal.h"/>
+        <File Name="Brokers/IB/Official/EReaderSignal.h"/>
+        <File Name="Brokers/IB/Official/EReaderWMSignal.cpp"/>
+        <File Name="Brokers/IB/Official/EReaderWMSignal.h"/>
+        <File Name="Brokers/IB/Official/ESocket.cpp"/>
+        <File Name="Brokers/IB/Official/ESocket.h"/>
+        <File Name="Brokers/IB/Official/ETransport.h"/>
+        <File Name="Brokers/IB/Official/EWrapper.h"/>
+        <File Name="Brokers/IB/Official/Execution.h"/>
+        <File Name="Brokers/IB/Official/executioncondition.cpp"/>
+        <File Name="Brokers/IB/Official/executioncondition.h"/>
+        <File Name="Brokers/IB/Official/IExternalizable.h"/>
+        <File Name="Brokers/IB/Official/MarginCondition.cpp"/>
+        <File Name="Brokers/IB/Official/MarginCondition.h"/>
+        <File Name="Brokers/IB/Official/OperatorCondition.cpp"/>
+        <File Name="Brokers/IB/Official/OperatorCondition.h"/>
+        <File Name="Brokers/IB/Official/Order.h"/>
+        <File Name="Brokers/IB/Official/OrderCondition.cpp"/>
+        <File Name="Brokers/IB/Official/OrderCondition.h"/>
+        <File Name="Brokers/IB/Official/OrderState.h"/>
+        <File Name="Brokers/IB/Official/PercentChangeCondition.cpp"/>
+        <File Name="Brokers/IB/Official/PercentChangeCondition.h"/>
+        <File Name="Brokers/IB/Official/PriceCondition.cpp"/>
+        <File Name="Brokers/IB/Official/PriceCondition.h"/>
+        <File Name="Brokers/IB/Official/Resource.h"/>
+        <File Name="Brokers/IB/Official/ScannerSubscription.h"/>
+        <File Name="Brokers/IB/Official/shared_ptr.h"/>
+        <File Name="Brokers/IB/Official/SoftDollarTier.cpp"/>
+        <File Name="Brokers/IB/Official/SoftDollarTier.h"/>
+        <File Name="Brokers/IB/Official/StdAfx.cpp"/>
+        <File Name="Brokers/IB/Official/StdAfx.h"/>
+        <File Name="Brokers/IB/Official/TagValue.h"/>
+        <File Name="Brokers/IB/Official/TimeCondition.cpp"/>
+        <File Name="Brokers/IB/Official/TimeCondition.h"/>
+        <File Name="Brokers/IB/Official/TwsSocketClientErrors.h"/>
+        <File Name="Brokers/IB/Official/VolumeCondition.cpp"/>
+        <File Name="Brokers/IB/Official/VolumeCondition.h"/>
+      </VirtualDirectory>
+      <File Name="Brokers/IB/ibbrokerage.cpp"/>
+      <File Name="Brokers/IB/ibbrokerage.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Paper">
+      <File Name="Brokers/Paper/paperbrokerage.cpp"/>
+      <File Name="Brokers/Paper/paperbrokerage.h"/>
+      <File Name="Brokers/Paper/paperdatafeed.cpp"/>
+      <File Name="Brokers/Paper/paperdatafeed.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Sina">
+      <File Name="Brokers/Sina/sinadatafeed.cpp"/>
+      <File Name="Brokers/Sina/sinadatafeed.h"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Common">
+    <VirtualDirectory Name="Algo">
+      <File Name="Common/Algo/algobase.cpp"/>
+      <File Name="Common/Algo/algobase.h"/>
+      <File Name="Common/Algo/algomq.cpp"/>
+      <File Name="Common/Algo/algomq.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Brokerage">
+      <File Name="Common/Brokerage/exchange.cpp"/>
+      <File Name="Common/Brokerage/exchange.h"/>
+      <File Name="Common/Brokerage/brokerage.cpp"/>
+      <File Name="Common/Brokerage/brokerage.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Data">
+      <File Name="Common/Data/bar.cpp"/>
+      <File Name="Common/Data/bar.h"/>
+      <File Name="Common/Data/barinterval.h"/>
+      <File Name="Common/Data/barseries.cpp"/>
+      <File Name="Common/Data/barseries.h"/>
+      <File Name="Common/Data/datamanager.cpp"/>
+      <File Name="Common/Data/datamanager.h"/>
+      <File Name="Common/Data/datatype.h"/>
+      <File Name="Common/Data/tick.cpp"/>
+      <File Name="Common/Data/tick.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Logger">
+      <File Name="Common/Logger/log.cpp"/>
+      <File Name="Common/Logger/log.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Order">
+      <File Name="Common/Order/order.h"/>
+      <File Name="Common/Order/ordermanager.cpp"/>
+      <File Name="Common/Order/ordermanager.h"/>
+      <File Name="Common/Order/orderstatus.cpp"/>
+      <File Name="Common/Order/orderstatus.h"/>
+      <File Name="Common/Order/ordertype.h"/>
+      <File Name="Common/Order/trade.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Security">
+      <File Name="Common/Security/accountinfo.h"/>
+      <File Name="Common/Security/currencytype.h"/>
+      <File Name="Common/Security/portfoliomanager.cpp"/>
+      <File Name="Common/Security/portfoliomanager.h"/>
+      <File Name="Common/Security/position.cpp"/>
+      <File Name="Common/Security/position.h"/>
+      <File Name="Common/Security/security.h"/>
+      <File Name="Common/Security/securitytype.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Time">
+      <File Name="Common/Time/bstTime.cpp"/>
+      <File Name="Common/Time/bstTime.h"/>
+      <File Name="Common/Time/getRealTime.cpp"/>
+      <File Name="Common/Time/getRealTime.h"/>
+      <File Name="Common/Time/heartbeat.cpp"/>
+      <File Name="Common/Time/heartbeat.h"/>
+      <File Name="Common/Time/timeutil.cpp"/>
+      <File Name="Common/Time/timeutil.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Util">
+      <File Name="Common/Util/basictypes.h"/>
+      <File Name="Common/Util/circularbuffer.h"/>
+      <File Name="Common/Util/hook.cpp"/>
+      <File Name="Common/Util/hook.h"/>
+      <File Name="Common/Util/util.cpp"/>
+      <File Name="Common/Util/util.h"/>
+    </VirtualDirectory>
+    <File Name="Common/config.cpp"/>
+    <File Name="Common/config.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Engine">
+    <VirtualDirectory Name="Data">
+      <File Name="Engine/Data/datathread.cpp"/>
+      <File Name="Engine/Data/datathread.h"/>
+      <File Name="Engine/Data/marketdatafeed.cpp"/>
+      <File Name="Engine/Data/marketdatafeed.h"/>
+      <File Name="Engine/Data/tickrecorder.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Interface">
+      <File Name="Engine/Interface/api_core.cpp"/>
+      <File Name="Engine/Interface/api_core.h"/>
+      <File Name="Engine/Interface/api_nn.cpp"/>
+      <File Name="Engine/Interface/api_nn.h"/>
+      <File Name="Engine/Interface/callback.h"/>
+      <File Name="Engine/Interface/msgq.cpp"/>
+      <File Name="Engine/Interface/msgq.h"/>
+      <File Name="Engine/Interface/o2j.cpp"/>
+      <File Name="Engine/Interface/o2j.h"/>
+      <File Name="Engine/Interface/api_ws.cpp"/>
+      <File Name="Engine/Interface/api_ws.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Order">
+      <File Name="Engine/Order/orderq.cpp"/>
+      <File Name="Engine/Order/orderq.h"/>
+      <File Name="Engine/Order/orderthread.cpp"/>
+      <File Name="Engine/Order/orderthread.h"/>
+    </VirtualDirectory>
+    <File Name="Engine/elitequant_.cpp"/>
+    <File Name="Engine/merlion.cpp"/>
+    <File Name="Engine/merlion.h"/>
+    <File Name="Engine/threadfunc.cpp"/>
+    <File Name="Engine/threadfunc.h"/>
+    <File Name="Engine/tradingengine.cpp"/>
+    <File Name="Engine/tradingengine.h"/>
+    <File Name="Engine/tseries.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Strategy">
+    <File Name="Strategy/strategyFactory.cpp"/>
+    <File Name="Strategy/strategyFactory.h"/>
+  </VirtualDirectory>
+  <Settings Type="Dynamic Library">
+    <GlobalSettings>
+      <Compiler Options="-std=c++14;-std=c++11;-Wall;-fPIC" C_Options="-std=c++14;-std=c++11;-Wall;-fPIC" Assembler="">
+        <IncludePath Value="."/>
+        <IncludePath Value="$(ProjectPath)"/>
+        <IncludePath Value="$(WorkspacePath)/ThirdParty/"/>
+        <IncludePath Value="$(WorkspacePath)/ThirdParty/cereal/include/"/>
+        <IncludePath Value="$(WorkspacePath)/ThirdParty/yaml-cpp/include/"/>
+        <IncludePath Value="$(WorkspacePath)/ThirdParty/rapidjson/include/"/>
+        <IncludePath Value="$(WorkspacePath)/ThirdParty/seasocks/src/main/c/"/>
+        <IncludePath Value="/usr/include/python2.7/"/>
+        <IncludePath Value="/usr/include/"/>
+        <Preprocessor Value="IB_USE_STD_STRING"/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+        <LibraryPath Value="$(WorkspacePath)/ThirdParty/nanomsg/build/"/>
+        <LibraryPath Value="$(WorkspacePath)/ThirdParty/yaml-cpp/build/"/>
+        <LibraryPath Value="$(WorkspacePath)/ThirdParty/seasocks/build/src/main/c/"/>
+        <LibraryPath Value="/usr/local/lib/"/>
+        <Library Value="boost_system"/>
+        <Library Value="boost_filesystem"/>
+        <Library Value="boost_date_time"/>
+        <Library Value="python2.7"/>
+        <Library Value="boost_python"/>
+        <Library Value="nanomsg"/>
+        <Library Value="yaml-cpp"/>
+        <Library Value="seasocks"/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;-std=c++14;-std=c++11;-fPIC" C_Options="-g;-std=c++14;-std=c++11;-fPIC" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).so" IntermediateDirectory="./Debug" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="Default"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="yes">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName/>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="-O2" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).so" IntermediateDirectory="./Release" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="Default"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName/>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+</CodeLite_Project>

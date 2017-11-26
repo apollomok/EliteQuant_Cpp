@@ -1,0 +1,7 @@
+C:/Workspace/QuantWealthCpp/Source/Vendors/cereal/build/CMakeFiles/ALL_BUILD.dir
+C:/Workspace/QuantWealthCpp/Source/Vendors/cereal/build/CMakeFiles/ZERO_CHECK.dir
+C:/Workspace/QuantWealthCpp/Source/Vendors/cereal/build/sandbox/CMakeFiles/sandbox.dir
+C:/Workspace/QuantWealthCpp/Source/Vendors/cereal/build/sandbox/CMakeFiles/sandbox_json.dir
+C:/Workspace/QuantWealthCpp/Source/Vendors/cereal/build/sandbox/CMakeFiles/sandbox_rtti.dir
+C:/Workspace/QuantWealthCpp/Source/Vendors/cereal/build/sandbox/CMakeFiles/sandbox_vs.dir
+C:/Workspace/QuantWealthCpp/Source/Vendors/cereal/build/sandbox/sandbox_shared_lib/CMakeFiles/sandbox_vs_dll.dir

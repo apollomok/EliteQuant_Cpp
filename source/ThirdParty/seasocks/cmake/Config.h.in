@@ -1,0 +1,9 @@
+
+#pragma once
+
+namespace seasocks {
+
+    constexpr auto version = "@PROJECT_VERSION@";
+
+}
+

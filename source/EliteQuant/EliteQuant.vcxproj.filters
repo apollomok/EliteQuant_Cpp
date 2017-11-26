@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Brokers">
+      <UniqueIdentifier>{fc83306c-3009-41e1-aa98-286fcf74603d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{582d4893-5ee2-4d99-a725-bc8730863675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brokers\Google">
+      <UniqueIdentifier>{35a64f21-81fe-4645-9af8-697ea624987a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brokers\IB">
+      <UniqueIdentifier>{98c6d379-c227-4083-8e5c-ffc76b53dc4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brokers\Paper">
+      <UniqueIdentifier>{4b5e8fb3-cc35-4e37-a56a-ae3b23b83aec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brokers\Sina">
+      <UniqueIdentifier>{316b2d77-20ec-4641-b057-97a8166d2f5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Brokerage">
+      <UniqueIdentifier>{ea041f48-3dad-4ea3-bc75-d223d224fb60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Data">
+      <UniqueIdentifier>{deab68c3-dd82-4666-acc5-e5a90d99ebb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Logger">
+      <UniqueIdentifier>{4864514b-4e0a-4210-b05d-6c4cb3bb34f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Order">
+      <UniqueIdentifier>{66dc973d-b2f2-4f5a-816e-abaf609d04b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Security">
+      <UniqueIdentifier>{77aaa5b7-d8a1-4e0b-a8fa-c431a7725d28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Time">
+      <UniqueIdentifier>{b637feeb-6261-4086-9bc0-1751ba1c12e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Util">
+      <UniqueIdentifier>{0f0fba09-5461-4c63-98f0-866fe0916739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brokers\IB\IBOfficial">
+      <UniqueIdentifier>{ad327dc9-4ad0-4edb-bad8-a14d3761fcaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Strategy">
+      <UniqueIdentifier>{bb16b2b6-c999-4441-954a-20c1a99913be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Risk">
+      <UniqueIdentifier>{6bd60286-f9c5-4124-81d2-49e09fec9801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Performance">
+      <UniqueIdentifier>{617c7069-73a1-43ce-bcee-04b1071fcaf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Account">
+      <UniqueIdentifier>{f6ab13d1-c078-4445-ac55-4a1530971af5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brokers\Backtest">
+      <UniqueIdentifier>{9124e7f6-1645-49b3-9934-01f3c09c97e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strategy">
+      <UniqueIdentifier>{913ead31-789a-4fe1-9045-f076e52544d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brokers\Ctp">
+      <UniqueIdentifier>{d4070865-bf50-4081-aafa-5f04664e8a22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Msgq">
+      <UniqueIdentifier>{9b7bc155-32a3-491e-be69-6c8149a74904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services">
+      <UniqueIdentifier>{ca1bfb2e-7226-4b70-a241-7f3951b2a370}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services\Api">
+      <UniqueIdentifier>{c35302a0-a7a7-4ee1-b1e3-da9d330170f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services\Data">
+      <UniqueIdentifier>{b3edde01-044c-46d6-b460-5581b2028f02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services\Brokerage">
+      <UniqueIdentifier>{6dcaca2f-2a81-487c-9b66-6783ab502fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services\Strategy">
+      <UniqueIdentifier>{bd1548ba-f273-4df1-b583-7575292293c3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Brokers\Google\googledatafeed.cpp">
+      <Filter>Brokers\Google</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\Sina\sinadatafeed.cpp">
+      <Filter>Brokers\Sina</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\Paper\paperbrokerage.cpp">
+      <Filter>Brokers\Paper</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Brokerage\brokerage.cpp">
+      <Filter>Common\Brokerage</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Brokerage\exchange.cpp">
+      <Filter>Common\Brokerage</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Data\bar.cpp">
+      <Filter>Common\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Data\barseries.cpp">
+      <Filter>Common\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Data\datamanager.cpp">
+      <Filter>Common\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Data\tick.cpp">
+      <Filter>Common\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Util\util.cpp">
+      <Filter>Common\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Time\getRealTime.cpp">
+      <Filter>Common\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Time\heartbeat.cpp">
+      <Filter>Common\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Time\timeutil.cpp">
+      <Filter>Common\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Security\portfoliomanager.cpp">
+      <Filter>Common\Security</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Security\position.cpp">
+      <Filter>Common\Security</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Order\ordermanager.cpp">
+      <Filter>Common\Order</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Order\orderstatus.cpp">
+      <Filter>Common\Order</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\config.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\Paper\paperdatafeed.cpp">
+      <Filter>Brokers\Paper</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\OfficialWindows\EClientSocketBase.cpp">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\OfficialWindows\EPosixClientSocket.cpp">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\ibbrokerage.cpp">
+      <Filter>Brokers\IB</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Strategy\strategybase.cpp">
+      <Filter>Common\Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Risk\marginmanager.cpp">
+      <Filter>Common\Risk</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Risk\riskmanager.cpp">
+      <Filter>Common\Risk</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Performance\performancemanager.cpp">
+      <Filter>Common\Performance</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Strategy\strategymanager.cpp">
+      <Filter>Common\Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Account\accountmanager.cpp">
+      <Filter>Common\Account</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Performance\reportmanager.cpp">
+      <Filter>Common\Performance</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\Backtest\backtestdatafeed.cpp">
+      <Filter>Brokers\Backtest</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Data\marketdatafeed.cpp">
+      <Filter>Common\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Order\orderbook.cpp">
+      <Filter>Common\Order</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Logger\logger.cpp">
+      <Filter>Common\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Util\calc.cpp">
+      <Filter>Common\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Strategy\smacross.cpp">
+      <Filter>Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Strategy\strategyFactory.cpp">
+      <Filter>Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\Ctp\ctpdatafeed.cpp">
+      <Filter>Brokers\Ctp</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\Ctp\ctpbrokerage.cpp">
+      <Filter>Brokers\Ctp</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Msgq\msgq.cpp">
+      <Filter>Common\Msgq</Filter>
+    </ClCompile>
+    <ClCompile Include="Services\backtestoptimizationengine.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Services\elitequant_.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Services\tradingengine.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Services\Api\apiservice.cpp">
+      <Filter>Services\Api</Filter>
+    </ClCompile>
+    <ClCompile Include="Services\Data\dataservice.cpp">
+      <Filter>Services\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Util\consolecontrolhandler.cpp">
+      <Filter>Common\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Services\Brokerage\brokerageservice.cpp">
+      <Filter>Services\Brokerage</Filter>
+    </ClCompile>
+    <ClCompile Include="Services\Strategy\strategyservice.cpp">
+      <Filter>Services\Strategy</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Brokers\Google\googledatafeed.h">
+      <Filter>Brokers\Google</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\Sina\sinadatafeed.h">
+      <Filter>Brokers\Sina</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\Paper\paperbrokerage.h">
+      <Filter>Brokers\Paper</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Brokerage\brokerage.h">
+      <Filter>Common\Brokerage</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Brokerage\exchange.h">
+      <Filter>Common\Brokerage</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Data\bar.h">
+      <Filter>Common\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Data\barinterval.h">
+      <Filter>Common\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Data\barseries.h">
+      <Filter>Common\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Data\datamanager.h">
+      <Filter>Common\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Data\datatype.h">
+      <Filter>Common\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Data\tick.h">
+      <Filter>Common\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Util\util.h">
+      <Filter>Common\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Time\getRealTime.h">
+      <Filter>Common\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Time\heartbeat.h">
+      <Filter>Common\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Time\timeutil.h">
+      <Filter>Common\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Security\currencytype.h">
+      <Filter>Common\Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Security\portfoliomanager.h">
+      <Filter>Common\Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Security\position.h">
+      <Filter>Common\Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Security\security.h">
+      <Filter>Common\Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Security\securitytype.h">
+      <Filter>Common\Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Order\order.h">
+      <Filter>Common\Order</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Order\ordermanager.h">
+      <Filter>Common\Order</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Order\orderstatus.h">
+      <Filter>Common\Order</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Order\ordertype.h">
+      <Filter>Common\Order</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\config.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\Paper\paperdatafeed.h">
+      <Filter>Brokers\Paper</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\CommissionReport.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\CommonDefs.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\Contract.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\EClient.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\EClientSocketBase.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\EClientSocketBaseImpl.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\EPosixClientSocket.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\EPosixClientSocketPlatform.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\EWrapper.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\Execution.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\IBString.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\Order.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\OrderState.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\ScannerSubscription.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\shared_ptr.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\StdAfx.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\TagValue.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\OfficialWindows\TwsSocketClientErrors.h">
+      <Filter>Brokers\IB\IBOfficial</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\ibbrokerage.h">
+      <Filter>Brokers\IB</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Strategy\strategybase.h">
+      <Filter>Common\Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Risk\marginmanager.h">
+      <Filter>Common\Risk</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Risk\riskmanager.h">
+      <Filter>Common\Risk</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Performance\performancemanager.h">
+      <Filter>Common\Performance</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Strategy\strategymanager.h">
+      <Filter>Common\Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Account\accountmanager.h">
+      <Filter>Common\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Account\accountinfo.h">
+      <Filter>Common\Account</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Performance\reportmanager.h">
+      <Filter>Common\Performance</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\Backtest\backtestdatafeed.h">
+      <Filter>Brokers\Backtest</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Data\marketdatafeed.h">
+      <Filter>Common\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Order\timeinforce.h">
+      <Filter>Common\Order</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Order\orderidtracker.h">
+      <Filter>Common\Order</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Order\orderbook.h">
+      <Filter>Common\Order</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Logger\logger.h">
+      <Filter>Common\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Data\tickwriter.h">
+      <Filter>Common\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Data\tickreader.h">
+      <Filter>Common\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Order\fill.h">
+      <Filter>Common\Order</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Util\calc.h">
+      <Filter>Common\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Strategy\smacross.h">
+      <Filter>Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Strategy\strategyFactory.h">
+      <Filter>Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\Ctp\ThostFtdcMdApi.h">
+      <Filter>Brokers\Ctp</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\Ctp\ThostFtdcTraderApi.h">
+      <Filter>Brokers\Ctp</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\Ctp\ThostFtdcUserApiDataType.h">
+      <Filter>Brokers\Ctp</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\Ctp\ThostFtdcUserApiStruct.h">
+      <Filter>Brokers\Ctp</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\Ctp\ctpdatafeed.h">
+      <Filter>Brokers\Ctp</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\Ctp\ctpbrokerage.h">
+      <Filter>Brokers\Ctp</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Msgq\msgq.h">
+      <Filter>Common\Msgq</Filter>
+    </ClInclude>
+    <ClInclude Include="Services\backtestoptimizationengine.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Services\tradingengine.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Services\Api\apiservice.h">
+      <Filter>Services\Api</Filter>
+    </ClInclude>
+    <ClInclude Include="Services\Data\dataservice.h">
+      <Filter>Services\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Util\consolecontrolhandler.h">
+      <Filter>Common\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Services\Brokerage\brokerageservice.h">
+      <Filter>Services\Brokerage</Filter>
+    </ClInclude>
+    <ClInclude Include="Services\Strategy\strategyservice.h">
+      <Filter>Services\Strategy</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
