@@ -50,6 +50,12 @@ The easiest way is to download and uzip compiled.zip from the project root direc
 3. If you use CTP, change your brokerage account information and ctp addresses accordingly.
 4. create folder for log_dir and data_dir respectively. The former records runtime logs, while the later saves tick data.
 
+**Interactive Brokers**
+IB is the most popular broker among retail traders. A lot of retail trading platform such as quantopian, quantconnect are buit to support IB. If you don't have IB account but want to try it out, they provide demo account edemo with password demouser. Just download TWS trader workstation and log in with this demo account. Note that accound id changes everytime you log on to TWS with demo account so you have to change EliteQuant config file accordingly.
+
+**CTP**
+CTP is the de-facto brokerage for Chinese futures market, including commodity futures and financial futures. They also offer free demo account [SimNow](http://simnow.com.cn/). After registration, you will get account, password, brokerid, along with market data and trading broker address. Replace them in EliteQuant config file accordingly.
+
 ## Development Environment
 
 Below is the environment we are using
