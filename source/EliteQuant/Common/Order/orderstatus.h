@@ -19,6 +19,13 @@ namespace EliteQuant {
 		OS_None
 	};
 
+	enum OrderFlag {			// for CTP offset flag
+		OF_OpenPosition = 0,
+		OF_ClosePosition = 1,
+		OF_CloseToday = 2,
+		OF_CloseYesterday = 3
+	};
+
 	const std::string OrderStatusString[] = {
 		"NewBorn",
 		"PendingSubmit",

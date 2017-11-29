@@ -42,6 +42,8 @@ namespace EliteQuant
 
 		if (CConfig::instance()._msgq == MSGQ::NANOMSG)
 			nn_term();
+		else if (CConfig::instance()._msgq == MSGQ::ZMQ)
+			;
 
 		//printf("waiting for threads joined...\n");
 		for (thread* t : threads) {

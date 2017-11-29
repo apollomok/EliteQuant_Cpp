@@ -1,0 +1,13 @@
+CTP的模拟交易不支持市价报单
+
+会报如下错误
+
+2017-11-28 01:43:39.925 INFO:[d:\workspace\elitequant_cpp\source\elitequant\services\api\apiservice.cpp,65][EliteQuant::ApiServer::onClientMessage]client msgin: o|MKT|IC1712|1
+2017-11-28 01:43:39.936 INFO:[d:\workspace\elitequant_cpp\source\elitequant\common\brokerage\brokerage.cpp,69][EliteQuant::brokerage::monitorClientRequest]msg received: o|MKT|IC1712|1|0
+2017-11-28 01:43:39.936 INFO[d:\workspace\elitequant_cpp\source\elitequant\common\brokerage\brokerage.cpp,96][EliteQuant::brokerage::monitorClientRequest]receive market order: o|MKT|IC1712|1|0
+2017-11-28 01:43:39.936 INFO:[d:\workspace\elitequant_cpp\source\elitequant\brokers\ctp\ctpbrokerage.cpp,146][EliteQuant::ctpbrokerage::placeOrder]Placing Order orderId=0: fullSymbol=IC1712
+2017-11-28 01:43:40.183 INFO:[d:\workspace\elitequant_cpp\source\elitequant\brokers\ctp\ctpbrokerage.cpp,496][EliteQuant::ctpbrokerage::OnRtnOrder]CTP trade server OnRtnOrder details: OrderRef=IC1712, InstrumentID=CFFEX, ExchangeID=0, InsertTime=14:43:39, CancelTime=, FrontID=1, SessionID=81103703, Direction=0, CombOffsetFlag=0, OrderStatus=a, OrderSubmitStatus=0, StatusMsg=报单已提交, LimitPrice=0.000000, VolumeTotalOriginal=1, VolumeTraded=0, OrderSysID=, SequenceNo=0.
+2017-11-28 01:43:40.183 ERROR:[d:\workspace\elitequant_cpp\source\elitequant\common\order\ordermanager.cpp,65][EliteQuant::OrderManager::gotOrder]Order is not tracked. OrderId= 0
+2017-11-28 01:43:40.184 INFO:[d:\workspace\elitequant_cpp\source\elitequant\brokers\ctp\ctpbrokerage.cpp,496][EliteQuant::ctpbrokerage::OnRtnOrder]CTP trade server OnRtnOrder details: OrderRef=IC1712, InstrumentID=CFFEX, ExchangeID=0, InsertTime=14:43:39, CancelTime=, FrontID=1, SessionID=81103703, Direction=0, CombOffsetFlag=0, OrderStatus=5, OrderSubmitStatus=4, StatusMsg=已撤单报单被拒绝CFFEX:不被支持的报单类型, LimitPrice=0.000000, VolumeTotalOriginal=1, VolumeTraded=0, OrderSysID=, SequenceNo=0.
+2017-11-28 01:43:40.184 ERROR:[d:\workspace\elitequant_cpp\source\elitequant\common\order\ordermanager.cpp,65][EliteQuant::OrderManager::gotOrder]Order is not tracked. OrderId= 0
+

@@ -72,7 +72,7 @@ namespace EliteQuant {
 
 	string CMsgqNanomsg::recmsg(int blockingflags) {
 		char* buf = nullptr;
-		int bytes = nn_recv(sock_, &buf, NN_MSG, blockingflags);		// NN_DONTWAIT
+		int bytes = nn_recv(sock_, &buf, NN_MSG, blockingflags);		//NN_DONTWAIT
 
 		if (bytes > 0 && buf != nullptr) {
 			string msg(buf, bytes);
@@ -124,9 +124,11 @@ namespace EliteQuant {
 		rc_ = zmq_unbind(socket_, endpoint_.c_str());
 		zmq_close(socket_);
 		zmq_ctx_shutdown(context_);
+		zmq_term(context_);
 		zmq_ctx_destroy(context_);
 	}
 
+	// zmq doesn't have global nn_term(), has to be set non-blocking, ZMQ_DONTWAIT
 	void CMsgqZmq::sendmsg(const string& msg) {
 		int bytes = zmq_send(socket_, msg.c_str(), msg.size() + 1, 0);		// TODO: size or size+1
 	}
@@ -136,7 +138,7 @@ namespace EliteQuant {
 	}
 
 	string CMsgqZmq::recmsg(int blockingflags) {		
-		int bytes = zmq_recv(socket_, buf_, 1024, blockingflags);		// ZMQ_NOBLOCK
+		int bytes = zmq_recv(socket_, buf_, 1024, blockingflags);		//ZMQ_NOBLOCK
 
 		if (bytes > 0) {
 			buf_[bytes] = '\0';

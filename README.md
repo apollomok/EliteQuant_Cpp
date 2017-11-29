@@ -51,10 +51,10 @@ The easiest way is to download and uzip compiled.zip from the project root direc
 4. create folder for log_dir and data_dir respectively. The former records runtime logs, while the later saves tick data.
 
 **Interactive Brokers**
-IB is the most popular broker among retail traders. A lot of retail trading platform such as quantopian, quantconnect are buit to support IB. If you don't have IB account but want to try it out, they provide demo account edemo with password demouser. Just download TWS trader workstation and log in with this demo account. Note that accound id changes everytime you log on to TWS with demo account so you have to change EliteQuant config file accordingly.
+is the most popular broker among retail traders. A lot of retail trading platform such as quantopian, quantconnect are built to support IB. If you don't have IB account but want to try it out, they provide demo account edemo with password demouser. Just download TWS trader workstation and log in with this demo account. Note that accound id changes everytime you log on to TWS with demo account so you have to change EliteQuant config file accordingly.
 
 **CTP**
-CTP is the de-facto brokerage for Chinese futures market, including commodity futures and financial futures. They also offer free demo account [SimNow](http://simnow.com.cn/). After registration, you will get account, password, brokerid, along with market data and trading broker address. Replace them in EliteQuant config file accordingly.
+is the de-facto brokerage for Chinese futures market, including commodity futures and financial futures. They also offer free demo account [SimNow](http://simnow.com.cn/). After registration, you will get account, password, brokerid, along with market data and trading broker address. Replace them in EliteQuant config file accordingly.
 
 ## Development Environment
 
@@ -84,8 +84,9 @@ Visual C++ is a popular choice on Windows. CodeLite is a free Linux IDE, very cl
 
 Messages are sperated by character '|'. For example
 
-* new market order: o|MKT|AAPL STK SMART|100
-* new limit order: o|LMT|AAPL STK SMART|100|170.00
+* new market order: o|MKT|AAPL STK SMART|100[|order_flag]
+* new limit order: o|LMT|AAPL STK SMART|100|170.00[|order_flag]
+* order status: s|order_id|order_status
 * tick message: AAPL STK SMART|time|data type|price|size|depth
 
 The following are message types:
@@ -112,6 +113,28 @@ In EliteQuant, an instrument is identified by its **full symbol**, which consist
 * FX futures: 6BU1 FUT GLOBELX
 * Option: GOOGL_140920P00535000 OPT SMART 100
 * Futures Options: EWQ4_C1730 FOP GLOBEX 50
+
+### order status
+``` cpp
+enum OrderStatus {
+		OS_NewBorn = 0,			// NewBorn
+		OS_PendingSubmit = 1,
+		OS_PendingCancel =2 ,
+		OS_Submitted = 3,			// submitted
+		OS_Acknowledged = 4,		// acknowledged
+		OS_Canceled = 5,			// Canceled
+		OS_Filled = 6,				// Filled
+		OS_Inactive = 7,
+		OS_PartiallyFilled = 8		// PartiallyFilled
+	};
+
+	enum OrderFlag {			// for CTP offset flag
+		OF_OpenPosition = 0,
+		OF_ClosePosition = 1,
+		OF_CloseToday = 2,
+		OF_CloseYesterday = 3
+	};
+```
 
 ### Code Structure
 

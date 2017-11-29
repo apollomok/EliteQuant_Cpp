@@ -35,7 +35,7 @@ namespace EliteQuant {
 		mutex wlock;
 		void reset();
 
-		void placeOrder(std::shared_ptr<Order> o);		// put order under track
+		void trackOrder(std::shared_ptr<Order> o);		// put order under track
 		void gotOrder(long oid);						// order acknowledged
 		void gotFill(Fill& fill);
 		void gotCancel(long oid);

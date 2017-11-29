@@ -54,8 +54,8 @@ namespace EliteQuant
 			///@remark “tcp”代表传输协议，“127.0.0.1”代表服务器地址。”17001”代表服务器端口号。
 			this->api_->RegisterFront((char*)CConfig::instance().ctp_data_address.c_str());		// 服务器地址
 
-																								// 初始化运行环境, 只有调用后, 接口才开始工作
-																								// if success, server returns onFrontConnected
+			// 初始化运行环境, 只有调用后, 接口才开始工作
+			// if success, server calls for onFrontConnected
 			this->api_->Init();
 
 			PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp datasource connecting...!\n", __FILE__, __LINE__, __FUNCTION__);
@@ -151,6 +151,8 @@ namespace EliteQuant
 
 	}
 
+	// 当前置机连接后 (OnFrontConnected), 用户开始请求登陆
+	// 登陆成功后调用 OnRspUserLogin
 	void ctpdatafeed::requestMarketDataAccountInformation(const string& account)
 	{
 		requestUserLogin();
@@ -284,7 +286,8 @@ namespace EliteQuant
 		}
 	}
 
-	///深度行情通知
+	/// 深度行情通知
+	// for now, it's the only todo in ctp md
 	void ctpdatafeed::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData) {
 		// TODO: use OpenPrice, HighestPrice, LowestPrice, PreClosePrice, UpperLimitPrice, LowerLimitPrice fields
 		// TODO: add pDepthMarketData->ExchangeID to fullsymbol			ExchangeInstID=合约在交易所的代码

@@ -39,7 +39,7 @@ namespace EliteQuant {
 		_count = 0;
 	}
 
-	void OrderManager::placeOrder(std::shared_ptr<Order> o)
+	void OrderManager::trackOrder(std::shared_ptr<Order> o)
 	{
 		if (o->orderId < 0 || o->orderSize == 0) {
 			PRINT_TO_FILE("ERROR:[%s,%d][%s]%s\n", __FILE__, __LINE__, __FUNCTION__, "Incorrect OrderSize.");

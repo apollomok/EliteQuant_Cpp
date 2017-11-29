@@ -80,7 +80,7 @@ namespace EliteQuant
 			// 注册前置机并初始化
 			this->api_->RegisterFront((char*)CConfig::instance().ctp_broker_address.c_str());
 
-			// if success, server returns onFrontConnected
+			// 成功后调用 onFrontConnected
 			this->api_->Init();
 
 			PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp brokerage connection connected!\n", __FILE__, __LINE__, __FUNCTION__);
@@ -118,7 +118,25 @@ namespace EliteQuant
 		orderfield.OrderPriceType = order->orderType == "MKT" ? THOST_FTDC_OPT_AnyPrice : THOST_FTDC_OPT_LimitPrice;
 		orderfield.LimitPrice = order->orderType == "MKT" ? 0.0 : order->limitPrice;
 		orderfield.Direction = order->orderSize > 0 ? THOST_FTDC_D_Buy : THOST_FTDC_D_Sell;
-		orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_Open;	// 开仓; THOST_FTDC_OF_Close = 平仓; THOST_FTDC_OF_CloseToday = 平今; THOST_FTDC_OF_CloseYesterday = 平昨
+
+		switch (order->orderFlag) {
+			case OrderFlag::OF_OpenPosition:
+				orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_Open;	// 开仓
+				break;
+			case OrderFlag::OF_ClosePosition:
+				orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_Close;	// 平仓
+				break;
+			case OrderFlag::OF_CloseToday:
+				orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_CloseToday;	// 平今
+				break;
+			case OrderFlag::OF_CloseYesterday:
+				orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_CloseYesterday;	// 平昨
+				break;
+			default:
+				orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_Open;	// 开仓
+				break;
+		}
+
 		strcpy(orderfield.OrderRef, to_string(order->orderId).c_str());
 
 		strcpy(orderfield.InvestorID, CConfig::instance().ctp_user_id.c_str());
@@ -134,10 +152,10 @@ namespace EliteQuant
 		orderfield.VolumeCondition = THOST_FTDC_VC_AV;					// 任意成交量
 		orderfield.MinVolume = 1;										// 最小成交量为1
 
-																		// TODO: 判断FAK和FOK
-																		//orderfield.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
-																		//orderfield.TimeCondition = THOST_FTDC_TC_IOC;
-																		//orderfield.VolumeCondition = THOST_FTDC_VC_CV;
+		// TODO: 判断FAK和FOK
+		//orderfield.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
+		//orderfield.TimeCondition = THOST_FTDC_TC_IOC;
+		//orderfield.VolumeCondition = THOST_FTDC_VC_CV;				// FAK; FOK uses THOST_FTDC_VC_AV
 
 		int i = api_->ReqOrderInsert(&orderfield, reqId_++);
 
@@ -306,7 +324,7 @@ namespace EliteQuant
 		if (pRspInfo->ErrorID == 0) {
 			PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker authenticated. Continue to log in.\n", __FILE__, __LINE__, __FUNCTION__);
 
-			//TODO: login after authentification
+			//TODO 一：authentification before login
 		}
 	}
 
@@ -335,6 +353,7 @@ namespace EliteQuant
 			if (_bkstate <= BK_READYTOORDER)
 				_bkstate = BK_READYTOORDER;
 
+			// TODO二: 放在 _bkstate 改变后面行吗？
 			requestBrokerageAccountInformation("");
 			requestOpenPositions();
 			requestSettlementInfoConfirm();
@@ -375,7 +394,7 @@ namespace EliteQuant
 
 			lock_guard<mutex> g(orderStatus_mtx);
 			std::shared_ptr<Order> o = OrderManager::instance().retrieveOrder(std::stoi(pInputOrder->OrderRef));
-			o->orderStatus = OS_Acknowledged;			// rejected ?
+			o->orderStatus = OS_Acknowledged;			// TODO 三：应该是rejected ?
 
 			sendOrderStatus(std::stoi(pInputOrder->OrderRef));
 			sendGeneralMessage(string("CTP Trader Server OnRspOrderInsert order acknowledged:") +
@@ -397,6 +416,7 @@ namespace EliteQuant
 	}
 
 	///报单操作请求响应(参数不通过)
+	// 撤单错误（柜台）
 	void ctpbrokerage::OnRspOrderAction(CThostFtdcInputOrderActionField *pInputOrderAction, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {
 		bool bResult = pRspInfo && (pRspInfo->ErrorID != 0);
 		if (!bResult)
@@ -496,11 +516,6 @@ namespace EliteQuant
 			__FILE__, __LINE__, __FUNCTION__, pOrder->InstrumentID, pOrder->ExchangeID, pOrder->OrderRef, pOrder->InsertTime, pOrder->CancelTime,
 			pOrder->FrontID, pOrder->SessionID, pOrder->Direction, pOrder->CombOffsetFlag, pOrder->OrderStatus, pOrder->OrderSubmitStatus, pOrder->StatusMsg,
 			pOrder->LimitPrice, pOrder->VolumeTotalOriginal, pOrder->VolumeTraded, pOrder->OrderSysID, pOrder->SequenceNo);	// TODO: diff between tradeid and orderref
-
-																															// CTP的报单号一致性维护需要基于frontID, sessionID, orderID三个字段
-																															// 但在本接口设计中，已经考虑了CTP的OrderRef的自增性，避免重复
-																															// 唯一可能出现OrderRef重复的情况是多处登录并在非常接近的时间内（几乎同时发单）
-																															// 考虑到应用场景，认为以上情况不会构成问题
 
 		OrderManager::instance().gotOrder(std::stoi(pOrder->OrderRef));
 		sendOrderAcknowledged(std::stoi(pOrder->OrderRef));

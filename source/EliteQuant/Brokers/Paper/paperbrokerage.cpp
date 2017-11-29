@@ -59,13 +59,12 @@ namespace EliteQuant
 		fill.tradePrice = DataManager::instance()._latestmarkets[order->fullSymbol].price_;			// TODO: assuming this security is tracked
 		fill.tradeSize = order->orderSize;
 
-		OrderManager::instance().gotFill(fill);
 		sendOrderFilled(fill);
 	}
 
 	void paperbrokerage::requestNextValidOrderID() {
 		lock_guard<mutex> g(oid_mtx);
-		++m_orderId;
+		m_orderId++;
 		_bkstate = BK_READYTOORDER;
 	}
 

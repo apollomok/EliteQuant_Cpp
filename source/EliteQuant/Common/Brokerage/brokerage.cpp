@@ -81,28 +81,43 @@ namespace EliteQuant
 				o->orderSize = (-1) * iterator->second->_size;
 				o->orderType = "MKT";
 				o->orderStatus = OrderStatus::OS_NewBorn;
-				++m_orderId;
+				m_orderId++;
 
+				OrderManager::instance().trackOrder(o);
 				placeOrder(o);
 			}
-		} // endif close all
+		}
 		else if (startwith(msg, CConfig::instance().new_order_msg)) {
 			vector<string> v = stringsplit(msg, SERIALIZATION_SEPARATOR);
 
 			if (v[1] == "MKT")
 			{
-				if (v.size() == 5)				// o|mkt|IBM|-500|oid
+				if (v.size() >= 4)				// o|mkt|IBM|-500[|OrderFlag]
 				{
 					PRINT_TO_FILE_AND_CONSOLE("INFO[%s,%d][%s]receive market order: %s\n", __FILE__, __LINE__, __FUNCTION__, msg.c_str());
 					std::shared_ptr<Order> o = make_shared<Order>();
+
+					lock_guard<mutex> g(oid_mtx);
+					assert(m_orderId >= 0);			// start with 0
+					//string oid = to_string(long(m_orderId));
+					
 					o->fullSymbol = v[2];
-					o->orderId = stoi(v[4]);
+					o->orderId = m_orderId;
 					o->createTime = time(nullptr);
 					o->orderSize = stoi(v[3]);
 					o->orderType = "MKT";
 					o->orderStatus = OrderStatus::OS_NewBorn;
-					//++m_orderId;
+					
+					if (v.size() == 5) {
+						o->orderFlag = static_cast<OrderFlag>(stoi(v[4]));
+					}
+					else {
+						o->orderFlag = OrderFlag::OF_OpenPosition;
+					}
 
+					m_orderId++;
+
+					OrderManager::instance().trackOrder(o);
 					placeOrder(o);
 				}
 				else
@@ -110,22 +125,35 @@ namespace EliteQuant
 					PRINT_TO_FILE("ERROR:[%s,%d][%s]market order bad format.\n", __FILE__, __LINE__, __FUNCTION__);
 				}
 			}
-			else if (v[1] == "LMT")			//o|lmt|IBM|-500|125.5|oid
+			// TODO: assign order id here
+			else if (v[1] == "LMT")			//o|lmt|IBM|-500|125.5[|OrderFlag]
 			{
-				if (v.size() == 6)
+				if (v.size() >= 5)
 				{
 					//lock_guard<mutex> g(oid_mtx);
-					PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]recieved limit order: %s.\n", __FILE__, __LINE__, __FUNCTION__, msg.c_str());
+					PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]recieved limit order: %s.\n", __FILE__, __LINE__, __FUNCTION__, msg.c_str());
+
+					lock_guard<mutex> g(oid_mtx);
+					assert(m_orderId >= 0);			// start with 0
+
 					std::shared_ptr<Order> o = make_shared<Order>();
 					o->fullSymbol = v[2];
-					o->orderId = stoi(v[5]);
+					o->orderId = m_orderId;
 					o->createTime = time(nullptr);
 					o->orderSize = stoi(v[3]);
 					o->orderType = "LMT";
 					o->limitPrice = stof(v[4]);
 					o->orderStatus = OrderStatus::OS_NewBorn;
-					//++m_orderId;
+					if (v.size() == 6) {
+						o->orderFlag = static_cast<OrderFlag>(stoi(v[5]));
+					}
+					else {
+						o->orderFlag = OrderFlag::OF_OpenPosition;
+					}
 
+					m_orderId++;
+
+					OrderManager::instance().trackOrder(o);
 					placeOrder(o);
 				}
 				else {

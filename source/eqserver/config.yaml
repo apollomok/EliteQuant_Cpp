@@ -1,27 +1,30 @@
 #------------------ System Setting --------------#
 broker: IB # IB CTP SINA, GOOGLE, PAPER
-msgq: zmq           # nanomsg kafka, zmq
+msgq: nanomsg           # nanomsg kafka, zmq
 log_dir: d:/workspace/elitequant_cpp/log
 data_dir: d:/workspace/elitequant_cpp/data
 #------------------ End of System ---------------#
 #-------------- Interactive Brokers -------------#
-account: DU15161
+account: DU15183
 ibport: 7497
 # ----------------- End of IB  ------------------#
 #----------------- Ctp --------------------------#
 ctp_broker_id: 9999
-ctp_user_id: 067425
-ctp_password: 780505
-ctp_md_address: tcp://180.168.212.228:41213
+ctp_user_id: simnow
+ctp_password: simnow
+ctp_md_address: tcp://180.168.146.187:10010
 ctp_td_address: tcp://180.168.146.187:10000
 # ---------------- End of CTP  ------------------#
 tickers:
-  # - IF1707
-  # - IF1709
-  # - rb1709
-  # - i1709
-  # - j1709
-  # - cu1707C39000
+  # - IC1712
+  # - IC1801
+  # - IC1803
+  # - IF1712
+  # - IF1801
+  # - al1712
+  # - al1801
+  # - cu1712
+  # - cu1801
   - SPY STK SMART
   - AAPL STK SMART
   - AMZN STK SMART
@@ -43,12 +46,4 @@ tickers:
   #- sh601166
   #- sh601377
   #- sh600958
-  #- sh600028		# 中国石化
-  #- sh601857		# 中国石油
-  #- sh600036		# 招商银行
-  #- sh601668		# 中国建筑	
-  #- sh601988  		# 中国银行
-  #- sh601166  		# 兴业银行
-  #- sh601377  		# 兴业证券
-  #- sh600958  		# 东方证券
   

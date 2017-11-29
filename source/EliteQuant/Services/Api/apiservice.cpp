@@ -65,12 +65,7 @@ namespace EliteQuant
 		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]client msgin: %s\n", __FILE__, __LINE__, __FUNCTION__, msgin.c_str());
 
 		if (startwith(msgin, CConfig::instance().new_order_msg)) {
-			lock_guard<mutex> g(oid_mtx);
-			assert(long(m_orderId) >= 0);			// start with 0
-			string oid = to_string(long(m_orderId));
-			m_orderId++;
-
-			brokerage_msg_pair_->sendmsg(string(msgin) + SERIALIZATION_SEPARATOR + oid);
+			brokerage_msg_pair_->sendmsg(msgin);
 		}
 		else if (startwith(msgin, CConfig::instance().cancel_order_msg)) {
 			brokerage_msg_pair_->sendmsg(msgin);		// passthrough

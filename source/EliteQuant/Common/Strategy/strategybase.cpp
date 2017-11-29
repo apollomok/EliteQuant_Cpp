@@ -31,14 +31,15 @@ namespace EliteQuant {
 	// ************  Outgoing Methods ********************//
 	void StrategyBase::SendOrder(std::shared_ptr<Order> o)
 	{
-		lock_guard<mutex> g(oid_mtx);
+		// TODO: send o|MKT|SPY STK SMART
+		/*lock_guard<mutex> g(oid_mtx);
 
 		o->createTime = time(nullptr);
 		o->orderStatus = OrderStatus::OS_NewBorn;
 		o->orderId = m_orderId;
 		// increase order id
-		m_orderId++;
-		OrderManager::instance().placeOrder(o);
+		m_orderId++; */
+		//OrderManager::instance().trackOrder(o);   TODO: send order through message queue;
 	}
 
 	void StrategyBase::SendOrderCancel(long oid)

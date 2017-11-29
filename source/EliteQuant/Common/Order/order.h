@@ -35,6 +35,7 @@ namespace EliteQuant
 		string account;					// TODO: support multiple accounts
 		string orderType;
 		OrderStatus orderStatus;				// submitted, canceled, etc
+		OrderFlag orderFlag;
 		long orderSize;					// < 0 = short, order size != trade size
 		long filled = 0;
 		double lastFilledPrice = { 0.0f };
