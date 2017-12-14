@@ -1,5 +1,7 @@
 #ifndef _EliteQuant_Brokers_IBBrokerage_H_
 #define _EliteQuant_Brokers_IBBrokerage_H_
+#ifdef _WIN32
+// Windows
 #include <Brokers/IB/OfficialWindows/EWrapper.h>
 #include <Brokers/IB/OfficialWindows/EPosixClientSocket.h>
 #include <Brokers/IB/OfficialWindows/EPosixClientSocketPlatform.h>
@@ -7,6 +9,16 @@
 #include <Brokers/IB/OfficialWindows/Order.h>
 #include <Brokers/IB/OfficialWindows/Execution.h>
 #include <Brokers/IB/OfficialWindows/OrderState.h>
+#else
+#include <Brokers/IB/OfficialLinux/EWrapper.h>
+#include <Brokers/IB/OfficialLinux/EPosixClientSocket.h>
+#include <Brokers/IB/OfficialLinux/EPosixClientSocketPlatform.h>
+#include <Brokers/IB/OfficialLinux/Contract.h>
+#include <Brokers/IB/OfficialLinux/Order.h>
+#include <Brokers/IB/OfficialLinux/Execution.h>
+#include <Brokers/IB/OfficialLinux/OrderState.h>
+#endif
+
 #include <Common/config.h>
 #include <Common/Brokerage/brokerage.h>
 #include <Common/Data/marketdatafeed.h>

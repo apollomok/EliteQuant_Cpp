@@ -202,31 +202,31 @@ namespace EliteQuant
 	//******************************** Message serialization ***********************//
 	void brokerage::sendOrderCreated(long oid) {
 		string msg = CConfig::instance().order_status_msg
-			+ SERIALIZATION_SEPARATOR + std::to_string(int(OrderStatus::OS_NewBorn))
-			+ SERIALIZATION_SEPARATOR + std::to_string(oid);
+			+ SERIALIZATION_SEPARATOR + std::to_string(oid)
+			+ SERIALIZATION_SEPARATOR + std::to_string(int(OrderStatus::OS_NewBorn));
 
 		msgq_pair_->sendmsg(msg);
 	}
 
 	void brokerage::sendOrderSubmitted(long oid) {
 		string msg = CConfig::instance().order_status_msg
-			+ SERIALIZATION_SEPARATOR + std::to_string(int(OrderStatus::OS_Submitted))
-			+ SERIALIZATION_SEPARATOR + std::to_string(oid);
+			+ SERIALIZATION_SEPARATOR + std::to_string(oid)
+			+ SERIALIZATION_SEPARATOR + std::to_string(int(OrderStatus::OS_Submitted));
 
 		msgq_pair_->sendmsg(msg);
 	}
 
 	void brokerage::sendOrderAcknowledged(long oid) {
 		string msg = CConfig::instance().order_status_msg
-			+ SERIALIZATION_SEPARATOR + std::to_string(int(OrderStatus::OS_Acknowledged))
-			+ SERIALIZATION_SEPARATOR + std::to_string(oid);
+			+ SERIALIZATION_SEPARATOR + std::to_string(oid)
+			+ SERIALIZATION_SEPARATOR + std::to_string(int(OrderStatus::OS_Acknowledged));
 
 		msgq_pair_->sendmsg(msg);
 	}
 
 	void brokerage::sendOrderFilled(Fill& t) {
-		string msg = CConfig::instance().order_status_msg
-			+ SERIALIZATION_SEPARATOR + std::to_string(int(OrderStatus::OS_Filled))
+		// TODO: use OrderManager to check if the order is completely (not partially) filled. Then send one more message on order_status OS_FILLED
+		string msg = CConfig::instance().fill_msg
 			+ SERIALIZATION_SEPARATOR + t.serialize();
 
 		msgq_pair_->sendmsg(msg);
@@ -234,8 +234,8 @@ namespace EliteQuant
 
 	void brokerage::sendOrderCancelled(long oid) {
 		string msg = CConfig::instance().order_status_msg
-			+ SERIALIZATION_SEPARATOR + std::to_string(int(OrderStatus::OS_Canceled))
-			+ SERIALIZATION_SEPARATOR + std::to_string(oid);
+			+ SERIALIZATION_SEPARATOR + std::to_string(oid)
+			+ SERIALIZATION_SEPARATOR + std::to_string(int(OrderStatus::OS_Canceled));
 
 		msgq_pair_->sendmsg(msg);
 	}

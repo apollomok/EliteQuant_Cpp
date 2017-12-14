@@ -138,6 +138,7 @@ printf("%s ",ymdhms().c_str());printf(__VA_ARGS__);\
 		string new_order_msg = "o";
 		string cancel_order_msg = "c";
 		string order_status_msg = "s";
+		string fill_msg = "f";				// including partial fill
 		string close_all_msg = "a";
 		string position_msg = "n";
 		string general_msg = "m";

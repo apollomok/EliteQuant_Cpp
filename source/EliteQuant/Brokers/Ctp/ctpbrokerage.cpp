@@ -517,8 +517,13 @@ namespace EliteQuant
 			pOrder->FrontID, pOrder->SessionID, pOrder->Direction, pOrder->CombOffsetFlag, pOrder->OrderStatus, pOrder->OrderSubmitStatus, pOrder->StatusMsg,
 			pOrder->LimitPrice, pOrder->VolumeTotalOriginal, pOrder->VolumeTraded, pOrder->OrderSysID, pOrder->SequenceNo);	// TODO: diff between tradeid and orderref
 
-		OrderManager::instance().gotOrder(std::stoi(pOrder->OrderRef));
-		sendOrderAcknowledged(std::stoi(pOrder->OrderRef));
+		// increase order_id
+		int nOrderref = std::stoi(pOrder->OrderRef);
+		if (m_orderId <= (nOrderref+1))
+			m_orderId = nOrderref + 1;
+
+		OrderManager::instance().gotOrder(nOrderref);
+		sendOrderAcknowledged(nOrderref);
 	}
 
 	/// 成交通知

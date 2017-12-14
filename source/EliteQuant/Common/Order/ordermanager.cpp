@@ -82,7 +82,7 @@ namespace EliteQuant {
 		}
 		PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Order is filled. OrderId=%d, price=%.2f\n", __FILE__, __LINE__, __FUNCTION__, fill.tradeId, fill.tradePrice);
 		lock_guard<mutex> g(orderStatus_mtx);
-		_orders[fill.tradeId]->orderStatus = OrderStatus::OS_Filled;			// what about partially filled?
+		_orders[fill.tradeId]->orderStatus = OrderStatus::OS_Filled;			// TODO: check for partial fill
 
 		PortfolioManager::instance().Adjust(fill);
 	}

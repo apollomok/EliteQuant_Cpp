@@ -87,6 +87,7 @@ Messages are sperated by character '|'. For example
 * new market order: o|MKT|AAPL STK SMART|100[|order_flag]
 * new limit order: o|LMT|AAPL STK SMART|100|170.00[|order_flag]
 * order status: s|order_id|order_status
+* fill: f|trade_id|trade_time|trade_price|trade_size
 * tick message: AAPL STK SMART|time|data type|price|size|depth
 
 The following are message types:

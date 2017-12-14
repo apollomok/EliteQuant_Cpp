@@ -47,7 +47,7 @@ namespace EliteQuant {
 		}
 
 		if (eid_ < 0 || sock_ < 0) {
-			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Unable to connect to message queue: %d,%d\n", __FILE__, __LINE__, __FUNCTION__, eid_, sock_);
+			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Unable to connect to message queue: %s,%d\n", __FILE__, __LINE__, __FUNCTION__, port.c_str(), binding);
 		}
 	}
 
