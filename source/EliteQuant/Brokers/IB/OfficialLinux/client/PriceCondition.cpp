@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "PriceCondition.h"
 #include <sstream>
 #include "EDecoder.h"

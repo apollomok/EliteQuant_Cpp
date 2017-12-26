@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "MarginCondition.h"
 #include <sstream>
 

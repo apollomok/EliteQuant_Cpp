@@ -38,7 +38,7 @@
 #include <cereal/types/vector.hpp>
 #include <cereal/types/map.hpp>
 
-#include <cereal/external/rapidjson/filestream.h>
+//#include <cereal/external/rapidjson/filestream.h>
 
 #include <sstream>
 #include <fstream>

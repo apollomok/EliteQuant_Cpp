@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "OrderCondition.h"
 #include "executioncondition.h"
 #include "MarginCondition.h"

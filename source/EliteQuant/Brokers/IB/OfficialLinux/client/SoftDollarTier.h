@@ -1,5 +1,10 @@
 #pragma once
 
+#ifdef IB_POSIX
+#define TWSAPIDLLEXP
+#include <string>
+#endif
+
 class TWSAPIDLLEXP SoftDollarTier
 {
 	std::string m_name, m_val, m_displayName;

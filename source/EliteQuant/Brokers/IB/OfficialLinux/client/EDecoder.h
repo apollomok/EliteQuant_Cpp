@@ -160,6 +160,10 @@ class EWrapper;
 class EClient;
 struct EClientMsgSink;
 
+#if defined(IB_POSIX)
+#define TWSAPIDLLEXP
+#endif
+
 class TWSAPIDLLEXP EDecoder
 {
     EWrapper *m_pEWrapper;

@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "SoftDollarTier.h"
 
 SoftDollarTier::SoftDollarTier(const std::string& name, const std::string& val, const std::string& displayName) :

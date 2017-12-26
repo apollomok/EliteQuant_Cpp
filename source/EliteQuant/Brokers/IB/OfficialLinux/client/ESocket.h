@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "ETransport.h"
+#include <cstddef>
 
 class ESocket :
     public ETransport

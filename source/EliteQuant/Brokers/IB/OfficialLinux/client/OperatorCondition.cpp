@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "OperatorCondition.h"
 #include "EDecoder.h"
 #include "EClient.h"
