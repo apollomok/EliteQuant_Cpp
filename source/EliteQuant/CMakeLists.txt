@@ -34,7 +34,7 @@ set(EliteQuantCppSrc
   ./Services/Strategy/strategyservice.cpp
   ./Services/Api/apiservice.cpp
   ./Services/Data/dataservice.cpp
-  #./Services/elitequant_.cpp
+  ./Services/elitequant_.cpp
   ./Services/Brokerage/brokerageservice.cpp
   ./Services/tradingengine.cpp
   ./Brokers/Paper/paperdatafeed.cpp
@@ -69,4 +69,9 @@ set(EliteQuantCppSrc
   ./Brokers/Backtest/backtestdatafeed.cpp
   ./Brokers/Google/googledatafeed.cpp
   )
-add_library(libelitequant ${EliteQuantCppSrc})
+#ADD_LIBRARY(boost_python STATIC IMPORTED)
+#SET_TARGET_PROPERTIES(boost_python PROPERTIES
+#    IMPORTED_LOCATION /usr/lib/x86_64-linux-gnu/libboost_python.a)
+add_library(elitequant SHARED ${EliteQuantCppSrc})
+set_target_properties(elitequant  PROPERTIES COMPILE_FLAGS "-fPIC")
+target_link_libraries(elitequant  boost_python-py35  boost_system boost_filesystem boost_date_time python3.5m yaml-cpp zmq thosttraderapi thostmduserapi zmq yaml-cpp sandbox_vs_dll nanomsg pthread dl util m)

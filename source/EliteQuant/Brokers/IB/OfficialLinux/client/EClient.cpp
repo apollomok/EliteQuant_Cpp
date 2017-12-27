@@ -44,6 +44,12 @@ void EClient::EncodeField<bool>(std::ostream& os, bool boolValue)
 }
 
 template<>
+void EClient::EncodeField<const char *>(std::ostream& os, const char * str)
+{
+  os << str;
+}
+
+template<>
 void EClient::EncodeField<double>(std::ostream& os, double doubleValue)
 {
 	char str[128];

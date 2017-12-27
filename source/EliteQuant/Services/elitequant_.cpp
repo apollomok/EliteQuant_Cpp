@@ -5,7 +5,11 @@ using namespace EliteQuant;
 
 // http://www.shocksolution.com/python-basics-tutorials-and-examples/linking-python-and-c-with-boostpython/
 
+#if defined(IB_WIN32)
 BOOST_PYTHON_MODULE(EliteQuant)
+#elif defined(IB_POSIX)
+BOOST_PYTHON_MODULE(libelitequant)
+#endif
 {
 	class_<tradingengine, boost::noncopyable>("tradingengine_").
 		def("run", &tradingengine::run).
