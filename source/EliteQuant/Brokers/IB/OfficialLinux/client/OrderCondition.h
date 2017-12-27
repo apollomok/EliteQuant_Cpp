@@ -2,6 +2,10 @@
 #include "IExternalizable.h"
 #include "shared_ptr.h"
 
+#ifdef IB_POSIX
+#define TWSAPIDLLEXP
+#endif
+
 class TWSAPIDLLEXP OrderCondition : public IExternalizable {
 public:
 	enum OrderConditionType {

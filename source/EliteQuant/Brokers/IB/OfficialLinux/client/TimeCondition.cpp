@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "TimeCondition.h"
 
 std::string TimeCondition::valueToString() const {

@@ -3,7 +3,11 @@
 
 #pragma once
 
-#include "StdAfx.h"
+//#include "StdAfx.h"
+#ifdef IB_POSIX
+#define TWSAPIDLLEXP
+#include <pthread.h>
+#endif
 
 class TWSAPIDLLEXP EMutex
 {

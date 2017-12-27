@@ -181,6 +181,9 @@ struct ETransport;
 class EWrapper;
 typedef std::vector<char> BytesVec;
 
+#if defined(IB_POSIX)
+#define TWSAPIDLLEXP
+#endif
 
 class TWSAPIDLLEXP EClient
 {

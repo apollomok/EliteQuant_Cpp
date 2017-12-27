@@ -9,6 +9,7 @@
 #include "SoftDollarTier.h"
 #include <string>
 #include <set>
+#include <vector>
 
 enum TickType { BID_SIZE, BID, ASK, ASK_SIZE, LAST, LAST_SIZE,
 				HIGH, LOW, VOLUME, CLOSE,

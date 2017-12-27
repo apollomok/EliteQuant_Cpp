@@ -1,4 +1,4 @@
-﻿#include "StdAfx.h"
+﻿//#include "StdAfx.h"
 #include "EMessage.h"
 #include "ESocket.h"
 

@@ -1,4 +1,6 @@
+#if defined(IB_WIN32)
 #include "StdAfx.h"
+#endif
 #include "ContractCondition.h"
 #include "EDecoder.h"
 #include "EClient.h"

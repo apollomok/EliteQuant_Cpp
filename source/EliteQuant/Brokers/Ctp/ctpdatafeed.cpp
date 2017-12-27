@@ -6,6 +6,7 @@
 #include <mutex>
 
 #include <Brokers/Ctp/ctpdatafeed.h>
+#include <Brokers/Ctp/ThostFtdcMdApi.h>
 #include <Common/Util/util.h>
 #include <Common/Order/orderstatus.h>
 #include <Common/Logger/logger.h>

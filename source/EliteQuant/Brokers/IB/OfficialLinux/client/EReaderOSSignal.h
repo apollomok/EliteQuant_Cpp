@@ -3,11 +3,15 @@
 
 #pragma once
 #include "EReaderSignal.h"
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include <stdexcept>
 
 #if !defined(INFINITE)
 #define INFINITE ((unsigned long)-1)
+#endif
+
+#if defined(IB_POSIX)
+#define TWSAPIDLLEXP
 #endif
 
 class TWSAPIDLLEXP EReaderOSSignal :

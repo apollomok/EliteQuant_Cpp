@@ -6,7 +6,7 @@ project(Seasocks)
 set(PROJECT_VERSION 1.2.6)
 
 
-option(UNITTESTS "Build unittests." ON)
+option(UNITTESTS "Build unittests." OFF)
 
 message(STATUS "${PROJECT_NAME} ${PROJECT_VERSION}")
 message(STATUS "Unittests: ${UNITTESTS}")

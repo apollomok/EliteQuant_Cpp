@@ -2,6 +2,11 @@
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 #pragma once
+#if defined(IB_POSIX)
+#define TWSAPIDLLEXP
+#include <vector>
+#endif
+
 class TWSAPIDLLEXP EMessage
 {
     std::vector<char> data;

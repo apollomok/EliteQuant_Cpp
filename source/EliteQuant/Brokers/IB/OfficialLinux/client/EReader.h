@@ -3,10 +3,11 @@
 
 #pragma once
 
-#include "StdAfx.h"
+//#include "StdAfx.h"
 #include "EDecoder.h"
 #include "EMutex.h"
 #include "EReaderOSSignal.h"
+#include <deque>
 
 class EClientSocket;
 class EReaderSignal;

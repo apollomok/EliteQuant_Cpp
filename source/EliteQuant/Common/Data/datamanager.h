@@ -17,8 +17,13 @@
 #include <cereal/types/string.hpp>
 #include <cereal/types/map.hpp>
 
+#if defined(IB_POSIX)
+#include <nanomsg/nn.h>
+#include <nanomsg/pubsub.h>
+#elif defined(IB_WIN32)
 #include <nanomsg/src/nn.h>
 #include <nanomsg/src/pubsub.h>
+#endif
 
 using std::string;
 
