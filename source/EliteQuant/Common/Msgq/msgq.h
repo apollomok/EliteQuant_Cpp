@@ -3,12 +3,12 @@
 
 #include <string>
 #include <Common/config.h>
-#if defined(IB_POSIX)
-#include <nanomsg/nn.h>
-#include <nanomsg/pubsub.h>
-#elif defined(IB_WIN32)
+#ifdef _WIN32
 #include <nanomsg/src/nn.h>
 #include <nanomsg/src/pubsub.h>
+#else
+#include <nanomsg/nn.h>
+#include <nanomsg/pubsub.h>
 #endif
 
 #include <zmq.h>

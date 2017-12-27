@@ -1,6 +1,6 @@
 #ifndef _EliteQuant_Brokers_IBBrokerage_H_
 #define _EliteQuant_Brokers_IBBrokerage_H_
-#ifdef _WIN32
+#ifdef _NOT_DEFINED_ALWAYS_USE_LINUX
 // Windows
 #include <Brokers/IB/OfficialWindows/EWrapper.h>
 #include <Brokers/IB/OfficialWindows/EPosixClientSocket.h>

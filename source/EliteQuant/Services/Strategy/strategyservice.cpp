@@ -11,12 +11,12 @@
 
 #include <Strategy/smacross.h>
 #include <atomic>
-#if defined(IB_POSIX)
-#include <nanomsg/nn.h>
-#include <nanomsg/pair.h>
-#elif defined(IB_WIN32)
+#ifdef _WIN32
 #include <nanomsg/src/nn.h>
 #include <nanomsg/src/pair.h>
+#else
+#include <nanomsg/nn.h>
+#include <nanomsg/pair.h>
 #endif
 
 using namespace std;
