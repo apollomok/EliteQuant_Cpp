@@ -43,7 +43,7 @@ namespace EliteQuant
 		void sendOrderFilled(Fill& t);
 		void sendOrderCancelled(long oid);
 		void sendOrderStatus(long oid);
-		void sendOpenPositionMessage(string symbol, int position, double averageCost, double unrealisedPNL, double realisedPNL);
+		void sendOpenPositionMessage(string symbol, double position, double averageCost, double unrealisedPNL, double realisedPNL);
 		void sendHistoricalBarMessage(string symbol, string time, double open, double high, double low, double close, int volume, int barcount = 0, double wap = 0);
 		void sendGeneralMessage(std::string gm);
 

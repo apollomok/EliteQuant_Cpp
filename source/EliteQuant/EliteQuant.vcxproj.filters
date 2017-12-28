@@ -40,9 +40,6 @@
     <Filter Include="Common\Util">
       <UniqueIdentifier>{0f0fba09-5461-4c63-98f0-866fe0916739}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Brokers\IB\IBOfficial">
-      <UniqueIdentifier>{ad327dc9-4ad0-4edb-bad8-a14d3761fcaf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Common\Strategy">
       <UniqueIdentifier>{bb16b2b6-c999-4441-954a-20c1a99913be}</UniqueIdentifier>
     </Filter>
@@ -81,6 +78,9 @@
     </Filter>
     <Filter Include="Services\Strategy">
       <UniqueIdentifier>{bd1548ba-f273-4df1-b583-7575292293c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Brokers\IB\Official">
+      <UniqueIdentifier>{ad327dc9-4ad0-4edb-bad8-a14d3761fcaf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,11 +219,68 @@
     <ClCompile Include="Services\Strategy\strategyservice.cpp">
       <Filter>Services\Strategy</Filter>
     </ClCompile>
-    <ClCompile Include="Brokers\IB\OfficialWindows\EClientSocketBase.cpp">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClCompile Include="Brokers\IB\Official\ContractCondition.cpp">
+      <Filter>Brokers\IB\Official</Filter>
     </ClCompile>
-    <ClCompile Include="Brokers\IB\OfficialWindows\EPosixClientSocket.cpp">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClCompile Include="Brokers\IB\Official\DefaultEWrapper.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\EClient.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\EClientSocket.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\EDecoder.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\EMessage.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\EMutex.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\EReader.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\EReaderOSSignal.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\EReaderWMSignal.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\ESocket.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\executioncondition.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\MarginCondition.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\OperatorCondition.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\OrderCondition.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\PercentChangeCondition.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\PriceCondition.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\SoftDollarTier.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\StdAfx.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\TimeCondition.cpp">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\IB\Official\VolumeCondition.cpp">
+      <Filter>Brokers\IB\Official</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -410,59 +467,119 @@
     <ClInclude Include="Services\Strategy\strategyservice.h">
       <Filter>Services\Strategy</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\CommissionReport.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\CommissionReport.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\CommonDefs.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\CommonDefs.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\Contract.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\Contract.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\EClient.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\ContractCondition.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\EClientSocketBase.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\DefaultEWrapper.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\EClientSocketBaseImpl.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EClient.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\EPosixClientSocket.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EClientMsgSink.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\EPosixClientSocketPlatform.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EClientSocket.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\EWrapper.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EDecoder.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\Execution.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EMessage.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\IBString.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EMutex.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\Order.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EPosixClientSocketPlatform.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\OrderState.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EReader.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\ScannerSubscription.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EReaderOSSignal.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\shared_ptr.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EReaderSignal.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\StdAfx.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\EReaderWMSignal.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\TagValue.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\ESocket.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
-    <ClInclude Include="Brokers\IB\OfficialWindows\TwsSocketClientErrors.h">
-      <Filter>Brokers\IB\IBOfficial</Filter>
+    <ClInclude Include="Brokers\IB\Official\ETransport.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\EWrapper.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\Execution.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\executioncondition.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\IExternalizable.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\MarginCondition.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\OperatorCondition.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\Order.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\OrderCondition.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\OrderState.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\PercentChangeCondition.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\PriceCondition.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\Resource.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\ScannerSubscription.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\shared_ptr.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\SoftDollarTier.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\StdAfx.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\TagValue.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\TimeCondition.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\TwsSocketClientErrors.h">
+      <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\IB\Official\VolumeCondition.h">
+      <Filter>Brokers\IB\Official</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,13 +9,12 @@
 #include <Common/Security/portfoliomanager.h>
 #include <Common/Data/marketdatafeed.h>
 #include <Strategy/strategyFactory.h>
-
-#if defined(IB_POSIX)
-#include <nanomsg/pair.h>
-#include <nanomsg/reqrep.h>
-#elif defined(IB_WIN32)
+#ifdef _WIN32
 #include <nanomsg/src/pair.h>
 #include <nanomsg/src/reqrep.h>
+#else
+#include <nanomsg/pair.h>
+#include <nanomsg/reqrep.h>
 #endif
 
 using namespace std;

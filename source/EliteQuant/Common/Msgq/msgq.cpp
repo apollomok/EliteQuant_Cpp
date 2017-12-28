@@ -1,11 +1,11 @@
 #include <Common/Msgq/msgq.h>
-#if defined(IB_POSIX)
+#ifdef _WIN32
+#include <nanomsg/src/nn.h>
+#include <nanomsg/src/pair.h>
+#else
 #include <nanomsg/nn.h>
 #include <nanomsg/pair.h>
 #include <zmq.h>
-#elif defined(IB_WIN32)
-#include <nanomsg/src/nn.h>
-#include <nanomsg/src/pair.h>
 #endif
 
 namespace EliteQuant {

@@ -262,7 +262,7 @@ namespace EliteQuant
 		}
 	}
 
-	void brokerage::sendOpenPositionMessage(string symbol, int position, double averageCost, double unrealisedPNL, double realisedPNL) {
+	void brokerage::sendOpenPositionMessage(string symbol, double position, double averageCost, double unrealisedPNL, double realisedPNL) {
 		//char str[512];
 		//sprintf(str, "%d,%.4f,%.4f,%.4f", position, averageCost, unrealisedPNL, realisedPNL);
 		//push(string(str));
