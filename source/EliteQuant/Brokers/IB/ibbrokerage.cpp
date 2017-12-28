@@ -17,22 +17,40 @@ namespace EliteQuant
 	extern std::atomic<bool> gShutdown;
 
 	IBBrokerage::IBBrokerage() :
-		m_pClient(new EPosixClientSocket(this))
+		m_osSignal(2000)//2-seconds timeout
+		, m_pClient(new EClientSocket(this, &m_osSignal))
+		, m_sleepDeadline(0)
+		, m_pReader(0)
+		, m_extraAuth(false)
 	{
 	}
 
+	//! [socket_init]
 	IBBrokerage::~IBBrokerage()
 	{
+		if (m_pReader)
+			delete m_pReader;
+
+		delete m_pClient;
 	}
 
 	//********************************************************************************************//
 	// Brokerage part
 	void IBBrokerage::processBrokerageMessages()
 	{
+		fd_set readSet, writeSet, errorSet;
+
+		struct timeval tval;
+		tval.tv_usec = 0;
+		tval.tv_sec = 0;
+
+		time_t now = time(NULL);
+
 		if (!brokerage::heatbeat(5)) {
 			disconnectFromBrokerage();
 			return;
 		}
+
 		switch (_bkstate) {
 		case BK_ACCOUNT:		// not used
 			requestBrokerageAccountInformation(CConfig::instance().account);
@@ -56,61 +74,14 @@ namespace EliteQuant
 			break;
 		}
 
-		// from IB source code
-		// TODO: what does this do?
-		if (m_pClient->fd() >= 0) {
-			fd_set readSet, writeSet, errorSet;
-			FD_ZERO(&readSet);
-			errorSet = writeSet = readSet;
-
-			FD_SET(m_pClient->fd(), &readSet);
-
-			if (!m_pClient->isOutBufferEmpty())
-				FD_SET(m_pClient->fd(), &writeSet);
-
-			FD_SET(m_pClient->fd(), &errorSet);
-
-			int ret = select(m_pClient->fd() + 1, &readSet, &writeSet, &errorSet, &(brokerage::timeout));
-
-			if (ret == 0) { // timeout
-				return;
-			}
-
-			if (ret < 0) {	// error
-				printf("error\n");
-				disconnectFromBrokerage();
-				return;
-			}
-
-			if (m_pClient->fd() < 0) {
-				printf("error\n");
-				return;
-			}
-
-			if (FD_ISSET(m_pClient->fd(), &errorSet)) {
-				// error on socket
-				printf("error\n");
-				m_pClient->onError();
-			}
-
-			if (m_pClient->fd() < 0) {
-				return;
-			}
-
-			if (FD_ISSET(m_pClient->fd(), &writeSet)) {
-				// socket is ready for writing
-				m_pClient->onSend();
-			}
-
-			if (m_pClient->fd() < 0) {
-				return;
-			}
-
-			if (FD_ISSET(m_pClient->fd(), &readSet)) {
-				// socket is ready for reading
-				m_pClient->onReceive();
-			}
+		if (m_sleepDeadline > 0) {
+			// initialize timeout with m_sleepDeadline - now
+			tval.tv_sec = m_sleepDeadline - now;
 		}
+
+		m_pReader->checkClient();
+		m_osSignal.waitForSignal();
+		m_pReader->processMsgs();
 	}
 
 	bool IBBrokerage::connectToBrokerage() {
@@ -120,10 +91,13 @@ namespace EliteQuant
 
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Connecting to %s:%d clientId:%d.\n", __FILE__, __LINE__, __FUNCTION__, host, port, clientId);
 
-		bool bRes = m_pClient->eConnect(host, port, clientId);
+		bool bRes = m_pClient->eConnect(host, port, clientId, m_extraAuth);
 
 		if (bRes) {
 			PRINT_TO_FILE("INFO:[%s,%d][%s]Connected to ib brokerage %s:%d clientId:%d\n", __FILE__, __LINE__, __FUNCTION__, host, port, clientId);
+			m_pReader = new EReader(m_pClient, &m_osSignal);
+			m_pReader->start();
+
 			_bkstate = BK_CONNECT;
 			//m_pClient->setServerLogLevel(5);			// can not work on m_pClient before a loop process
 			if (clientId == 0) {
@@ -245,7 +219,7 @@ namespace EliteQuant
 	}
 
 	/*void IBBrokerage::exerciseOptions(TickerId id, const Contract &contract,
-	int exerciseAction, int exerciseQuantity, const IBString &account,
+	int exerciseAction, int exerciseQuantity, const std::string &account,
 	int override) {}*/
 
 	// End of Brokerage part
@@ -522,9 +496,9 @@ namespace EliteQuant
 
 	///https://www.interactivebrokers.com/en/software/api/apiguide/java/orderstatus.htm
 	// Note that TWS orders have a fixed clientId and orderId of 0 that distinguishes them from API orders.
-	void IBBrokerage::orderStatus(OrderId orderId, const IBString &status, int filled,
-		int remaining, double avgFillPrice, int permId, int parentId,
-		double lastFillPrice, int clientId, const IBString& whyHeld)
+	void IBBrokerage::orderStatus(OrderId orderId, const std::string &status, double filled,
+		double remaining, double avgFillPrice, int permId, int parentId,
+		double lastFillPrice, int clientId, const std::string& whyHeld)
 	{
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Order status, oid = %ld.\n", __FILE__, __LINE__, __FUNCTION__, orderId);
 
@@ -565,19 +539,19 @@ namespace EliteQuant
 		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Open orders end.\n", __FILE__, __LINE__, __FUNCTION__);
 	}
 
-	void IBBrokerage::updateAccountValue(const IBString& key, const IBString& val,
-		const IBString& currency, const IBString& accountName)
+	void IBBrokerage::updateAccountValue(const std::string& key, const std::string& val,
+		const std::string& currency, const std::string& accountName)
 	{
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Update account value: %s,%s,%s,%s.\n", __FILE__, __LINE__, __FUNCTION__, key.c_str(), val.c_str(), currency.c_str(), accountName.c_str());
 		PortfolioManager::instance()._account.setvalue(key, val, currency);
 	}
 
 	// triggered by reqAccountUpdate(true, null) called in Start()
-	void IBBrokerage::updatePortfolio(const Contract& contract, int position,
+	void IBBrokerage::updatePortfolio(const Contract& contract, double position,
 		double marketPrice, double marketValue, double averageCost,
-		double unrealizedPNL, double realizedPNL, const IBString& accountName)
+		double unrealizedPNL, double realizedPNL, const std::string& accountName)
 	{
-		PRINT_TO_FILE("INFO:[%s,%d][%s]Update portfolio: %s,%d,%3.f\n", __FILE__, __LINE__, __FUNCTION__, contract.localSymbol.c_str(), position, averageCost);
+		PRINT_TO_FILE("INFO:[%s,%d][%s]Update portfolio: %s,%f, %3.f\n", __FILE__, __LINE__, __FUNCTION__, contract.localSymbol.c_str(), position, averageCost);
 
 		//Note: after closing position, position is 0 
 		//Don't send message when position is 0
@@ -633,7 +607,7 @@ namespace EliteQuant
 	}
 
 	//Error Code: https://www.interactivebrokers.com/en/software/api/apiguide/tables/api_message_codes.htm
-	void IBBrokerage::error(const int id, const int errorCode, const IBString errorString) {
+	void IBBrokerage::error(const int id, const int errorCode, const std::string errorString) {
 		PRINT_TO_FILE("ERROR:[%s,%d][%s]id=%d,eCode=%d,msg:%s.\n", __FILE__, __LINE__, __FUNCTION__, id, errorCode, errorString.c_str());
 		sendGeneralMessage(to_string(id) + SERIALIZATION_SEPARATOR + to_string(errorCode) + SERIALIZATION_SEPARATOR + errorString);
 
@@ -664,7 +638,7 @@ namespace EliteQuant
 	}
 
 	// TODO postion = depth
-	void IBBrokerage::updateMktDepthL2(TickerId id, int position, IBString marketMaker, int operation,
+	void IBBrokerage::updateMktDepthL2(TickerId id, int position, std::string marketMaker, int operation,
 		int side, double price, int size) {
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Update market depth L2.\n", __FILE__, __LINE__, __FUNCTION__);
 
@@ -676,7 +650,7 @@ namespace EliteQuant
 
 	// triggered by EClientSocket::reqManagedAccts
 	// feed in upon connection
-	void IBBrokerage::managedAccounts(const IBString& accountsList) {
+	void IBBrokerage::managedAccounts(const std::string& accountsList) {
 		PRINT_TO_FILE("INFO:[%s,%d][%s]client_id=%d,the managed account is:%s.\n", __FILE__, __LINE__, __FUNCTION__, m_pClient->clientId(), accountsList.c_str());
 
 		if (CConfig::instance().account != accountsList) {
@@ -689,7 +663,7 @@ namespace EliteQuant
 	}
 
 	// Intra-day bar sizes are relayed back in Local Time Zone, daily bar sizes and greater are relayed back in Exchange Time Zone.
-	void IBBrokerage::historicalData(TickerId reqId, const IBString& date, double open, double high,
+	void IBBrokerage::historicalData(TickerId reqId, const std::string& date, double open, double high,
 		double low, double close, int volume, int barCount, double WAP, int hasGaps) {
 		try {
 			string symbol = histreqeuests_[reqId];
@@ -714,6 +688,14 @@ namespace EliteQuant
 		PRINT_TO_FILE("INFO:[%s,%d][%s]%s:%.2f:%.2f:%.2f:%.2f:%.2f:%ld.\n", __FILE__, __LINE__, __FUNCTION__,
 			symbol.c_str(), open, high, low, close, wap, volume);
 	}
+
+	//! [connectack]
+	void IBBrokerage::connectAck() {
+		if (!m_extraAuth && m_pClient->asyncEConnect())
+			m_pClient->startApi();
+	}
+	//! [connectack]
+
 	// end of events from EWrapper
 	//********************************************************************************************//
 

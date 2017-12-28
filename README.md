@@ -106,7 +106,7 @@ The following are message types:
 
 ### Ticker Symbol
 
-In EliteQuant, an instrument is identified by its **full symbol**, which consists of a couple fo words separated by space. The general pattern is "Local_Symbol Security_Type Exchange_Name Multiplier). For example
+In EliteQuant, an instrument is identified by its **full symbol**, which consists of a couple fo words separated by space. The general pattern is "Local_Symbol Security_Type Exchange_Name Currency Multiplier“. For example
 
 * Stock: SPY STK SMART
 * Future: ESZ7 FUT GLOBEX 50

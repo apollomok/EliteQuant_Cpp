@@ -5,7 +5,7 @@ log_dir: d:/workspace/elitequant_cpp/log
 data_dir: d:/workspace/elitequant_cpp/data
 #------------------ End of System ---------------#
 #-------------- Interactive Brokers -------------#
-account: DU15187
+account: DU15186
 ibport: 7497
 # ----------------- End of IB  ------------------#
 #----------------- Ctp --------------------------#
