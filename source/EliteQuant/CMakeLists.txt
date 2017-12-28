@@ -41,29 +41,27 @@ set(EliteQuantCppSrc
   ./Brokers/Paper/paperbrokerage.cpp
   ./Brokers/Ctp/ctpbrokerage.cpp
   ./Brokers/Ctp/ctpdatafeed.cpp
-  ./Brokers/IB/OfficialLinux/EPosixClientSocket.cpp
-  ./Brokers/IB/OfficialLinux/EClientSocketBase.cpp
-  # ./Brokers/IB/OfficialLinux/client/EClient.cpp
-  # ./Brokers/IB/OfficialLinux/client/SoftDollarTier.cpp
-  # ./Brokers/IB/OfficialLinux/client/OrderCondition.cpp
-  # ./Brokers/IB/OfficialLinux/client/ContractCondition.cpp
-  # ./Brokers/IB/OfficialLinux/client/OperatorCondition.cpp
-  # ./Brokers/IB/OfficialLinux/client/EClientSocket.cpp
-  # ./Brokers/IB/OfficialLinux/client/TimeCondition.cpp
-  # ./Brokers/IB/OfficialLinux/client/VolumeCondition.cpp
-  # ./Brokers/IB/OfficialLinux/client/EReader.cpp
-  # ./Brokers/IB/OfficialLinux/client/MarginCondition.cpp
-  # ./Brokers/IB/OfficialLinux/client/executioncondition.cpp
-  # ./Brokers/IB/OfficialLinux/client/ESocket.cpp
-  # ./Brokers/IB/OfficialLinux/client/StdAfx.cpp
-  # ./Brokers/IB/OfficialLinux/client/EReaderOSSignal.cpp
-  # ./Brokers/IB/OfficialLinux/client/EReaderWMSignal.cpp
-  # ./Brokers/IB/OfficialLinux/client/DefaultEWrapper.cpp
-  # ./Brokers/IB/OfficialLinux/client/EMessage.cpp
-  # ./Brokers/IB/OfficialLinux/client/PriceCondition.cpp
-  # ./Brokers/IB/OfficialLinux/client/PercentChangeCondition.cpp
-  # ./Brokers/IB/OfficialLinux/client/EDecoder.cpp
-  # ./Brokers/IB/OfficialLinux/client/EMutex.cpp
+  ./Brokers/IB/Official/EClient.cpp
+  ./Brokers/IB/Official/SoftDollarTier.cpp
+  ./Brokers/IB/Official/OrderCondition.cpp
+  ./Brokers/IB/Official/ContractCondition.cpp
+  ./Brokers/IB/Official/OperatorCondition.cpp
+  ./Brokers/IB/Official/EClientSocket.cpp
+  ./Brokers/IB/Official/TimeCondition.cpp
+  ./Brokers/IB/Official/VolumeCondition.cpp
+  ./Brokers/IB/Official/EReader.cpp
+  ./Brokers/IB/Official/MarginCondition.cpp
+  ./Brokers/IB/Official/executioncondition.cpp
+  ./Brokers/IB/Official/ESocket.cpp
+  ./Brokers/IB/Official/StdAfx.cpp
+  ./Brokers/IB/Official/EReaderOSSignal.cpp
+  ./Brokers/IB/Official/EReaderWMSignal.cpp
+  ./Brokers/IB/Official/DefaultEWrapper.cpp
+  ./Brokers/IB/Official/EMessage.cpp
+  ./Brokers/IB/Official/PriceCondition.cpp
+  ./Brokers/IB/Official/PercentChangeCondition.cpp
+  ./Brokers/IB/Official/EDecoder.cpp
+  ./Brokers/IB/Official/EMutex.cpp
   ./Brokers/IB/ibbrokerage.cpp
   ./Brokers/Sina/sinadatafeed.cpp
   ./Brokers/Backtest/backtestdatafeed.cpp

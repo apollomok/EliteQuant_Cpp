@@ -9,11 +9,11 @@ include_directories(./include)
 
 find_package(Boost COMPONENTS serialization unit_test_framework)
 
-if(Boost_FOUND)
-  include_directories(${Boost_INCLUDE_DIRS})
-  enable_testing()
-  add_subdirectory(unittests)
-endif(Boost_FOUND)
+# if(Boost_FOUND)
+#   include_directories(${Boost_INCLUDE_DIRS})
+#   enable_testing()
+#   add_subdirectory(unittests)
+# endif(Boost_FOUND)
 
 add_subdirectory(sandbox)
 

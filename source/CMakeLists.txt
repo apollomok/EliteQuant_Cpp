@@ -34,7 +34,7 @@ add_subdirectory(ThirdParty/cereal)
 add_subdirectory(ThirdParty/seasocks)
 
 include_directories(${NANOMSG_INCLUDE_DIR})
-ADD_DEFINITIONS("-std=gnu++17 -DIB_USE_STD_STRING -DIB_POSIX")
+ADD_DEFINITIONS("-std=gnu++17 -DIB_USE_STD_STRING")
 subdirs(EliteQuant eqserver)
 
 get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
