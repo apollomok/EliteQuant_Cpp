@@ -38,6 +38,12 @@ void EClient::EncodeField(std::ostream& os, T value)
 }
 
 template<>
+void EClient::EncodeField<char const  *>(std::ostream& os, char const * value)
+{
+  os << value << '\0';
+}
+
+template<>
 void EClient::EncodeField<bool>(std::ostream& os, bool boolValue)
 {
 	EncodeField<int>(os, boolValue ? 1 : 0);
@@ -49,7 +55,6 @@ void EClient::EncodeField<double>(std::ostream& os, double doubleValue)
 	char str[128];
 
 	snprintf(str, sizeof(str), "%.10g", doubleValue);
-
 	EncodeField<const char*>(os, str);
 }
 
