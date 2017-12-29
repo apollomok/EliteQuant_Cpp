@@ -65,6 +65,31 @@ Below is the environment we are using
 
 Visual C++ is a popular choice on Windows. CodeLite is a free Linux IDE, very close to Visual Studio in terms of user experience. Other choices are CLion, CMake, etc.
 
+### Development on Ubuntu 16.04 64 bit System
+
+You can follow below steps to install necessary third party libraries and build this project with cmake on newest 64 bit Ubuntu system.
+
+```bash
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install aptitude git cmake 
+sudo aptitude install zlib1g-dev rapidjson-dev python3-dev libboost-all-dev libsodium-dev \
+                      libyaml-cpp-dev libwebsocketpp-dev libnanomsg-dev libzmq3-dev
+
+# Download SimNow tradeapi for Linux 
+wget http://simnow.sfit.com.cn/download/api/v6.3.5_20150803_tradeapi_linux64.tar
+tar xvf v6.3.5_20150803_tradeapi_linux64.tar
+cd v6.3.5_20150803_api_tradeapi_linux64/
+sudo cp thostmduserapi.so /usr/lib/libthostmduserapi.so
+sudo cp thosttraderapi.so /usr/lib/libthosttraderapi.so
+cd -
+git clone https://github.com/EliteQuant/EliteQuant_Cpp.git
+cd EliteQuant_Cpp/source
+mkdir build
+cmake ..
+make -j2
+```
+
 ## Architecture Diagram
 
 ### Micro-Services
