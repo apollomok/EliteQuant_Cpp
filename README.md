@@ -98,6 +98,13 @@ mkdir log data
 ./eqserver             # change config.yaml first
 ```
 
+On Linux, you might encounter the **double free or corruption (!prev)** error when you terminate the eqserver by pressing Ctrl+C. One way to suppress this warning is to add **MALLOC_CHECK_=0** variable to your environment.
+```bash
+sudo vim ~/.bashrc          # edit system config
+export MALLOC_CHECK_=0      # append this to the end of the file
+source ~/.bashrc            # source the configuration file into effect
+```
+
 ## Architecture Diagram
 
 ### Micro-Services
