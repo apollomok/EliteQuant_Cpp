@@ -76,18 +76,26 @@ sudo apt-get install aptitude git cmake
 sudo aptitude install zlib1g-dev rapidjson-dev python3-dev libboost-all-dev libsodium-dev \
                       libyaml-cpp-dev libwebsocketpp-dev libnanomsg-dev libzmq3-dev
 
-# Download SimNow tradeapi for Linux 
+# Download SimNow tradeapi for Linux
+cd ~          # or directory of your choice 
 wget http://simnow.sfit.com.cn/download/api/v6.3.5_20150803_tradeapi_linux64.tar
 tar xvf v6.3.5_20150803_tradeapi_linux64.tar
 cd v6.3.5_20150803_api_tradeapi_linux64/
 sudo cp thostmduserapi.so /usr/lib/libthostmduserapi.so
 sudo cp thosttraderapi.so /usr/lib/libthosttraderapi.so
-cd -
+cd ~        # or directory of your choice        
 git clone https://github.com/EliteQuant/EliteQuant_Cpp.git
 cd EliteQuant_Cpp/source
 mkdir build
+cd build
 cmake ..
 make -j2
+
+# run the program
+cd eqserver
+cp ../../eqserver/config.yaml .
+mkdir log data
+./eqserver             # change config.yaml first
 ```
 
 ## Architecture Diagram

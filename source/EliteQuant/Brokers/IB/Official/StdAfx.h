@@ -2,6 +2,7 @@
  * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
 
 #ifdef _MSC_VER
+#define NOMINMAX		// https://stackoverflow.com/questions/7035023/stdmax-expected-an-identifier
 
 #ifdef TWSAPIDLL
 #ifndef TWSAPIDLLEXP
