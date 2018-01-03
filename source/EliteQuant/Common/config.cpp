@@ -34,7 +34,7 @@ namespace EliteQuant {
 #ifdef _DEBUG
 		std::printf("Current path is : %s\n", boost::filesystem::current_path().string().c_str());
 #endif
-		string path = boost::filesystem::current_path().string() + "/config.yaml";
+		string path = boost::filesystem::current_path().string() + "/config_server.yaml";
 		YAML::Node config = YAML::LoadFile(path);
 
 		_config_dir = boost::filesystem::current_path().string();
@@ -54,29 +54,35 @@ namespace EliteQuant {
 		else
 			_msgq = MSGQ::NANOMSG;
 		
-		const string broker = config["broker"].as<std::string>();
-		if (broker == "IB")
-			_broker = BROKERS::IB;
-		else if (broker == "CTP")
-			_broker = BROKERS::CTP;
-		else if (broker == "GOOGLE")
-			_broker = BROKERS::GOOGLE;
-		else if (broker == "SINA")
-			_broker = BROKERS::SINA;
-		else
-			_broker = BROKERS::PAPER;
+		// TODO: support multiple accounts; currently only the last account loop counts
+		const std::vector<string> accounts = config["accounts"].as<std::vector<string>>();
+		for (auto s : accounts) {
+			const string api = config[s]["api"].as<std::string>();
+			if (api == "IB") {
+				_broker = BROKERS::IB;
+				account = s;
+				ib_port = config[s]["port"].as<long>();
+			}
+			else if (api == "CTP") {
+				_broker = BROKERS::CTP;
+				ctp_broker_id = config[s]["broker_id"].as<std::string>();
+				ctp_user_id = s;
+				ctp_password = config[s]["password"].as<std::string>();
+				ctp_data_address = config[s]["md_address"].as<std::string>();
+				ctp_broker_address = config[s]["td_address"].as<std::string>();
+			}
+			else if (api == "SINA")
+				_broker = BROKERS::SINA;
+			else
+				_broker = BROKERS::PAPER;
 
-		account = config["account"].as<std::string>();
-		ib_port = config["ibport"].as<long>();
-		ctp_broker_id = config["ctp_broker_id"].as<std::string>();
-		ctp_user_id = config["ctp_user_id"].as<std::string>();
-		ctp_password = config["ctp_password"].as<std::string>();
-		ctp_data_address = config["ctp_md_address"].as<std::string>();
-		ctp_broker_address = config["ctp_td_address"].as<std::string>();
-		const std::vector<string> tickers = config["tickers"].as<std::vector<string>>();
-		for (auto s : tickers)
-		{
-			securities.push_back(s);
+
+			securities.clear();
+			const std::vector<string> tickers = config[s]["tickers"].as<std::vector<string>>();
+			for (auto s : tickers)
+			{
+				securities.push_back(s);
+			}
 		}
 	}
 

@@ -67,7 +67,7 @@ Visual C++ is a popular choice on Windows. CodeLite is a free Linux IDE, very cl
 
 ### Development on Ubuntu 16.04 64 bit System
 
-You can follow below steps to install necessary third party libraries and build this project with cmake on newest 64 bit Ubuntu system.
+You can follow below steps to install necessary third party libraries and build this project with cmake on newest 64 bit Ubuntu system. Assume you have [xcode](https://developer.apple.com/xcode/) and [Homebrew](https://brew.sh/) installed, open a command terminal and execute the following.
 
 ```bash
 sudo apt-get update
@@ -103,6 +103,18 @@ On Linux, you might encounter the **double free or corruption (!prev)** error wh
 sudo vim ~/.bashrc          # edit system config
 export MALLOC_CHECK_=0      # append this to the end of the file
 source ~/.bashrc            # source the configuration file into effect
+```
+
+### Development on macOS
+You can follow below steps to install necessary third party libraries and build this project with cmake on clean macOS system.
+
+```bash
+brew --version
+brew update
+
+brew install git cmake
+brew install zlib1g-dev rapidjson-dev python3-dev libboost-all-dev libsodium-dev \
+                      libyaml-cpp-dev libwebsocketpp-dev libnanomsg-dev libzmq3-dev
 ```
 
 ## Architecture Diagram

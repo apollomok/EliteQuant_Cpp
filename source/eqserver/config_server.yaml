@@ -1,0 +1,67 @@
+#------------------ System Setting --------------#
+accounts:    # accounts active for trading
+  - your_simnow_account 
+  - DU15104
+msgq: nanomsg           # nanomsg kafka, zmq
+log_dir: d:/workspace/elitequant_cpp/log
+data_dir: d:/workspace/elitequant_cpp/data
+#------------------ End of System ---------------#
+
+#-------------- Interactive Brokers -------------#
+DU15104:
+  broker: IB                 # IB CTP SINA, GOOGLE, PAPER
+  api: IB
+  port: 7497
+  base_currency: USD
+  tickers:
+    - SPY STK SMART
+    - AAPL STK SMART
+    - AMZN STK SMART
+    - TSLA STK SMART
+    - GOOGL STK SMART
+
+DU15146:
+  broker: IB
+  api: IB
+  port: 7498          # Two IB accounts should have different ports
+  base_currency: USD
+  tickers:
+# ----------------- End of IB  ------------------#
+
+#----------------- Ctp --------------------------#
+your_simnow_account:
+  broker_id: 9999
+  api: CTP
+  password: your_simnow_pass
+  md_address: tcp://180.168.146.187:10010
+  td_address: tcp://180.168.146.187:10000
+  base_currency: CNY
+  tickers:
+    - IC1712
+    - IC1801
+    - IC1803
+    - IF1712
+    - IF1801
+    - al1712
+    - al1801
+    - cu1712
+    - cu1801
+
+your_simnow_account2:
+  broker_id: 9999
+  api: CTP
+  password: your_simnow_pass2
+  md_address: tcp://180.168.146.187:10010
+  td_address: tcp://180.168.146.187:10000
+  base_currency: CNY
+  tickers:
+    - IC1712
+    - IC1801
+    - IC1803
+    - IF1712
+    - IF1801
+    - al1712
+    - al1801
+    - cu1712
+    - cu1801
+# ---------------- End of CTP  ------------------#
