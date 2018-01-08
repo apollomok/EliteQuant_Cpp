@@ -20,13 +20,15 @@ namespace EliteQuant
 {
 	struct Fill {
 		Fill()
-			: tradeId(0)
+			: orderId(0)
+			, tradeId(0)
 			, clientId(0)
 			, tradeSize(0)
 			, tradePrice(DBL_MAX)
 		{
 		}
 
+		long orderId;
 		long tradeId;
 		long clientId;
 		int tradetime;			// int time
@@ -47,7 +49,8 @@ namespace EliteQuant
 		}
 
 		string serialize() {
-			string str = std::to_string(tradeId)
+			string str = std::to_string(orderId)
+				+ SERIALIZATION_SEPARATOR + std::to_string(tradeId)
 				+ SERIALIZATION_SEPARATOR + std::to_string(tradetime)
 				+ SERIALIZATION_SEPARATOR + std::to_string(tradePrice)
 				+ SERIALIZATION_SEPARATOR + std::to_string(tradeSize);

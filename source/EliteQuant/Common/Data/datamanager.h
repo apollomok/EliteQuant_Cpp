@@ -9,6 +9,7 @@
 #include <Common/Data/datatype.h>
 #include <Common/Data/tick.h>
 #include <Common/Data/barseries.h>
+#include <Common/Security/security.h>
 
 #include <cereal/types/unordered_map.hpp>
 #include <cereal/types/memory.hpp>
@@ -47,6 +48,7 @@ namespace EliteQuant
 		//std::map<string, BarSeries> _15s;
 		std::map<string, BarSeries> _60s;
 		//std::map<string, BarSeries> _1d;
+		std::map<std::string, Security> securityDetails_;
 
 		DataManager();
 		~DataManager();

@@ -2,6 +2,7 @@
 #include <Common/Order/orderstatus.h>
 #include <Common/Order/fill.h>
 #include <Common/Order/ordermanager.h>
+#include <Common/Security/portfoliomanager.h>
 #include <Common/Data/datamanager.h>
 #include <Common/Logger/logger.h>
 #include <Common/Util/util.h>
@@ -12,7 +13,15 @@ namespace EliteQuant
 {
 	extern std::atomic<bool> gShutdown;
 
-	ctpbrokerage::ctpbrokerage() {
+	ctpbrokerage::ctpbrokerage() 
+		: isConnected_(false)
+		, isLogedin_(false)
+		, isAuthenticated_(false)
+		, reqId_(0)
+		, orderRef_(0)
+		, frontID_(0)
+		, sessionID_(0)
+	{
 		string path = CConfig::instance().logDir() + "/ctp/";
 		boost::filesystem::path dir(path.c_str());
 		boost::filesystem::create_directory(dir);
@@ -25,14 +34,12 @@ namespace EliteQuant
 		///@param pSpi 派生自回调接口类的实例
 		this->api_->RegisterSpi(this);
 
-		isConnected_ = false;
-		isLogedin_ = false;
-		isAuthenticated_ = false;
-		requireAuthentication_ = false;
-		reqId_ = 0;
-		orderRef_ = 0;
-		frontID_ = 0;
-		sessionID_ = 0;
+		if (CConfig::instance().ctp_auth_code == "NA") {
+			requireAuthentication_ = false;
+		}
+		else {
+			requireAuthentication_ = true;
+		}
 	}
 
 	ctpbrokerage::~ctpbrokerage() {
@@ -83,9 +90,9 @@ namespace EliteQuant
 			// 成功后调用 onFrontConnected
 			this->api_->Init();
 
-			PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp brokerage connection connected!\n", __FILE__, __LINE__, __FUNCTION__);
+			PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp brokerage connecting!\n", __FILE__, __LINE__, __FUNCTION__);
 			
-			sendGeneralMessage("Connected to ctp brokerage");
+			sendGeneralMessage("Connecting to ctp brokerage");
 		}
 
 		return true;
@@ -98,10 +105,12 @@ namespace EliteQuant
 		this->api_->Release();
 		this->api_ = NULL;
 		isConnected_ = false;
+		isLogedin_ = false;
+		isAuthenticated_ = false;
 	}
 
 	bool ctpbrokerage::isConnectedToBrokerage() const {
-		return (isConnected_);				// automatic disconnect when shutdown
+		return (isConnected_) && (_bkstate >= BK_CONNECTED);						// automatic disconnect when shutdown
 	}
 
 	void ctpbrokerage::placeOrder(std::shared_ptr<Order> order) {
@@ -174,8 +183,12 @@ namespace EliteQuant
 		lock_guard<mutex> g(oid_mtx);
 		m_orderId = 0;
 
-		// TODO: if isAuthenticate, go to authenticate
-		if (!isLogedin_) {
+		if (requireAuthentication_) {
+			// trigger onRspAuthenticate()
+			requestAuthenticate(CConfig::instance().ctp_user_id, CConfig::instance().ctp_auth_code, 
+				CConfig::instance().ctp_broker_id, CConfig::instance().ctp_user_prod_info);				// authenticate first
+		}
+		else if (!isLogedin_) {
 			requestUserLogin();
 		}
 	}
@@ -295,7 +308,8 @@ namespace EliteQuant
 	///当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
 	void ctpbrokerage::OnFrontConnected() {
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker connected; Continue to login.\n", __FILE__, __LINE__, __FUNCTION__);
-		//_bkstate = BK_CONNECT;
+		
+		_bkstate = BK_CONNECTED;
 		isConnected_ = true;
 		reqId_ = 0;
 	}
@@ -312,6 +326,7 @@ namespace EliteQuant
 		_bkstate = BK_DISCONNECTED;
 		isConnected_ = false;
 		isLogedin_ = false;
+		isAuthenticated_ = false;
 	}
 
 	///心跳超时警告。当长时间未收到报文时，该方法被调用。
@@ -323,8 +338,13 @@ namespace EliteQuant
 	void ctpbrokerage::OnRspAuthenticate(CThostFtdcRspAuthenticateField *pRspAuthenticateField, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {
 		if (pRspInfo->ErrorID == 0) {
 			PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker authenticated. Continue to log in.\n", __FILE__, __LINE__, __FUNCTION__);
-
-			//TODO 一：authentification before login
+			isAuthenticated_ = true;
+			// proceed to login
+			requestUserLogin();
+		}
+		else {
+			PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker authentication failed. \n", __FILE__, __LINE__, __FUNCTION__);
+			sendGeneralMessage("Ctp broker authentication failed");
 		}
 	}
 
@@ -337,7 +357,6 @@ namespace EliteQuant
 			sessionID_ = pRspUserLogin->SessionID;
 
 			isLogedin_ = true;
-			isConnected_ = true;
 
 			PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker server user logged in, TradingDay=%s, LoginTime=%s, BrokerID=%s, UserID=%s, frontID=%d, sessionID=%d, MaxOrderRef=%s\n.",
 				__FILE__, __LINE__, __FUNCTION__,
@@ -373,7 +392,7 @@ namespace EliteQuant
 			PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker server user logged out, BrokerID=%s, UserID=%s.\n",
 				__FILE__, __LINE__, __FUNCTION__, pUserLogout->BrokerID, pUserLogout->UserID);
 			isLogedin_ = false;
-			isConnected_ = false;
+			isAuthenticated_ = false;
 		}
 		else {
 			PRINT_TO_FILE("ERROR:[%s,%d][%s]Ctp broker server user logout failed: ErrorID=%d, ErrorMsg=%s.\n",
@@ -394,10 +413,10 @@ namespace EliteQuant
 
 			lock_guard<mutex> g(orderStatus_mtx);
 			std::shared_ptr<Order> o = OrderManager::instance().retrieveOrder(std::stoi(pInputOrder->OrderRef));
-			o->orderStatus = OS_Acknowledged;			// TODO 三：应该是rejected ?
+			o->orderStatus = OS_Error;			// rejected ?
 
 			sendOrderStatus(std::stoi(pInputOrder->OrderRef));
-			sendGeneralMessage(string("CTP Trader Server OnRspOrderInsert order acknowledged:") +
+			sendGeneralMessage(string("CTP Trader Server OnRspOrderInsert:") +
 				SERIALIZATION_SEPARATOR + to_string(pRspInfo->ErrorID) + SERIALIZATION_SEPARATOR + pRspInfo->ErrorMsg);
 		}
 		else
@@ -445,25 +464,25 @@ namespace EliteQuant
 
 	///请求查询投资者持仓响应 (respond to requestOpenPositions)
 	void ctpbrokerage::OnRspQryInvestorPosition(CThostFtdcInvestorPositionField *pInvestorPosition, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {
-		PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker server OnRspQryInvestorPosition, InstrumentID=%s, InvestorID=%s, OpenAmount=%f, OpenVolume=%d, PosiDirection=%c, PositionProfit=%.2f, PositionCost=%.2f, UseMargin=%.2f, LongFrozen=%d, ShortFrozen=%d, TradingDay=%s, YdPosition=%d.\n",
+		PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker server OnRspQryInvestorPosition, InstrumentID=%s, InvestorID=%s, OpenAmount=%f, OpenVolume=%d, PosiDirection=%c, PositionProfit=%.2f, PositionCost=%.2f, UseMargin=%.2f, LongFrozen=%d, ShortFrozen=%d, TradingDay=%s, YdPosition=%d, last=%d\n",
 			__FILE__, __LINE__, __FUNCTION__, pInvestorPosition->InstrumentID, pInvestorPosition->InvestorID, pInvestorPosition->OpenAmount, pInvestorPosition->OpenVolume,
 			pInvestorPosition->PosiDirection, pInvestorPosition->PositionProfit, pInvestorPosition->PositionCost, pInvestorPosition->UseMargin,
-			pInvestorPosition->LongFrozen, pInvestorPosition->ShortFrozen, pInvestorPosition->TradingDay, pInvestorPosition->YdPosition);
+			pInvestorPosition->LongFrozen, pInvestorPosition->ShortFrozen, pInvestorPosition->TradingDay, pInvestorPosition->YdPosition, bIsLast);
 
 		// TODO: 针对上期所持仓的今昨分条返回（有昨仓、无今仓），读取昨仓数据
 		// pInvestorPosition->YdPosition;
 		// TODO: 汇总总仓, 计算持仓均价, 读取冻结
 
 		sendOpenPositionMessage(pInvestorPosition->InstrumentID, (pInvestorPosition->PosiDirection == THOST_FTDC_PD_Long ? 1 : -1) * pInvestorPosition->Position,
-			pInvestorPosition->PositionCost, pInvestorPosition->CloseAmount, pInvestorPosition->CloseProfit);
+			pInvestorPosition->PositionCost, pInvestorPosition->PositionProfit, pInvestorPosition->CloseProfit);
 	}
 
 	///请求查询资金账户响应 (respond to requestAccount)
 	void ctpbrokerage::OnRspQryTradingAccount(CThostFtdcTradingAccountField *pTradingAccount, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {
-		// 资金账户查询回报
-		// TODO: send account information
+		time_t current_time;
+		time(&current_time);
 
-		// 这里的balance和快期中的账户不确定是否一样，需要测试
+		// balance和快期中的账户可能不一样
 		double balance = pTradingAccount->PreBalance - pTradingAccount->PreCredit - pTradingAccount->PreMortgage
 			+ pTradingAccount->Mortgage - pTradingAccount->Withdraw + pTradingAccount->Deposit
 			+ pTradingAccount->CloseProfit + pTradingAccount->PositionProfit + pTradingAccount->CashIn - pTradingAccount->Commission;
@@ -472,19 +491,42 @@ namespace EliteQuant
 			__FILE__, __LINE__, __FUNCTION__, pTradingAccount->AccountID, pTradingAccount->Available, pTradingAccount->PreBalance,
 			pTradingAccount->Deposit, pTradingAccount->Withdraw, pTradingAccount->WithdrawQuota, pTradingAccount->Commission,
 			pTradingAccount->CurrMargin, pTradingAccount->FrozenMargin, pTradingAccount->CloseProfit, pTradingAccount->PositionProfit, balance);
+
+		PortfolioManager::instance()._account.AccountID = pTradingAccount->AccountID;
+		PortfolioManager::instance()._account.PreviousDayEquityWithLoanValue = pTradingAccount->PreBalance;
+		PortfolioManager::instance()._account.NetLiquidation = balance;
+		PortfolioManager::instance()._account.AvailableFunds = pTradingAccount->Available;
+		PortfolioManager::instance()._account.Commission = pTradingAccount->Commission;
+		PortfolioManager::instance()._account.FullMaintainanceMargin = pTradingAccount->CurrMargin;
+		PortfolioManager::instance()._account.RealizedPnL = pTradingAccount->CloseProfit;
+		PortfolioManager::instance()._account.UnrealizedPnL = pTradingAccount->PositionProfit;
+
+		sendAccountMessage(to_string(tointtime(current_time)));
 	}
 
 	///请求查询合约响应 (respond to ReqQryInstrument)
 	void ctpbrokerage::OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {
-		// 合约查询回报
 		// pInstrument->StrikePrice; pInstrument->EndDelivDate; pInstrument->IsTrading;
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker server OnRspQryInstrument: InstrumentID=%s, InstrumentName=%s, ExchangeID=%s, ExchangeInstID=%s, VolumeMultiple=%d, PriceTick=%.2f, UnderlyingInstrID=%s, ProductClass=%c, ExpireDate=%s, LongMarginRatio=%.2f.\n",
 			__FILE__, __LINE__, __FUNCTION__, pInstrument->InstrumentID, pInstrument->InstrumentName, pInstrument->ExchangeID, pInstrument->ExchangeInstID,
 			pInstrument->VolumeMultiple, pInstrument->PriceTick, pInstrument->UnderlyingInstrID, pInstrument->ProductClass, pInstrument->ExpireDate, pInstrument->LongMarginRatio);
 
-		char buffer[150];
-		//sprintf(buffer, "%s,%s,%s, %s", pInstrument->InstrumentID, pInstrument->InstrumentName, pInstrument->ExchangeID, pInstrument->ExpireDate);
-		//sendGeneralMessage(buffer);
+		string symbol = CtpSymbolToSecurityFullName(pInstrument);
+
+		auto it = DataManager::instance().securityDetails_.find(symbol);
+		if (it == DataManager::instance().securityDetails_.end()) {
+			Security s;
+			s.symbol = pInstrument->InstrumentName;
+			s.exchange = pInstrument->ExchangeID;
+			s.securityType = "FUT";
+			s.multiplier = pInstrument->VolumeMultiple;
+			s.localName = pInstrument->InstrumentName;
+			s.ticksize = std::to_string(pInstrument->PriceTick);
+
+			DataManager::instance().securityDetails_[symbol] = s;
+		}
+
+		sendContractMessage(symbol, pInstrument->InstrumentName, std::to_string(pInstrument->PriceTick));
 	}
 
 	///错误应答
@@ -537,8 +579,9 @@ namespace EliteQuant
 
 		Fill t;
 		t.fullSymbol = pTrade->InstrumentID;
-		t.tradetime = tointtime(current_time);
-		t.tradeId = std::stoi(pTrade->OrderRef);
+		t.tradetime = tointtime(current_time);		// TODO: use pTrade->TradeTime
+		t.orderId = std::stoi(pTrade->OrderRef);
+		t.tradeId = std::stoi(pTrade->TraderID);
 		t.tradePrice = pTrade->Price;
 		t.tradeSize = (pTrade->Direction == THOST_FTDC_D_Buy ? 1 : -1)*pTrade->Volume;
 		OrderManager::instance().gotFill(t);
@@ -558,6 +601,9 @@ namespace EliteQuant
 			o->orderStatus = OS_Error;			// rejected
 			sendOrderStatus(std::stoi(pInputOrder->OrderRef));
 		}
+
+		sendGeneralMessage(string("CTP Trader Server OnErrRtnOrderInsert") +
+			SERIALIZATION_SEPARATOR + to_string(pRspInfo->ErrorID) + SERIALIZATION_SEPARATOR + pRspInfo->ErrorMsg);
 	}
 
 	///报单操作错误回报
@@ -569,6 +615,21 @@ namespace EliteQuant
 			SERIALIZATION_SEPARATOR + to_string(pRspInfo->ErrorID) + SERIALIZATION_SEPARATOR + pRspInfo->ErrorMsg);
 	}
 	////////////////////////////////////////////////////// end callback/incoming function ///////////////////////////////////////
+	string ctpbrokerage::SecurityFullNameToCtpSymbol(const std::string& symbol)
+	{
+		vector<string> v = stringsplit(symbol, ' ');
+
+		return v[0];
+	}
+
+	string ctpbrokerage::CtpSymbolToSecurityFullName(CThostFtdcInstrumentField * pInstrument)
+	{
+		char sym[128] = {};
+		sprintf(sym, "%s FUT %s %s", pInstrument->InstrumentID, pInstrument->ExchangeID, pInstrument->VolumeMultiple);
+
+		string symbol = sym;
+		return symbol;
+	}
 
 	// https://www.cplusplus.me/1780.html          -------- Doesn't work
 	/*string ctpbrokerage::UTF8ToGBK(const std::string & strUTF8) {

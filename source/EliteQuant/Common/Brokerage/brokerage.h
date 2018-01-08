@@ -20,7 +20,7 @@ namespace EliteQuant
 
 	enum BKState {				// brokerage state
 		BK_DISCONNECTED,
-		BK_CONNECT,
+		BK_CONNECTED,
 		BK_ACCOUNT,
 		BK_ACCOUNTACK,
 		BK_GETORDERID,
@@ -34,7 +34,7 @@ namespace EliteQuant
 	class brokerage : virtual public CHeartbeat {
 	protected:
 		struct timeval timeout;
-		std::unique_ptr<CMsgq> msgq_pair_;
+		std::unique_ptr<CMsgq> msgq_pair_;			// TODO: move it to DataManager to support multiple datasource
 
 		// outbound messages
 		void sendOrderCreated(long oid);
@@ -45,6 +45,8 @@ namespace EliteQuant
 		void sendOrderStatus(long oid);
 		void sendOpenPositionMessage(string symbol, double position, double averageCost, double unrealisedPNL, double realisedPNL);
 		void sendHistoricalBarMessage(string symbol, string time, double open, double high, double low, double close, int volume, int barcount = 0, double wap = 0);
+		void sendAccountMessage(string timeUpdated);
+		void sendContractMessage(string sym, string local_name, string min_tick);
 		void sendGeneralMessage(std::string gm);
 
 		// inbound messages

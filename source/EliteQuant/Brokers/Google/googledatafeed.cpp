@@ -220,7 +220,7 @@ namespace EliteQuant
 						s = d["t"];
 						k.fullsymbol_ = s.GetString();
 						k.fullsymbol_ = k.fullsymbol_ + " STK SMART";
-						k.datatype_ = DataType::DT_TradePrice;
+						k.datatype_ = DataType::DT_Trade;
 						s = d["l"];
 						k.price_ = atof(s.GetString());
 						k.size_ = 100;

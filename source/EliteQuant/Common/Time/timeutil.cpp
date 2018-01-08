@@ -101,7 +101,8 @@ namespace EliteQuant {
 
 	string time_t2str(time_t tt) {
 		ptime pt = from_time_t(tt);
-		return ptime2str(pt);
+		// return ptime2str(pt);
+		return to_simple_string(pt);
 	}
 
 	int tointdate(time_t time) {

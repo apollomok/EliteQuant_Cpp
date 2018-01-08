@@ -7,21 +7,25 @@
 
 namespace EliteQuant {
 	enum DataType : int {
-		DT_BidPrice = 0,
-		DT_BidSize = 1,
-		DT_AskPrice = 2,
-		DT_AskSize = 3,
-		DT_TradePrice = 4,
-		DT_TradeSize = 5,
-		DT_OpenPrice = 6,
-		DT_HighPrice = 7,
-		DT_LowPrice = 8,
-		DT_ClosePrice = 9,
-		DT_Volume = 10,
-		DT_OpenInterest = 11,
-		DT_Bar = 12,
-		DT_Account = 13,
-		DT_Position = 14
+		DT_Trade = 0,			// DT_TradePrice + DT_TradeSize
+		DT_Bid = 1,
+		DT_Ask = 2,
+		DT_Full = 3,
+		DT_BidPrice = 4,
+		DT_BidSize = 5,
+		DT_AskPrice = 6,
+		DT_AskSize = 7,
+		DT_TradePrice = 8,
+		DT_TradeSize = 9,
+		DT_OpenPrice = 10,
+		DT_HighPrice = 11,
+		DT_LowPrice = 12,
+		DT_ClosePrice = 13,
+		DT_Volume = 14,
+		DT_OpenInterest = 15,
+		DT_Bar = 16,
+		DT_Account = 17,
+		DT_Position = 18
 	};
 
 	/// xxxTypeString is the string name of xxxType

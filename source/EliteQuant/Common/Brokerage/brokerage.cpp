@@ -292,6 +292,31 @@ namespace EliteQuant
 		msgq_pair_->sendmsg(msg);
 	}
 
+	void brokerage::sendAccountMessage(string timeUpdated) {
+		// read from buffer
+		string msg = CConfig::instance().account_msg
+			+ SERIALIZATION_SEPARATOR + PortfolioManager::instance()._account.AccountID						// AccountID
+			+ SERIALIZATION_SEPARATOR + std::to_string(PortfolioManager::instance()._account.PreviousDayEquityWithLoanValue)	// prev-day
+			+ SERIALIZATION_SEPARATOR + std::to_string(PortfolioManager::instance()._account.NetLiquidation)				// balance
+			+ SERIALIZATION_SEPARATOR + std::to_string(PortfolioManager::instance()._account.AvailableFunds)				// available
+			+ SERIALIZATION_SEPARATOR + std::to_string(PortfolioManager::instance()._account.Commission)					// commission
+			+ SERIALIZATION_SEPARATOR + std::to_string(PortfolioManager::instance()._account.FullMaintainanceMargin)		// margin
+			+ SERIALIZATION_SEPARATOR + std::to_string(PortfolioManager::instance()._account.RealizedPnL)					// closed pnl
+			+ SERIALIZATION_SEPARATOR + std::to_string(PortfolioManager::instance()._account.UnrealizedPnL)					// open pnl
+			+ SERIALIZATION_SEPARATOR + timeUpdated;									// open pnl
+
+		msgq_pair_->sendmsg(msg);
+	}
+
+	void brokerage::sendContractMessage(std::string symbol, string local_name, string min_tick) {
+		string msg = CConfig::instance().contract_msg
+			+ SERIALIZATION_SEPARATOR + symbol
+			+ SERIALIZATION_SEPARATOR + local_name
+			+ SERIALIZATION_SEPARATOR + min_tick;
+
+		msgq_pair_->sendmsg(msg);
+	}
+
 	// comma separated general msg
 	void brokerage::sendGeneralMessage(std::string gm) {
 		string msg = CConfig::instance().general_msg + SERIALIZATION_SEPARATOR + gm;

@@ -45,7 +45,7 @@ namespace EliteQuant
 		if (fullsymbol != k.fullsymbol_)
 			return false;			// invalid tick
 
-		if ((k.datatype_ != DataType::DT_TradePrice) && ((k.datatype_ != DataType::DT_TradeSize)))		// at this time only consier trade
+		if ((k.datatype_ != DataType::DT_Trade) && ((k.datatype_ != DataType::DT_Full)))		// at this time only consier trade
 			return false;
 
 		int lastbarorder = 0;

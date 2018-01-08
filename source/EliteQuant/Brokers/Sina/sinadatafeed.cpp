@@ -230,7 +230,7 @@ namespace EliteQuant
 						time_t current_time;
 						time(&current_time);
 						k.time_ = tointtime(current_time);
-						k.datatype_ = DataType::DT_TradePrice;
+						k.datatype_ = DataType::DT_Trade;
                         
                         string price;
                         if (symbol.substr(0, 3) == "usr") {

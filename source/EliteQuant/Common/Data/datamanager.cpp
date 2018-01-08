@@ -40,30 +40,27 @@ namespace EliteQuant {
 	void DataManager::SetTickValue(Tick& k) {
 		//PRINT_TO_FILE("INFO:[%s,%d][%s]%s, %s, %.2f\n", __FILE__, __LINE__, __FUNCTION__, k.fullsymbol_.c_str(), k.datatype_, k.price_);		// for debug
 
-		if (k.datatype_ == DataType::DT_BidPrice) {
+		if (k.datatype_ == DataType::DT_Bid) {
 			_latestmarkets[k.fullsymbol_].bidprice_L1_ = k.price_;
-		}
-		else if (k.datatype_ == DataType::DT_BidSize) {
 			_latestmarkets[k.fullsymbol_].bidsize_L1_ = k.size_;
 		}
-		else if (k.datatype_ == DataType::DT_AskPrice) {
+		else if (k.datatype_ == DataType::DT_Ask ){
 			_latestmarkets[k.fullsymbol_].askprice_L1_ = k.price_;
-		}
-		else if (k.datatype_ == DataType::DT_AskSize) {
 			_latestmarkets[k.fullsymbol_].asksize_L1_ = k.size_;
 		}
-		else if (k.datatype_ == DataType::DT_TradePrice) {
+		else if (k.datatype_ == DataType::DT_Trade) {
 			_latestmarkets[k.fullsymbol_].price_ = k.price_;
-			//k.size_ = _latestmarkets[k.fullsymbol_].size_;
-			_latestmarkets[k.fullsymbol_].size_ = k.size_;		// TODO: check tick size
+			_latestmarkets[k.fullsymbol_].size_ = k.size_;
 
 			//_5s[k.fullsymbol_].newTick(k);				// if it doesn't exist, operator[] creates a new element with default constructor
 			//_15s[k.fullsymbol_].newTick(k);
 			_60s[k.fullsymbol_].newTick(k);
 			//PortfolioManager::instance()._positions[sym].
 		}
-		else if (k.datatype_ == DataType::DT_TradeSize) {
-			_latestmarkets[k.fullsymbol_].size_ = k.size_;
+		else if (k.datatype_ == DataType::DT_Full) {
+			_latestmarkets[k.fullsymbol_] = dynamic_cast<FullTick&>(k);		// default assigement shallow copy
+
+			_60s[k.fullsymbol_].newTick(k);
 		}
 	}
 
@@ -74,6 +71,7 @@ namespace EliteQuant {
 		_60s.clear();
 		//_1d.clear();
 
+		securityDetails_.clear();
 		count_ = 0;
 	}
 

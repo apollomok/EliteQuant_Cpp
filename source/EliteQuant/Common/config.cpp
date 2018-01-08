@@ -68,6 +68,8 @@ namespace EliteQuant {
 				ctp_broker_id = config[s]["broker_id"].as<std::string>();
 				ctp_user_id = s;
 				ctp_password = config[s]["password"].as<std::string>();
+				ctp_auth_code = config[s]["auth_code"].as<std::string>();
+				ctp_user_prod_info = config[s]["user_prod_info"].as<std::string>();
 				ctp_data_address = config[s]["md_address"].as<std::string>();
 				ctp_broker_address = config[s]["td_address"].as<std::string>();
 			}

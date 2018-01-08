@@ -82,6 +82,32 @@ namespace EliteQuant
 							// PRINT_TO_FILE("ERROR:[%s,%d][%s]%s.\n", __FILE__, __LINE__, __FUNCTION__, buf);
 						}
 					}
+					else if (vs.size() == 17)		// Always Tick; actual contents are determined by DataType
+					{
+						FullTick k;
+						k.fullsymbol_ = vs[0];
+						k.time_ = atoi(vs[1].c_str());
+						k.datatype_ = (DataType)(atoi(vs[2].c_str()));
+						k.price_ = atof(vs[3].c_str());
+						k.size_ = atoi(vs[4].c_str());
+						k.depth_ = atoi(vs[5].c_str());
+						k.bidprice_L1_ = atoi(vs[6].c_str());
+						k.bidsize_L1_ = atoi(vs[7].c_str());
+						k.askprice_L1_ = atoi(vs[8].c_str());
+						k.asksize_L1_ = atoi(vs[9].c_str());
+						k.open_interest = atoi(vs[10].c_str());
+						k.open_ = atoi(vs[11].c_str());
+						k.high_ = atoi(vs[12].c_str());
+						k.low_ = atoi(vs[13].c_str());
+						k.pre_close_ = atoi(vs[14].c_str());
+						k.upper_limit_price_ = atoi(vs[15].c_str());
+						k.lower_limit_price_ = atoi(vs[16].c_str());
+
+						if (DataManager::instance()._latestmarkets.find(k.fullsymbol_) != DataManager::instance()._latestmarkets.end()) {
+							DataManager::instance().SetTickValue(k);
+							// PRINT_TO_FILE("ERROR:[%s,%d][%s]%s.\n", __FILE__, __LINE__, __FUNCTION__, buf);
+						}
+					}
 				}
 			}
 		}

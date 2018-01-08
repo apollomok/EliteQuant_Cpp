@@ -39,7 +39,6 @@ namespace EliteQuant
 		//cancelAllOrders is not reentrant!
 		virtual void cancelAllOrders();
 
-		//https://www.interactivebrokers.com/en/software/api/apiguide/java/reqaccountupdates.htm
 		virtual void requestBrokerageAccountInformation(const string& account_);
 
 		/*Call this function to request the open orders that were placed from this client.
@@ -428,8 +427,8 @@ namespace EliteQuant
 
 		CThostFtdcTraderApi* api_;			// TODO: change it to unique_ptr
 
-		//string SecurityFullNameToCtpSymbol(const std::string& symbol);
-		//string CtpSymbolToSecurityFullName(const std::string& symbol);
+		string SecurityFullNameToCtpSymbol(const std::string& symbol);
+		string CtpSymbolToSecurityFullName(CThostFtdcInstrumentField * pInstrument);
 		//string UTF8ToGBK(const std::string & strUTF8);
 		//string GBKToUTF8(const std::string & strGBK);
 	};

@@ -51,7 +51,7 @@ namespace EliteQuant
 			msg = msgq_sub_->recmsg(0);		
 			if (!msg.empty()) {
 				vector<string> vs = stringsplit(msg, SERIALIZATION_SEPARATOR);
-				if (vs.size() == 6)		// Always Tick; actual contents are determined by DataType
+				if ((vs.size() == 6)	|| (vs.size() == 17))	// Always Tick; actual contents are determined by DataType
 				{
 					Tick k;
 					k.fullsymbol_ = vs[0];
@@ -62,7 +62,7 @@ namespace EliteQuant
 					k.depth_ = atoi(vs[5].c_str());
 
 					strategy->OnTick(k);
-				}	
+				}
 			}
 
 			msg = msgq_pair_->recmsg(1);

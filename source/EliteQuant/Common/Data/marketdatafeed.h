@@ -16,7 +16,7 @@ namespace EliteQuant
 	typedef long TickerId;			// every subscription has a ticker id
 	enum MKState {				// market data state
 		MK_DISCONNECTED,
-		MK_CONNECT,
+		MK_CONNECTED,
 		MK_ACCOUNT,				// market data account vs brokerage account
 		MK_ACCOUNTACK,
 		MK_REQCONTRACT,			// TODO: delete request contract and Ack

@@ -19,7 +19,7 @@ namespace EliteQuant {
 		int size_;
 		int depth_ = 1;			// default is L1 or 1
 
-		string serialize() const;
+		virtual string serialize() const;
 	};
 
 	struct FullTick : Tick {
@@ -33,6 +33,15 @@ namespace EliteQuant {
 		int bidsize_L1_;
 		double askprice_L1_;
 		int asksize_L1_;
+		int open_interest;
+		double open_;
+		double high_;
+		double low_;
+		double pre_close_;
+		double upper_limit_price_;
+		double lower_limit_price_;
+
+		virtual string serialize() const;		// overriding
 	};
 }
 

@@ -23,7 +23,10 @@ namespace EliteQuant
 {
 	extern std::atomic<bool> gShutdown;
 
-	ctpdatafeed::ctpdatafeed() {
+	ctpdatafeed::ctpdatafeed() 
+		: loginReqId_(0)
+		, isConnected_(false)
+	{
 		// 创建ctp目录
 		string path = CConfig::instance().logDir() + "/ctp/";
 		boost::filesystem::path dir(path.c_str());
@@ -34,9 +37,6 @@ namespace EliteQuant
 		///注册回调接口
 		///@param pSpi 派生自回调接口类的实例
 		this->api_->RegisterSpi(this);
-
-		loginReqId_ = 0;
-		isConnected_ = false;
 	}
 
 	ctpdatafeed::~ctpdatafeed() {
@@ -124,11 +124,13 @@ namespace EliteQuant
 			_mkstate = MK_REQREALTIMEDATAACK;
 	}
 
-	// TODO: record a map from reqId -> symbol in subscription
 	void ctpdatafeed::unsubscribeMarketData(TickerId reqId) {
-		/*char* buffer = (char*)security_symbol.c_str();
-		char* myreq[1] = { buffer };;
-		int i = this->api_->UnSubscribeMarketData(myreq, 1);*/
+		for (auto it = CConfig::instance().securities.begin(); it != CConfig::instance().securities.end(); ++it)
+		{
+			char* buffer = (char*)(*it).c_str();
+			char* myreq[1] = { buffer };
+			int i = this->api_->UnSubscribeMarketData(myreq, 1);		// parameter 1 = myreq has one contract; return 0 = 发送订阅行情请求失败
+		}
 	}
 
 	void ctpdatafeed::subscribeMarketDepth() {
@@ -177,19 +179,21 @@ namespace EliteQuant
 		int i = this->api_->ReqUserLogin(&loginField, loginReqId_++);		// i=0： 发送登录请求失败
 	}
 
+	///登出请求
 	void ctpdatafeed::requestUserLogout(int nRequestID) {
-		CThostFtdcUserLogoutField myreq = CThostFtdcUserLogoutField();
+		CThostFtdcUserLogoutField logoutField = CThostFtdcUserLogoutField();
 
-		///登出请求
-		// TODO: set myreq
-		int i = this->api_->ReqUserLogout(&myreq, nRequestID);
+		strcpy(logoutField.BrokerID, CConfig::instance().ctp_broker_id.c_str());
+		strcpy(logoutField.UserID, CConfig::instance().ctp_user_id.c_str());
+
+		int i = this->api_->ReqUserLogout(&logoutField, nRequestID);
 	}
 	/////////////////////////////////////////////// end of outgoing functions ///////////////////////////////////////
 
 	////////////////////////////////////////////////////// incoming function ///////////////////////////////////////
 	///当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
 	void ctpdatafeed::OnFrontConnected() {
-		// _mkstate = MK_CONNECT;
+		 _mkstate = MK_CONNECTED;			// not used
 		isConnected_ = true;
 
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp data server is connected.\n", __FILE__, __LINE__, __FUNCTION__);
@@ -203,7 +207,7 @@ namespace EliteQuant
 	///        0x2002 发送心跳失败
 	///        0x2003 收到错误报文
 	void ctpdatafeed::OnFrontDisconnected(int nReason) {
-		//_mkstate = MK_DISCONNECTED;
+		_mkstate = MK_DISCONNECTED;			// not used
 		isConnected_ = false;
 
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp data server disconnected, nReason=%d.\n", __FILE__, __LINE__, __FUNCTION__, nReason);
@@ -288,52 +292,32 @@ namespace EliteQuant
 	}
 
 	/// 深度行情通知
-	// for now, it's the only todo in ctp md
+	/// CTP只有一档行情
 	void ctpdatafeed::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData) {
-		// TODO: use OpenPrice, HighestPrice, LowestPrice, PreClosePrice, UpperLimitPrice, LowerLimitPrice fields
 		// TODO: add pDepthMarketData->ExchangeID to fullsymbol			ExchangeInstID=合约在交易所的代码
-		// TODO: use pDepthMarketData->UpdateTime instead of now
-		// TODO: add pDepthMarketData->OpenInterest and pDepthMarketData->Turnover
-		if (pDepthMarketData->Volume != 0) {			// not valid without volume
-			Tick k;
-			k.datatype_ = DataType::DT_TradePrice;
-			k.fullsymbol_ = pDepthMarketData->InstrumentID;			// TODO use full symbol
-																	//DepthMarketData->ExchangeID;
-			k.price_ = pDepthMarketData->LastPrice;
-			k.size_ = pDepthMarketData->Volume;
-			//pDepthMarketData->OpenInterest;
-			//k.time_ = pDepthMarketData->UpdateTime;			// TODO: use CTP updateTime
-			//k.time_ = pDepthMarketData->UpdateMillisec;
-			time_t current_time;
-			time(&current_time);
-			k.time_ = tointtime(current_time);
-			msgq_pub_->sendmsg(k.serialize());
-		}
-		// CTP只有一档行情
-		if (pDepthMarketData->BidVolume1 != 0) {			// not valid without volume
-			Tick k;
-			k.datatype_ = DataType::DT_BidPrice;
-			k.fullsymbol_ = pDepthMarketData->InstrumentID;			// TODO use full symbol
-																	//DepthMarketData->ExchangeID;
-			k.price_ = pDepthMarketData->BidPrice1;
-			k.size_ = pDepthMarketData->BidVolume1;
-			time_t current_time;
-			time(&current_time);
-			k.time_ = tointtime(current_time);
-			msgq_pub_->sendmsg(k.serialize());
-		}
-		if (pDepthMarketData->AskVolume1 != 0) {			// not valid without volume
-			Tick k;
-			k.datatype_ = DataType::DT_AskPrice;
-			k.fullsymbol_ = pDepthMarketData->InstrumentID;			// TODO use full symbol
-																	//DepthMarketData->ExchangeID;
-			k.price_ = pDepthMarketData->AskPrice1;
-			k.size_ = pDepthMarketData->AskVolume1;
-			time_t current_time;
-			time(&current_time);
-			k.time_ = tointtime(current_time);
-			msgq_pub_->sendmsg(k.serialize());
-		}
+		// TODO: use pDepthMarketData->UpdateTime instead of now	
+		FullTick k;
+		time_t current_time;
+		time(&current_time);
+
+		k.time_ = tointtime(current_time);
+		k.datatype_ = DataType::DT_Full;
+		k.fullsymbol_ = pDepthMarketData->InstrumentID;
+		k.price_ = pDepthMarketData->LastPrice;
+		k.size_ = pDepthMarketData->Volume;			// not valid without volume
+		k.bidprice_L1_ = pDepthMarketData->BidPrice1;
+		k.bidsize_L1_ = pDepthMarketData->BidVolume1;
+		k.askprice_L1_ = pDepthMarketData->AskPrice1;
+		k.asksize_L1_ = pDepthMarketData->AskVolume1;
+		k.open_interest = pDepthMarketData->OpenInterest;
+		k.open_ = pDepthMarketData->OpenPrice;
+		k.high_ = pDepthMarketData->HighestPrice;
+		k.low_ = pDepthMarketData->LowestPrice;
+		k.pre_close_ = pDepthMarketData->PreClosePrice;
+		k.upper_limit_price_ = pDepthMarketData->UpperLimitPrice;
+		k.lower_limit_price_ = pDepthMarketData->LowerLimitPrice;
+		
+		msgq_pub_->sendmsg(k.serialize());
 	}
 
 	///询价通知

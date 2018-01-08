@@ -12,6 +12,7 @@
 using namespace std;
 using namespace IBOfficial;
 
+// http://interactivebrokers.github.io/tws-api/
 namespace EliteQuant
 {
 	extern std::atomic<bool> gShutdown;
@@ -22,6 +23,9 @@ namespace EliteQuant
 		, m_sleepDeadline(0)
 		, m_pReader(0)
 		, m_extraAuth(false)
+		, lastPriceCache_(CConfig::instance().securities.size(), 0.0)
+		, bidPriceCache_(CConfig::instance().securities.size(), 0.0)
+		, askPriceCache_(CConfig::instance().securities.size(), 0.0)
 	{
 	}
 
@@ -68,7 +72,7 @@ namespace EliteQuant
 		case BK_PLACEORDER_ACK:
 			break;
 		case BK_CANCELORDER:
-			cancelOrder(0); //TODO
+			cancelOrder(0);
 			break;
 		case BK_CANCELORDER_ACK:
 			break;
@@ -98,7 +102,7 @@ namespace EliteQuant
 			m_pReader = new EReader(m_pClient, &m_osSignal);
 			m_pReader->start();
 
-			_bkstate = BK_CONNECT;
+			_bkstate = BK_CONNECTED;
 			//m_pClient->setServerLogLevel(5);			// can not work on m_pClient before a loop process
 			if (clientId == 0) {
 				//m_pClient->reqAutoOpenOrders(true);		// associate TWS with the client
@@ -130,7 +134,7 @@ namespace EliteQuant
 
 	bool IBBrokerage::isConnectedToBrokerage() const
 	{
-		return m_pClient->isConnected();
+		return (m_pClient->isConnected() && (_bkstate >= BK_CONNECTED));
 	}
 
 	void IBBrokerage::placeOrder(std::shared_ptr<Order> o)
@@ -162,7 +166,7 @@ namespace EliteQuant
 		OrderToIBOfficialOrder(o, oib);
 
 		lock_guard<mutex> g(orderStatus_mtx);
-		o->orderStatus = OrderStatus::OS_Submitted;  // TODO: similar to gotCancel, change status in OrderManager
+		o->orderStatus = OrderStatus::OS_Submitted;
 		m_pClient->placeOrder(o->orderId, contract, oib);
 
 		sendOrderSubmitted(o->orderId);
@@ -228,7 +232,7 @@ namespace EliteQuant
 	//********************************************************************************************//
 	// Market data part
 	bool IBBrokerage::connectToMarketDataFeed() {
-		_mkstate = MK_CONNECT;
+		_mkstate = MK_CONNECTED;
 		return true;
 	}
 
@@ -237,7 +241,7 @@ namespace EliteQuant
 	}
 
 	bool IBBrokerage::isConnectedToMarketDataFeed() const {
-		return m_pClient->isConnected();
+		return (m_pClient->isConnected() && (_mkstate >= MK_CONNECTED));
 	}
 
 	void IBBrokerage::processMarketMessages()
@@ -322,7 +326,7 @@ namespace EliteQuant
 			c.exchange = "ISLAND";
 
 			PRINT_TO_FILE("INFO:[%s,%d][%s]Market depth subscribed to contract %s, %s.\n", __FILE__, __LINE__, __FUNCTION__, c.symbol.c_str(), c.exchange.c_str());
-			m_pClient->reqMktDepth(i + 1000, c, 10, mktDataOptions);
+			m_pClient->reqMktDepth(i + 2000, c, 10, mktDataOptions);
 
 			if (i >= IBLIMITMKDEPTHNUM)
 				break;
@@ -344,7 +348,16 @@ namespace EliteQuant
 
 		IBOfficial::Contract c;
 		SecurityFullNameToContract("SPY STK SMART", c);
-		m_pClient->reqContractDetails(0, c);
+		m_pClient->reqContractDetails(4000, c);
+
+		int i = 1;
+		for (auto it = CConfig::instance().securities.begin(); it != CConfig::instance().securities.end(); ++it)
+		{
+			Contract c;
+			SecurityFullNameToContract(*it, c);
+			m_pClient->reqContractDetails(4000 + i, c);
+			i++;
+		}
 
 		if (_mkstate < MK_REQCONTRACT_ACK) {
 			_mkstate = MK_REQCONTRACT_ACK;
@@ -416,7 +429,7 @@ namespace EliteQuant
 		string durationString_ = duration + " S";			// currently only consider intraday bar, so duration <= 1day
 		histreqeuests_.push_back(fullsymbol);
 		IBOfficial::TagValueListSPtr charOptions_;
-		m_pClient->reqHistoricalData(histreqeuests_.size() - 1, contract, enddate, durationString_, barSize_,
+		m_pClient->reqHistoricalData(6000+histreqeuests_.size() - 1, contract, enddate, durationString_, barSize_,
 			"TRADES", useRegularTradingHour, date_format, charOptions_);
 	}
 
@@ -434,34 +447,24 @@ namespace EliteQuant
 
 	//********************************************************************************************//
 	// events from EWrapper
+	// Every tickPrice callback is followed by a tickSize.
 	void IBBrokerage::tickPrice(TickerId tickerId, TickType field, double price, int canAutoExecute) {
-		Tick k;
-		k.fullsymbol_ = CConfig::instance().securities[tickerId];
-		k.price_ = price;
-		k.size_ = 0;			// TODO: use actual size
-
-		time_t current_time;
-		time(&current_time);
-		k.time_ = tointtime(current_time);
-
 		if (field == TickType::LAST)
 		{
-			k.datatype_ = DataType::DT_TradePrice;
+			lastPriceCache_[tickerId] = price;
 		}
 		else if (field == TickType::BID)
 		{
-			k.datatype_ = DataType::DT_BidPrice;
+			bidPriceCache_[tickerId] = price;
 		}
 		else if (field == TickType::ASK)
 		{
-			k.datatype_ = DataType::DT_AskPrice;
+			askPriceCache_[tickerId] = price;
 		}
 		else
 		{
 			return;
 		}
-
-		marketdatafeed::msgq_pub_->sendmsg(k.serialize());
 	}
 
 	void IBBrokerage::tickSize(TickerId tickerId, TickType field, int size) {
@@ -476,15 +479,18 @@ namespace EliteQuant
 
 		if (field == TickType::LAST_SIZE)
 		{
-			k.datatype_ = DataType::DT_TradeSize;
+			k.datatype_ = DataType::DT_Trade;
+			k.price_ = lastPriceCache_[tickerId];
 		}
 		else if (field == TickType::BID_SIZE)
 		{
-			k.datatype_ = DataType::DT_BidSize;
+			k.datatype_ = DataType::DT_Bid;
+			k.price_ = bidPriceCache_[tickerId];
 		}
 		else if (field == TickType::ASK_SIZE)
 		{
-			k.datatype_ = DataType::DT_AskSize;
+			k.datatype_ = DataType::DT_Ask;
+			k.price_ = askPriceCache_[tickerId];
 		}
 		else
 		{
@@ -543,7 +549,9 @@ namespace EliteQuant
 		const std::string& currency, const std::string& accountName)
 	{
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Update account value: %s,%s,%s,%s.\n", __FILE__, __LINE__, __FUNCTION__, key.c_str(), val.c_str(), currency.c_str(), accountName.c_str());
-		PortfolioManager::instance()._account.setvalue(key, val, currency);
+		
+		if ((currency == "USD") || (currency == ""))
+			PortfolioManager::instance()._account.setvalue(key, val, currency);
 	}
 
 	// triggered by reqAccountUpdate(true, null) called in Start()
@@ -566,9 +574,17 @@ namespace EliteQuant
 		}
 	}
 
+	void IBBrokerage::updateAccountTime(const std::string& timeStamp)
+	{
+		PRINT_TO_FILE("INFO:[%s,%d][%s]Update Account Time: %s \n", __FILE__, __LINE__, __FUNCTION__, timeStamp.c_str());
+		
+		// Trigger Account Message; once account has been updated.
+		sendAccountMessage(timeStamp);
+	}
+
 	void IBBrokerage::nextValidId(IBOfficial::OrderId orderid)
 	{
-		//if (orderid >= m_orderId) {		// TODO: it seems ib is connected twice
+		//if (orderid >= m_orderId) {		// it seems ib is connected twice
 		if (orderid > m_orderId) {
 			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]client id=%d next_valid_order_id = %ld\n", __FILE__, __LINE__, __FUNCTION__, m_pClient->clientId(), orderid);
 			m_orderId = orderid;
@@ -582,6 +598,23 @@ namespace EliteQuant
 			_mkstate = MK_REQREALTIMEDATA;
 		}
 		PRINT_TO_FILE("INFO:[%s,%d][%s]reqid=%d, symbol=%s\n", __FILE__, __LINE__, __FUNCTION__, reqId, contractDetails.longName.c_str());
+		string symbol;		// full symbol
+		ContractToSecurityFullName(symbol, contractDetails.summary);
+
+		auto it = DataManager::instance().securityDetails_.find(symbol);
+		if (it == DataManager::instance().securityDetails_.end()) {
+			Security s;
+			s.symbol = contractDetails.summary.localSymbol;
+			s.exchange = contractDetails.summary.exchange;
+			s.securityType = contractDetails.summary.secType;
+			s.multiplier = contractDetails.summary.multiplier;
+			s.localName = contractDetails.longName;
+			s.ticksize = std::to_string(contractDetails.minTick);
+
+			DataManager::instance().securityDetails_[symbol] = s;
+		}
+
+		sendContractMessage(symbol, contractDetails.longName, std::to_string(contractDetails.minTick));
 	}
 
 	void IBBrokerage::contractDetailsEnd(int reqId)
@@ -599,7 +632,8 @@ namespace EliteQuant
 		Fill t;
 		ContractToSecurityFullName(t.fullSymbol, contract);
 		t.tradetime = tointtime(current_time);
-		t.tradeId = execution.orderId;
+		t.orderId = execution.orderId;
+		t.tradeId = std::stoi(execution.execId);
 		t.tradePrice = execution.price;
 		t.tradeSize = (execution.side == "BOT" ? 1 : -1)*execution.shares;
 		OrderManager::instance().gotFill(t);
@@ -624,20 +658,20 @@ namespace EliteQuant
 			PRINT_TO_FILE("ERROR:[%s,%d][%s]ClientId duplicated! bump up clientID and reconnect!!. Error=%s\n", __FILE__, __LINE__, __FUNCTION__, errorString.c_str());
 			disconnectFromBrokerage();
 			disconnectFromMarketDataFeed();
-			connectToBrokerage();		// reconnect. TODO: should increase ib_client_id ?
+			connectToBrokerage();		// reconnect.
 			connectToMarketDataFeed();
 			//exit(0);
 		}
 	}
 
-	// TODO postion = depth
+	// postion = depth
 	void IBBrokerage::updateMktDepth(TickerId id, int position, int operation, int side, double price, int size) {
 		const char* sidestr = (side == 1) ? "BID_PRICE" : "ASK_PRICE";	 // side 0 for ask, 1 for bid
 		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Update market depth: %s %d %s %d %.3f %d\n", __FILE__, __LINE__, __FUNCTION__,
 			CConfig::instance().securities[id - 1000].c_str(), operation, sidestr, position, price, size);
 	}
 
-	// TODO postion = depth
+	// postion = depth
 	void IBBrokerage::updateMktDepthL2(TickerId id, int position, std::string marketMaker, int operation,
 		int side, double price, int size) {
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Update market depth L2.\n", __FILE__, __LINE__, __FUNCTION__);
@@ -723,7 +757,10 @@ namespace EliteQuant
 		char sym[128] = {};
 		if ((c.multiplier == "1") || (c.multiplier == ""))
 			//sprintf(sym, "%s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.exchange.c_str());
-			sprintf(sym, "%s %s SMART", c.localSymbol.c_str(), c.secType.c_str());
+			if (c.secType == "CASH")
+				sprintf(sym, "%s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.exchange.c_str());
+			else
+				sprintf(sym, "%s %s SMART", c.localSymbol.c_str(), c.secType.c_str());
 		else
 			//sprintf(sym, "%s %s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.exchange.c_str(), c.multiplier.c_str());
 			sprintf(sym, "%s %s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.exchange.c_str(), c.multiplier.c_str());

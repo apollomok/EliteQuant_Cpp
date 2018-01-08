@@ -36,18 +36,26 @@ namespace EliteQuant
 		}
 
 		// long internalId;
-		string	symbol;
-		string	securityType;
+		string symbol;
+		string securityType;
 		string exchange;
 		string multiplier;
-		string right;		// "C" or "P" or ""
-		double strike;
+		string localName;	// Unicode; e.g., in Chinese or French
 		string currency;
 		string ticksize;		// ES is 0.25
+
+		// Options
+		string underlyingSymbol;
+		double strike = 0.0;
+		string right;		// "C" or "P" or ""
+		string expiryDate;
 
 		string fullSymbol() {
 			std::stringstream ss;
 			ss << symbol << " " << securityType << " " << exchange;
+			if (securityType == "FUT")
+				ss << " " << multiplier;
+
 			std::string s = ss.str();
 			return s;
 		}

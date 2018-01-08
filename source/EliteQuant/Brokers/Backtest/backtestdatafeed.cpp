@@ -112,7 +112,7 @@ namespace EliteQuant
 					time(&current_time);
 					k.time_ = tointtime(current_time);
 					k.fullsymbol_ = s;
-					k.datatype_ = DataType::DT_TradePrice;
+					k.datatype_ = DataType::DT_Trade;
 					k.price_ = (rand() % 100 + 1000) / 10.0;
 					k.size_ = 100;
 					msgq_pub_->sendmsg(k.serialize());

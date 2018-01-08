@@ -118,7 +118,7 @@ namespace EliteQuant
 		void updatePortfolio(const Contract& contract, double position,
 			double marketPrice, double marketValue, double averageCost,
 			double unrealizedPNL, double realizedPNL, const std::string& accountName);
-		void updateAccountTime(const std::string& timeStamp) {}
+		void updateAccountTime(const std::string& timeStamp);
 		void accountDownloadEnd(const std::string& accountName) {}
 		void nextValidId(IBOfficial::OrderId orderId);
 		void contractDetails(int reqId, const ContractDetails& contractDetails);
@@ -176,7 +176,10 @@ namespace EliteQuant
 		time_t m_sleepDeadline;
 		EReader *m_pReader;
 		bool m_extraAuth;
-		
+		std::vector<double> lastPriceCache_;
+		std::vector<double> bidPriceCache_;
+		std::vector<double> askPriceCache_;
+
 		const int BARREQUESTSTARTINGPOINT = 1000;			// reqRealTimeBars request id starting point
 		// ***********************************************************************************************
 		// auxiliary functions
