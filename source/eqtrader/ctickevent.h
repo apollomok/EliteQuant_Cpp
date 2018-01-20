@@ -2,7 +2,9 @@
 #define CTICKEVENT_H
 
 #include <QString>
-#include "enums.h"
+#include <Common/Data/datatype.h>
+
+using namespace EliteQuant;
 
 class TickEvent
 {
@@ -11,7 +13,7 @@ public:
     TickEvent();
     ~TickEvent();
 public:
-    TickType tick_type;
+    DataType tick_type;
     QString timestamp;
     QString full_symbol;
     double price;

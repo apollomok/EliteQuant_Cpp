@@ -1,9 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <Common/Data/datatype.h>
 #include <yaml-cpp/yaml.h>
 #include <QDir>
 #include <iostream>
 #include <algorithm>
+
+using namespace EliteQuant;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -104,12 +108,12 @@ void MainWindow::ShowSingal(QString sMessage)
     k.full_symbol = v[0];
 
     k.timestamp = v[1];
-    k.tick_type = TickType(v[2].toInt());
+    k.tick_type = DataType(v[2].toInt());
     k.price = v[3].toDouble();
     k.size = v[4].toInt();
     k.depth = v[5].toInt();
 
-    if (k.tick_type == FULL)
+    if (k.tick_type == DataType::DT_Full)
     {
         k.bid_price_L1 = v[6].toDouble();
         k.bid_size_L1 = v[7].toInt();
@@ -136,22 +140,22 @@ void MainWindow::ShowSingal(QString sMessage)
         ui->tableWidget->item(row,1)->setText(k.full_symbol);
         ui->tableWidget->item(row,13)->setText(k.timestamp);
 
-        if (k.tick_type == BID)
+        if (k.tick_type == DataType::DT_Bid)
         {
             ui->tableWidget->item(row,5)->setText(QString::number(k.size));
             ui->tableWidget->item(row,6)->setText(QString::number(k.price));
         }
-        else if (k.tick_type == ASK)
+        else if (k.tick_type == DataType::DT_Ask)
         {
             ui->tableWidget->item(row,7)->setText(QString::number(k.price));
             ui->tableWidget->item(row,8)->setText(QString::number(k.size));
         }
-        else if(k.tick_type ==TRADE)
+        else if(k.tick_type ==DataType::DT_Trade)
         {
             ui->tableWidget->item(row,2)->setText(QString::number(k.price));
             ui->tableWidget->item(row,3)->setText(QString::number(k.size));
         }
-        else if (k.tick_type == FULL)
+        else if (k.tick_type == DataType::DT_Full)
         {
             ui->tableWidget->item(row,2)->setText(QString::number(k.price));
             ui->tableWidget->item(row,3)->setText(QString::number(k.size));
