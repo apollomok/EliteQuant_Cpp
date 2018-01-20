@@ -71,7 +71,7 @@ namespace EliteQuant
 					{
 						Tick k;
 						k.fullsymbol_ = vs[0];
-						k.time_ = atoi(vs[1].c_str());
+						k.time_ = vs[1];					//atoi(vs[1].c_str());
 						k.datatype_ = (DataType)(atoi(vs[2].c_str()));
 						k.price_ = atof(vs[3].c_str());
 						k.size_ = atoi(vs[4].c_str());
@@ -86,7 +86,7 @@ namespace EliteQuant
 					{
 						FullTick k;
 						k.fullsymbol_ = vs[0];
-						k.time_ = atoi(vs[1].c_str());
+						k.time_ = vs[1];
 						k.datatype_ = (DataType)(atoi(vs[2].c_str()));
 						k.price_ = atof(vs[3].c_str());
 						k.size_ = atoi(vs[4].c_str());

@@ -136,11 +136,13 @@ brew install zlib1g-dev rapidjson-dev python3-dev libboost-all-dev libsodium-dev
 
 Messages are sperated by character '|'. For example
 
-* new market order: o|MKT|AAPL STK SMART|100[|order_flag]
-* new limit order: o|LMT|AAPL STK SMART|100|170.00[|order_flag]
-* order status: s|order_id|order_status
-* fill: f|trade_id|trade_time|trade_price|trade_size
+* new market order: o|account|api|client order id|MKT|AAPL STK SMART|100[|order_flag]
+* new limit order: o|account|api|client order id|LMT|AAPL STK SMART|100|170.00[|order_flag]
+* order status: s|account|api|server order id|client order id|broker order id|order status
+* fill: f|account|api|server order id|client order id|broker order id|trade id|trade time|symbol|trade price|tradesize
+* cancel: c|account|api|server order id|client order id|broker order id
 * tick message: AAPL STK SMART|time|data type|price|size|depth
+* full tick message: AAPL STK SMART|time|3|price|size|1|bid|bid size|ask|ask size|open interest|open|high|low|pre close|upper limit|lower limit
 
 The following are message types:
 

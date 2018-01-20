@@ -127,26 +127,9 @@ namespace EliteQuant
 		orderfield.OrderPriceType = order->orderType == "MKT" ? THOST_FTDC_OPT_AnyPrice : THOST_FTDC_OPT_LimitPrice;
 		orderfield.LimitPrice = order->orderType == "MKT" ? 0.0 : order->limitPrice;
 		orderfield.Direction = order->orderSize > 0 ? THOST_FTDC_D_Buy : THOST_FTDC_D_Sell;
+		orderfield.CombOffsetFlag[0] = OrderFlagToCtpComboOffsetFlag(order->orderFlag);
 
-		switch (order->orderFlag) {
-			case OrderFlag::OF_OpenPosition:
-				orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_Open;	// 开仓
-				break;
-			case OrderFlag::OF_ClosePosition:
-				orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_Close;	// 平仓
-				break;
-			case OrderFlag::OF_CloseToday:
-				orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_CloseToday;	// 平今
-				break;
-			case OrderFlag::OF_CloseYesterday:
-				orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_CloseYesterday;	// 平昨
-				break;
-			default:
-				orderfield.CombOffsetFlag[0] = THOST_FTDC_OF_Open;	// 开仓
-				break;
-		}
-
-		strcpy(orderfield.OrderRef, to_string(order->orderId).c_str());
+		strcpy(orderfield.OrderRef, to_string(order->brokerOrderId).c_str());
 
 		strcpy(orderfield.InvestorID, CConfig::instance().ctp_user_id.c_str());
 		strcpy(orderfield.UserID, CConfig::instance().ctp_user_id.c_str());
@@ -166,14 +149,13 @@ namespace EliteQuant
 		//orderfield.TimeCondition = THOST_FTDC_TC_IOC;
 		//orderfield.VolumeCondition = THOST_FTDC_VC_CV;				// FAK; FOK uses THOST_FTDC_VC_AV
 
-		int i = api_->ReqOrderInsert(&orderfield, reqId_++);
-
+		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Placing Order orderId=%ld: fullSymbol=%s\n", __FILE__, __LINE__, __FUNCTION__, order->serverOrderId, order->fullSymbol.c_str());
+		
 		lock_guard<mutex> g(orderStatus_mtx);
-
-		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Placing Order orderId=%ld: fullSymbol=%s\n", __FILE__, __LINE__, __FUNCTION__, order->orderId, order->fullSymbol.c_str());
-
+		order->api = "CTP";
+		int i = api_->ReqOrderInsert(&orderfield, reqId_++);
 		order->orderStatus = OrderStatus::OS_Submitted;
-		sendOrderSubmitted(order->orderId);
+		sendOrderStatus(order->serverOrderId);
 	}
 
 	void ctpbrokerage::requestNextValidOrderID() {
@@ -181,7 +163,7 @@ namespace EliteQuant
 			_bkstate = BK_GETORDERIDACK;
 
 		lock_guard<mutex> g(oid_mtx);
-		m_orderId = 0;
+		m_brokerOrderId = 0;
 
 		if (requireAuthentication_) {
 			// trigger onRspAuthenticate()
@@ -199,13 +181,13 @@ namespace EliteQuant
 
 	// does not accept cancel order
 	void ctpbrokerage::cancelOrder(int oid) {
-		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Cancel Order m_orderId=%ld\n", __FILE__, __LINE__, __FUNCTION__, (long)m_orderId);
+		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Cancel Order m_orderId=%ld\n", __FILE__, __LINE__, __FUNCTION__, (long)oid);
 
 		CThostFtdcInputOrderActionField myreq = CThostFtdcInputOrderActionField();
-		std::shared_ptr<Order> o = OrderManager::instance().retrieveOrder(oid);
+		std::shared_ptr<Order> o = OrderManager::instance().retrieveOrderFromServerOrderId(oid);
 		strcpy(myreq.InstrumentID, o->fullSymbol.c_str());
 		//strcpy(myreq.ExchangeID, o->.c_str());			// TODO: get exchangeID from fullSymbol, e.g. "SHFE"  IF1709 FUT CFFEX 300, where 300 is multiplier
-		strcpy(myreq.OrderRef, to_string(oid).c_str());
+		strcpy(myreq.OrderRef, to_string(o->brokerOrderId).c_str());
 		// myreq.OrderSysID		// TODO: what is this used for?
 		myreq.FrontID = frontID_;
 		myreq.SessionID = sessionID_;
@@ -238,15 +220,20 @@ namespace EliteQuant
 		int i = this->api_->ReqQryTradingAccount(&myreq, reqId_++);			// return 0 = 发送投资者资金账户查询请求失败
 	}
 
-	void ctpbrokerage::requestOpenOrders() {
+	void ctpbrokerage::requestOpenOrders(const string& account_)
+	{
 	}
 
-	void ctpbrokerage::reqAllOpenOrders() {
+	/// 查询账户， trigger onRspQryInvestorPosition
+	void ctpbrokerage::requestOpenPositions(const string& account_) {
+		PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker requests open positions.\n", __FILE__, __LINE__, __FUNCTION__);
 
-	}
+		CThostFtdcQryInvestorPositionField myreq = CThostFtdcQryInvestorPositionField();
 
-	void ctpbrokerage::reqAutoOpenOrders(bool) {
+		strcpy(myreq.BrokerID, CConfig::instance().ctp_broker_id.c_str());
+		strcpy(myreq.InvestorID, CConfig::instance().ctp_user_id.c_str());
 
+		int i = this->api_->ReqQryInvestorPosition(&myreq, reqId_++);		// return 0 = 发送投资者持仓查询请求失败
 	}
 
 	void ctpbrokerage::requestAuthenticate(string userid, string authcode, string brokerid, string userproductinfo) {
@@ -279,18 +266,6 @@ namespace EliteQuant
 		strcpy(logoutField.UserID, CConfig::instance().ctp_user_id.c_str());
 
 		int i = this->api_->ReqUserLogout(&logoutField, reqId_++);
-	}
-
-	/// 查询账户， trigger onRspQryInvestorPosition
-	void ctpbrokerage::requestOpenPositions() {
-		PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker requests open positions.\n", __FILE__, __LINE__, __FUNCTION__);
-
-		CThostFtdcQryInvestorPositionField myreq = CThostFtdcQryInvestorPositionField();
-
-		strcpy(myreq.BrokerID, CConfig::instance().ctp_broker_id.c_str());
-		strcpy(myreq.InvestorID, CConfig::instance().ctp_user_id.c_str());
-
-		int i = this->api_->ReqQryInvestorPosition(&myreq, reqId_++);		// return 0 = 发送投资者持仓查询请求失败
 	}
 
 	/// 投资者结算结果确认, trigger response onRspSettlementInfoConfirm
@@ -374,7 +349,7 @@ namespace EliteQuant
 
 			// TODO二: 放在 _bkstate 改变后面行吗？
 			requestBrokerageAccountInformation("");
-			requestOpenPositions();
+			requestOpenPositions("");
 			requestSettlementInfoConfirm();
 		}
 		else {
@@ -412,12 +387,19 @@ namespace EliteQuant
 				__FILE__, __LINE__, __FUNCTION__, pInputOrder->OrderRef, pInputOrder->InstrumentID, pInputOrder->LimitPrice, pInputOrder->VolumeTotalOriginal, pInputOrder->Direction);
 
 			lock_guard<mutex> g(orderStatus_mtx);
-			std::shared_ptr<Order> o = OrderManager::instance().retrieveOrder(std::stoi(pInputOrder->OrderRef));
-			o->orderStatus = OS_Error;			// rejected ?
+			std::shared_ptr<Order> o = OrderManager::instance().retrieveOrderFromBrokerOrderIdAndApi(std::stoi(pInputOrder->OrderRef), "CTP");
 
-			sendOrderStatus(std::stoi(pInputOrder->OrderRef));
-			sendGeneralMessage(string("CTP Trader Server OnRspOrderInsert:") +
-				SERIALIZATION_SEPARATOR + to_string(pRspInfo->ErrorID) + SERIALIZATION_SEPARATOR + pRspInfo->ErrorMsg);
+			if (o != nullptr) {
+				o->orderStatus = OS_Error;			// rejected ?
+
+				sendOrderStatus(o->serverOrderId);
+				sendGeneralMessage(string("CTP Trader Server OnRspOrderInsert:") +
+					SERIALIZATION_SEPARATOR + to_string(pRspInfo->ErrorID) + SERIALIZATION_SEPARATOR + pRspInfo->ErrorMsg);
+			}
+			else {
+				PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]tp broker server OnRspOrderInsert cant find order : OrderRef=%s\n",
+					__FILE__, __LINE__, __FUNCTION__, pInputOrder->OrderRef);
+			}
 		}
 		else
 		{
@@ -425,12 +407,19 @@ namespace EliteQuant
 				__FILE__, __LINE__, __FUNCTION__, pRspInfo->ErrorID, pRspInfo->ErrorMsg);
 
 			lock_guard<mutex> g(orderStatus_mtx);
-			std::shared_ptr<Order> o = OrderManager::instance().retrieveOrder(std::stoi(pInputOrder->OrderRef));
-			o->orderStatus = OS_Error;			// rejected ?
+			std::shared_ptr<Order> o = OrderManager::instance().retrieveOrderFromBrokerOrderIdAndApi(std::stoi(pInputOrder->OrderRef), "CTP");
 
-			sendOrderStatus(std::stoi(pInputOrder->OrderRef));
-			sendGeneralMessage(string("CTP Trader Server OnRspOrderInsert error:") +
-				SERIALIZATION_SEPARATOR + to_string(pRspInfo->ErrorID) + SERIALIZATION_SEPARATOR + pRspInfo->ErrorMsg);
+			if (o != nullptr) {
+				o->orderStatus = OS_Error;			// rejected ?
+
+				sendOrderStatus(o->serverOrderId);
+				sendGeneralMessage(string("CTP Trader Server OnRspOrderInsert error:") +
+					SERIALIZATION_SEPARATOR + to_string(pRspInfo->ErrorID) + SERIALIZATION_SEPARATOR + pRspInfo->ErrorMsg);
+			}
+			else {
+				PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]tp broker server OnRspOrderInsert cant find order : OrderRef=%s\n",
+					__FILE__, __LINE__, __FUNCTION__, pInputOrder->OrderRef);
+			}			
 		}
 	}
 
@@ -460,6 +449,7 @@ namespace EliteQuant
 		// 查询合约代码, trigger response OnRspQryInstrument
 		CThostFtdcQryInstrumentField myreq = CThostFtdcQryInstrumentField();
 		int i = this->api_->ReqQryInstrument(&myreq, reqId_++);
+		PRINT_TO_FILE("INFO:[%s,%d][%s]Ctp broker servers ReqQryInstrument.\n", 	__FILE__, __LINE__, __FUNCTION__);
 	}
 
 	///请求查询投资者持仓响应 (respond to requestOpenPositions)
@@ -473,15 +463,25 @@ namespace EliteQuant
 		// pInvestorPosition->YdPosition;
 		// TODO: 汇总总仓, 计算持仓均价, 读取冻结
 
-		sendOpenPositionMessage(pInvestorPosition->InstrumentID, (pInvestorPosition->PosiDirection == THOST_FTDC_PD_Long ? 1 : -1) * pInvestorPosition->Position,
-			pInvestorPosition->PositionCost, pInvestorPosition->PositionProfit, pInvestorPosition->CloseProfit);
+		if (pInvestorPosition->Position != 0.0) {
+			Position pos;
+			pos._fullsymbol = pInvestorPosition->InstrumentID;
+			pos._size = (pInvestorPosition->PosiDirection == THOST_FTDC_PD_Long ? 1 : -1) * pInvestorPosition->Position;
+			pos._avgprice = pInvestorPosition->PositionCost / pInvestorPosition->Position;
+			pos._openpl = pInvestorPosition->PositionProfit;
+			pos._closedpl = pInvestorPosition->CloseProfit;
+			pos._account = CConfig::instance().ctp_user_id;
+			pos._pre_size = pInvestorPosition->YdPosition;
+			pos._freezed_size = (pInvestorPosition->PosiDirection == THOST_FTDC_PD_Long ? pInvestorPosition->LongFrozen : pInvestorPosition->ShortFrozen);
+			pos._api = "CTP";
+			PortfolioManager::instance().Add(pos);
+			sendOpenPositionMessage(pos);
+		}
+
 	}
 
 	///请求查询资金账户响应 (respond to requestAccount)
 	void ctpbrokerage::OnRspQryTradingAccount(CThostFtdcTradingAccountField *pTradingAccount, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {
-		time_t current_time;
-		time(&current_time);
-
 		// balance和快期中的账户可能不一样
 		double balance = pTradingAccount->PreBalance - pTradingAccount->PreCredit - pTradingAccount->PreMortgage
 			+ pTradingAccount->Mortgage - pTradingAccount->Withdraw + pTradingAccount->Deposit
@@ -501,7 +501,7 @@ namespace EliteQuant
 		PortfolioManager::instance()._account.RealizedPnL = pTradingAccount->CloseProfit;
 		PortfolioManager::instance()._account.UnrealizedPnL = pTradingAccount->PositionProfit;
 
-		sendAccountMessage(to_string(tointtime(current_time)));
+		sendAccountMessage();
 	}
 
 	///请求查询合约响应 (respond to ReqQryInstrument)
@@ -554,18 +554,53 @@ namespace EliteQuant
 		// pOrder->OrderStatus		报单状态
 		// pOrder->InsertDate		报单日期
 		// pOrder->SequenceNo		序号
-		PRINT_TO_FILE("INFO:[%s,%d][%s]CTP trade server OnRtnOrder details: OrderRef=%s, InstrumentID=%s, ExchangeID=%s, InsertTime=%s, CancelTime=%s, FrontID=%d, SessionID=%d, Direction=%c, CombOffsetFlag=%s, OrderStatus=%c, OrderSubmitStatus=%c, StatusMsg=%s, LimitPrice=%f, VolumeTotalOriginal=%d, VolumeTraded=%d, OrderSysID=%s, SequenceNo=%d.\n",
-			__FILE__, __LINE__, __FUNCTION__, pOrder->InstrumentID, pOrder->ExchangeID, pOrder->OrderRef, pOrder->InsertTime, pOrder->CancelTime,
+		PRINT_TO_FILE("INFO:[%s,%d][%s]CTP trade server OnRtnOrder details: InstrumentID=%s, OrderRef=%s, ExchangeID=%s, InsertTime=%s, CancelTime=%s, FrontID=%d, SessionID=%d, Direction=%c, CombOffsetFlag=%s, OrderStatus=%c, OrderSubmitStatus=%c, StatusMsg=%s, LimitPrice=%f, VolumeTotalOriginal=%d, VolumeTraded=%d, OrderSysID=%s, SequenceNo=%d.\n",
+			__FILE__, __LINE__, __FUNCTION__, pOrder->InstrumentID, pOrder->OrderRef, pOrder->ExchangeID, pOrder->InsertTime, pOrder->CancelTime,
 			pOrder->FrontID, pOrder->SessionID, pOrder->Direction, pOrder->CombOffsetFlag, pOrder->OrderStatus, pOrder->OrderSubmitStatus, pOrder->StatusMsg,
 			pOrder->LimitPrice, pOrder->VolumeTotalOriginal, pOrder->VolumeTraded, pOrder->OrderSysID, pOrder->SequenceNo);	// TODO: diff between tradeid and orderref
 
 		// increase order_id
 		int nOrderref = std::stoi(pOrder->OrderRef);
-		if (m_orderId <= (nOrderref+1))
-			m_orderId = nOrderref + 1;
+		
+		shared_ptr<Order> o = OrderManager::instance().retrieveOrderFromBrokerOrderIdAndApi(nOrderref, "CTP");
+		if (o == nullptr) {
+			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Broker order id is yet not tracked. OrderId= %d\n", __FILE__, __LINE__, __FUNCTION__, nOrderref);
+			// create an order
+			lock_guard<mutex> g(oid_mtx);
+			std::shared_ptr<Order> o = make_shared<Order>();
+			o->account = CConfig::instance().ctp_user_id;
+			o->api = "CTP";
+			o->clientOrderId = -1;
+			o->fullSymbol = pOrder->InstrumentID;
+			o->orderSize = (pOrder->Direction == '0'? 1 : -1) * pOrder->VolumeTotalOriginal;
+			o->clientId = -1;
+			o->limitPrice = pOrder->LimitPrice;
+			o->stopPrice = 0.0;
+			o->orderStatus = CtpOrderStatusToOrderStatus(pOrder->OrderStatus);
+			// o->orderStatus = OrderStatus::OS_Acknowledged;
+			o->orderFlag = CtpComboOffsetFlagToOrderFlag(pOrder->CombOffsetFlag[0]);
 
-		OrderManager::instance().gotOrder(nOrderref);
-		sendOrderAcknowledged(nOrderref);
+			o->serverOrderId = m_serverOrderId;
+			o->brokerOrderId = nOrderref;
+			o->createTime = ymdhmsf();
+			o->orderType = "LMT";					// assumed
+
+			m_serverOrderId++;
+			// m_brokerOrderId++;
+			if (m_brokerOrderId <= (nOrderref + 1))
+				m_brokerOrderId = nOrderref + 1;
+
+			OrderManager::instance().trackOrder(o);
+			sendOrderStatus(o->serverOrderId);
+		}
+		else {
+			// OrderManager::instance().gotOrder(o->serverOrderId);		// order received/confirmed
+			// including cancelled
+			o->orderStatus = CtpOrderStatusToOrderStatus(pOrder->OrderStatus);
+			o->orderFlag = CtpComboOffsetFlagToOrderFlag(pOrder->CombOffsetFlag[0]);
+
+			sendOrderStatus(o->serverOrderId);			// acknowledged
+		}		
 	}
 
 	/// 成交通知
@@ -574,18 +609,36 @@ namespace EliteQuant
 			__FILE__, __LINE__, __FUNCTION__, pTrade->TradeID, pTrade->OrderRef, pTrade->InstrumentID, pTrade->ExchangeID, pTrade->TradeTime,
 			pTrade->OffsetFlag, pTrade->Direction, pTrade->Price, pTrade->Volume);		// TODO: diff between tradeid and orderref
 
-		time_t current_time;
-		time(&current_time);
-
 		Fill t;
 		t.fullSymbol = pTrade->InstrumentID;
-		t.tradetime = tointtime(current_time);		// TODO: use pTrade->TradeTime
-		t.orderId = std::stoi(pTrade->OrderRef);
+		t.tradetime = pTrade->TradeTime;
+		t.brokerOrderId = std::stoi(pTrade->OrderRef);
 		t.tradeId = std::stoi(pTrade->TraderID);
 		t.tradePrice = pTrade->Price;
 		t.tradeSize = (pTrade->Direction == THOST_FTDC_D_Buy ? 1 : -1)*pTrade->Volume;
-		OrderManager::instance().gotFill(t);
-		sendOrderFilled(t);		// BOT SLD
+
+		auto o = OrderManager::instance().retrieveOrderFromBrokerOrderIdAndApi(std::stoi(pTrade->OrderRef), "CTP");
+		if (o != nullptr) {
+			t.serverOrderId = o->serverOrderId;
+			t.clientOrderId = o->clientOrderId;
+			t.brokerOrderId = o->brokerOrderId;
+			t.account = o->account;
+			t.api = o->api;
+
+			OrderManager::instance().gotFill(t);
+			// sendOrderStatus(o->serverOrderId);
+			sendOrderFilled(t);		// BOT SLD
+		}
+		else {
+			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]fill order id is not tracked. OrderId= %s\n", __FILE__, __LINE__, __FUNCTION__, pTrade->OrderRef);
+
+			t.serverOrderId = -1;
+			t.clientOrderId = -1;
+			t.account = CConfig::instance().ctp_broker_id;
+			t.api = "CTP";
+
+			sendOrderFilled(t);		// BOT SLD
+		}		
 	}
 
 	///报单录入错误回报
@@ -596,10 +649,13 @@ namespace EliteQuant
 			pInputOrder->Direction, pInputOrder->CombOffsetFlag, pInputOrder->LimitPrice, pInputOrder->VolumeTotalOriginal);
 
 		lock_guard<mutex> g(orderStatus_mtx);
-		std::shared_ptr<Order> o = OrderManager::instance().retrieveOrder(std::stoi(pInputOrder->OrderRef));
+		std::shared_ptr<Order> o = OrderManager::instance().retrieveOrderFromBrokerOrderIdAndApi(std::stoi(pInputOrder->OrderRef), "IB");
 		if (o != nullptr) {
 			o->orderStatus = OS_Error;			// rejected
-			sendOrderStatus(std::stoi(pInputOrder->OrderRef));
+			sendOrderStatus(o->serverOrderId);
+		}
+		else {
+			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Broker order id is not tracked. OrderId= %s\n", __FILE__, __LINE__, __FUNCTION__, pInputOrder->OrderRef);
 		}
 
 		sendGeneralMessage(string("CTP Trader Server OnErrRtnOrderInsert") +
@@ -625,10 +681,83 @@ namespace EliteQuant
 	string ctpbrokerage::CtpSymbolToSecurityFullName(CThostFtdcInstrumentField * pInstrument)
 	{
 		char sym[128] = {};
-		sprintf(sym, "%s FUT %s %s", pInstrument->InstrumentID, pInstrument->ExchangeID, pInstrument->VolumeMultiple);
+		sprintf(sym, "%s FUT %s %i", pInstrument->InstrumentID, pInstrument->ExchangeID, pInstrument->VolumeMultiple);
 
 		string symbol = sym;
 		return symbol;
+	}
+
+	OrderStatus ctpbrokerage::CtpOrderStatusToOrderStatus(const char status) {
+		if (status == THOST_FTDC_OST_AllTraded) {
+			return OrderStatus::OS_Filled;
+		}
+		else if (status == THOST_FTDC_OST_PartTradedQueueing) {
+			return OrderStatus::OS_PartiallyFilled;
+		}
+		else if (status == THOST_FTDC_OST_NoTradeQueueing) {
+			return OrderStatus::OS_Acknowledged;
+		}
+		else if (status == THOST_FTDC_OST_Canceled) {
+			return OrderStatus::OS_Canceled;
+		}
+		else if (status == THOST_FTDC_OST_Unknown) {
+			return OrderStatus::OS_UNKNOWN;
+		}
+		else {
+			return OrderStatus::OS_UNKNOWN;
+		}
+	}
+
+	OrderFlag ctpbrokerage::CtpComboOffsetFlagToOrderFlag(const char flag) {
+		OrderFlag f;
+
+		switch (flag) {
+			case THOST_FTDC_OF_Open:
+				f = OrderFlag::OF_OpenPosition;
+				break;
+			case THOST_FTDC_OF_Close:
+				f = OrderFlag::OF_ClosePosition;
+				break;
+			case THOST_FTDC_OF_ForceClose:
+				f = OrderFlag::OF_ForceClose;
+				break;
+			case THOST_FTDC_OF_CloseToday:
+				f = OrderFlag::OF_CloseToday;
+				break;
+			case THOST_FTDC_OF_CloseYesterday:
+				f = OrderFlag::OF_CloseYesterday;
+				break;
+			default:
+				f = OrderFlag::OF_OpenPosition;
+				break;
+		}
+		return f;
+	}
+
+	char ctpbrokerage::OrderFlagToCtpComboOffsetFlag(const OrderFlag flag) {
+		char c;
+
+		switch (flag) {
+			case OrderFlag::OF_OpenPosition:
+				c = THOST_FTDC_OF_Open;	// 开仓
+				break;
+			case OrderFlag::OF_ClosePosition:
+				c = THOST_FTDC_OF_Close;	// 平仓
+				break;
+			case OrderFlag::OF_ForceClose:
+				c = THOST_FTDC_OF_ForceClose;	// 平仓
+				break;
+			case OrderFlag::OF_CloseToday:
+				c = THOST_FTDC_OF_CloseToday;	// 平今
+				break;
+			case OrderFlag::OF_CloseYesterday:
+				c = THOST_FTDC_OF_CloseYesterday;	// 平昨
+				break;
+			default:
+				c = THOST_FTDC_OF_Open;	// 开仓
+				break;
+		}
+		return c;
 	}
 
 	// https://www.cplusplus.me/1780.html          -------- Doesn't work

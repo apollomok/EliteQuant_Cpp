@@ -29,12 +29,13 @@ namespace EliteQuant {
 		uint64_t _count = 0;
 		AccountInfo _account;
 
-		map<string, Position*> _positions;			// fullsymbol --> size
+		map<string, Position> _positions;			// fullsymbol --> size
 		double _cash;
 
 		void reset();
 		void rebuild();
 
+		void Add(Position& pos);
 		double Adjust(Fill& fill);
 	};
 }

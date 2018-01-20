@@ -4,38 +4,41 @@
 
 namespace EliteQuant {
 	enum OrderStatus {
-		OS_NewBorn = 0,			// NewBorn
-		OS_PendingSubmit = 1,
-		OS_PendingCancel =2 ,
+		OS_UNKNOWN = 0,		// Unknown
+		OS_NewBorn = 1,			// NewBorn
+		OS_PendingSubmit = 2,
 		OS_Submitted = 3,			// submitted
 		OS_Acknowledged = 4,		// acknowledged
-		OS_Canceled = 5,			// Canceled
+		OS_PartiallyFilled = 5,		// PartiallyFilled
 		OS_Filled = 6,				// Filled
-		OS_Inactive = 7,
-		OS_PartiallyFilled = 8,		// PartiallyFilled
-		OS_ApiPending,
-		OS_ApiCancelled,
-		OS_Error,
-		OS_None
+		OS_PendingCancel = 7 ,
+		OS_Canceled = 8,			// Canceled
+		OS_Inactive = 9,
+		OS_ApiPending = 10,
+		OS_ApiCancelled = 11,
+		OS_Error = 12
 	};
 
 	enum OrderFlag {			// for CTP offset flag
 		OF_OpenPosition = 0,
 		OF_ClosePosition = 1,
-		OF_CloseToday = 2,
-		OF_CloseYesterday = 3
+		OF_ForceClose = 2,
+		OF_CloseToday = 3,
+		OF_CloseYesterday = 4,
+		OF_ForceOff = 5,
+		OF_LocalForceClose = 6
 	};
 
 	const std::string OrderStatusString[] = {
 		"NewBorn",
 		"PendingSubmit",
-		"PendingCancel",
-		"PreSubmitted",
 		"Submitted",
-		"Canceled",
-		"Filled",
-		"Inactive",
+		"Acknowledged",
 		"PartiallyFilled",
+		"Filled",
+		"PendingCancel",
+		"Canceled",
+		"Inactive",
 		"ApiPending",
 		"ApiCancelled",
 		"Error",

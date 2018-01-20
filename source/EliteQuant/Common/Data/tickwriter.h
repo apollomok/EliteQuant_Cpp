@@ -38,7 +38,7 @@ namespace EliteQuant
 			if (!_str.empty()) {
 				char tmp[256] = {};
 				//sprintf(tmp, "%lu@%s\n", getMicroTime(), _str.c_str());
-				sprintf(tmp, "%s @ %s\n", ymdhms().c_str(), _str.c_str());
+				sprintf(tmp, "%s @ %s\n", ymdhmsf().c_str(), _str.c_str());
 				uint32_t strsize = strlen(tmp); // + 1;
 				uint32_t required_buffer_len = count + strsize;
 

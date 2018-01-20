@@ -2,9 +2,9 @@
 #include <Common/Security/portfoliomanager.h>
 
 namespace EliteQuant {
-	long m_orderId = -1; //define global order id, should be initialized by broker, TODO: every broker/account has an order_id
-	std::mutex oid_mtx;
-	std::mutex orderStatus_mtx;
+	long m_serverOrderId = 0;    // unique order id on server side defined in ordermanager.cpp. Every broker has its own id;
+	std::mutex oid_mtx;			 // mutex for increasing order id
+	std::mutex orderStatus_mtx;  // mutex for changing order status
 
 	OrderManager* OrderManager::pinstance_ = nullptr;
 	mutex OrderManager::instancelock_;
@@ -32,7 +32,6 @@ namespace EliteQuant {
 
 	void OrderManager::reset() {
 		_orders.clear();
-		_sents.clear();
 		_fills.clear();
 		_cancels.clear();
 
@@ -41,21 +40,20 @@ namespace EliteQuant {
 
 	void OrderManager::trackOrder(std::shared_ptr<Order> o)
 	{
-		if (o->orderId < 0 || o->orderSize == 0) {
+		if (o->orderSize == 0) {
 			PRINT_TO_FILE("ERROR:[%s,%d][%s]%s\n", __FILE__, __LINE__, __FUNCTION__, "Incorrect OrderSize.");
 			return;
 		}
 
-		auto iter = _orders.find(o->orderId);
+		auto iter = _orders.find(o->serverOrderId);
 		if (iter != _orders.end())			// order exists
 			return;
 
-		_orders[o->orderId] = o;		// add to map
-		_sents[o->orderId] = o->orderSize;
-		_cancels[o->orderId] = false;
-		_fills[o->orderId] = 0;
+		_orders[o->serverOrderId] = o;		// add to map
+		_cancels[o->serverOrderId] = false;
+		_fills[o->serverOrderId] = 0;
 
-		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Order is put under track. OrderId=%d\n", __FILE__, __LINE__, __FUNCTION__, o->orderId);
+		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Order is put under track. OrderId=%d\n", __FILE__, __LINE__, __FUNCTION__, o->serverOrderId);
 	}
 
 	void OrderManager::gotOrder(long oid)
@@ -75,16 +73,17 @@ namespace EliteQuant {
 
 	void OrderManager::gotFill(Fill& fill)
 	{
-		if (!isTracked(fill.tradeId))
+		if (!isTracked(fill.serverOrderId))
 		{
-			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Order is not tracked. OrderId= %d\n", __FILE__, __LINE__, __FUNCTION__, fill.tradeId);
-			return;
+			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Order is not tracked. OrderId= %d\n", __FILE__, __LINE__, __FUNCTION__, fill.serverOrderId);
 		}
-		PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Order is filled. OrderId=%d, price=%.2f\n", __FILE__, __LINE__, __FUNCTION__, fill.tradeId, fill.tradePrice);
-		lock_guard<mutex> g(orderStatus_mtx);
-		_orders[fill.tradeId]->orderStatus = OrderStatus::OS_Filled;			// TODO: check for partial fill
+		else {
+			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Order is filled. OrderId=%d, price=%.2f\n", __FILE__, __LINE__, __FUNCTION__, fill.serverOrderId, fill.tradePrice);
+			lock_guard<mutex> g(orderStatus_mtx);
+			_orders[fill.serverOrderId]->orderStatus = OrderStatus::OS_Filled;			// TODO: check for partial fill
 
-		PortfolioManager::instance().Adjust(fill);
+			PortfolioManager::instance().Adjust(fill);
+		}
 	}
 
 	void OrderManager::gotCancel(long oid)
@@ -97,11 +96,33 @@ namespace EliteQuant {
 		}
 	}
 
-	std::shared_ptr<Order> OrderManager::retrieveOrder(long oid) {
-		if (_orders.count(oid))
+	std::shared_ptr<Order> OrderManager::retrieveOrderFromServerOrderId(long oid) {
+		if (_orders.count(oid))         // return # of matches; either 0 or 1
 		{
 			return _orders[oid];
 		}
+		return nullptr;
+	}
+
+	std::shared_ptr<Order> OrderManager::retrieveOrderFromBrokerOrderId(long oid) {
+		for (auto iterator = _orders.begin(); iterator != _orders.end(); ++iterator) {
+			if (iterator->second->brokerOrderId == oid)
+			{
+				return iterator->second;
+			}
+		}
+
+		return nullptr;
+	}
+
+	std::shared_ptr<Order> OrderManager::retrieveOrderFromBrokerOrderIdAndApi(long oid, string api) {
+		for (auto iterator = _orders.begin(); iterator != _orders.end(); ++iterator) {
+			if ((iterator->second->brokerOrderId == oid) && (iterator->second->api == api))
+			{
+				return iterator->second;
+			}
+		}
+
 		return nullptr;
 	}
 

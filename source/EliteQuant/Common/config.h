@@ -60,12 +60,12 @@ namespace EliteQuant {
 #define PRINT_TO_FILE logger::instance().Printf2File
 
 #define PRINT_TO__CONSOLE(...) do{\
-printf("%s ",ymdhms().c_str());printf(__VA_ARGS__);\
+printf("%s ",ymdhmsf().c_str());printf(__VA_ARGS__);\
 }while (0)
 
 #define PRINT_TO_FILE_AND_CONSOLE(...) do{\
 logger::instance().Printf2File(__VA_ARGS__);\
-printf("%s ",ymdhms().c_str());printf(__VA_ARGS__);\
+printf("%s ",ymdhmsf().c_str());printf(__VA_ARGS__);\
 }while (0)
 
 #define PRINT_SHUTDOWN_MESSAGE printf("\n Thank you for using EliteQuant http://www.elitequant.com. Goodbye! \n");

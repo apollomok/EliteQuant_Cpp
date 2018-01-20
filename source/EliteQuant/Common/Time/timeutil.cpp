@@ -40,6 +40,43 @@ namespace EliteQuant {
 		return string(buf);
 	}
 
+	string ymdhmsf() {
+		std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+		std::chrono::system_clock::duration tp = now.time_since_epoch();
+		tp -= std::chrono::duration_cast<std::chrono::seconds>(tp);
+		time_t tt = std::chrono::system_clock::to_time_t(now);
+		
+		// tm t = *gmtime(&tt);
+		 tm t = *localtime(&tt);
+		
+		char buf[64];
+		std::sprintf(buf, "%04u-%02u-%02u %02u:%02u:%02u.%03u", t.tm_year + 1900,
+			t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec,
+			static_cast<unsigned>(tp / std::chrono::milliseconds(1)));
+
+		return string(buf);
+	}
+
+	string hmsf() {
+		std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+		std::chrono::system_clock::duration tp = now.time_since_epoch();
+		tp -= std::chrono::duration_cast<std::chrono::seconds>(tp);
+		time_t tt = std::chrono::system_clock::to_time_t(now);
+
+		// tm t = *gmtime(&tt);			// utc
+		tm t = *localtime(&tt);
+
+		char buf[64];
+		std::sprintf(buf, "%02u:%02u:%02u.%03u", t.tm_hour, t.tm_min, t.tm_sec,
+			static_cast<unsigned>(tp / std::chrono::milliseconds(1)));
+
+		return string(buf);
+	}
+
+	int hmsf2inttime(string hmsf) {
+		return std::stoi(hmsf.substr(0, 2)) * 10000 + std::stoi(hmsf.substr(3, 2)) * 100 + std::stoi(hmsf.substr(6, 2));
+	}
+
 	void msleep(uint64_t _ms) {
 		if (_ms == 0) { return; }
 		this_thread::sleep_for(chrono::milliseconds(_ms));
@@ -103,6 +140,18 @@ namespace EliteQuant {
 		ptime pt = from_time_t(tt);
 		// return ptime2str(pt);
 		return to_simple_string(pt);
+	}
+
+	int tointdate() {
+		time_t current_time;
+		time(&current_time);
+		return tointdate(current_time);
+	}
+
+	int tointtime() {
+		time_t current_time;
+		time(&current_time);
+		return tointtime(current_time);
 	}
 
 	int tointdate(time_t time) {

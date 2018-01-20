@@ -18,17 +18,20 @@ using namespace std;
 
 namespace EliteQuant {
 	struct Position {
-		string _account = CConfig::instance().account;
+		string _account = "";
+		string _api = "";
 		string _fullsymbol = "";
 		double _avgprice = 0;
 		int _size = 0;
-		time_t _time;
+		int _pre_size = 0;
+		int _freezed_size = 0;
 		double _openpl = 0;			// unrealized pnl
 		double _closedpl = 0;		// realized pnl
 
 		template<class Archive>
 		void serialize(Archive & ar) {
 			ar(CEREAL_NVP(_account),
+				CEREAL_NVP(_api),
 				//cereal::make_nvp("H", _high),
 				CEREAL_NVP(_fullsymbol),
 				CEREAL_NVP(_avgprice),

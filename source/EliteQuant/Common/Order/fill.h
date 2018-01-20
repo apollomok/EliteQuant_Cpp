@@ -20,27 +20,44 @@ namespace EliteQuant
 {
 	struct Fill {
 		Fill()
-			: orderId(0)
-			, tradeId(0)
+			: serverOrderId(-1)
+			, clientOrderId(-1)
+			, brokerOrderId(-1)
+			, tradeId(-1)
 			, clientId(0)
+			, tradetime("")
+			, fullSymbol("")
+			, account("")
+			, api("")
+			, source(-1)
+			, currency("")
+			, tradePrice(0.0)				// DBL_MAX
 			, tradeSize(0)
-			, tradePrice(DBL_MAX)
+			, commission(0.0)				// DBL_MAX
 		{
 		}
 
-		long orderId;
+		long serverOrderId;
+		long clientOrderId;
+		long brokerOrderId;
 		long tradeId;
 		long clientId;
-		int tradetime;			// int time
+		string tradetime;
 		string fullSymbol;
 		string account;
+		string api;						// IB, ctp etc
+		int source;						// sid, get from client; 0=mannual
 		string currency;
 		double tradePrice;
 		long tradeSize;					// < 0 = short, order size != trade size
+		double commission;
 
 		template<class Archive>
 		void serialize(Archive & ar) {
-			ar(cereal::make_nvp("id", tradeId),
+			ar(cereal::make_nvp("serverorderid", serverOrderId),
+				cereal::make_nvp("clientorderid", clientOrderId),
+				cereal::make_nvp("brokerorderid", brokerOrderId),
+				cereal::make_nvp("tradeid", tradeId),
 				cereal::make_nvp("sym", fullSymbol),
 				cereal::make_nvp("price", tradePrice),
 				cereal::make_nvp("size", tradeSize),
@@ -49,11 +66,16 @@ namespace EliteQuant
 		}
 
 		string serialize() {
-			string str = std::to_string(orderId)
+			string str = std::to_string(serverOrderId)
+				+ SERIALIZATION_SEPARATOR + std::to_string(clientOrderId)
+				+ SERIALIZATION_SEPARATOR + std::to_string(brokerOrderId)
 				+ SERIALIZATION_SEPARATOR + std::to_string(tradeId)
-				+ SERIALIZATION_SEPARATOR + std::to_string(tradetime)
+				+ SERIALIZATION_SEPARATOR + tradetime
+				+ SERIALIZATION_SEPARATOR + fullSymbol
 				+ SERIALIZATION_SEPARATOR + std::to_string(tradePrice)
-				+ SERIALIZATION_SEPARATOR + std::to_string(tradeSize);
+				+ SERIALIZATION_SEPARATOR + std::to_string(tradeSize)
+				+ SERIALIZATION_SEPARATOR + account
+				+ SERIALIZATION_SEPARATOR + api;
 
 			return str;
 		}

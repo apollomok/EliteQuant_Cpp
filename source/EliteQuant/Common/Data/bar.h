@@ -23,7 +23,7 @@ namespace EliteQuant {
 
 		string fullsymbol_;
 		int interval_;				// in seconds
-		int barstarttime_;			// hhmmss 24hours, e.g. 232020
+		int barstarttime_;			// hhmmss 24hours, e.g. 232020; 12020
 		int barorderinaday_;		// 0 = first bar, 1 = second bar of the day
 		double open_;
 		double high_;

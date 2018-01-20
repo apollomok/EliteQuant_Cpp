@@ -20,26 +20,53 @@ namespace EliteQuant
 {
 	struct Order {
 		Order()
-			: orderId(0)
+			: serverOrderId(-1)
+			, clientOrderId(-1)
+			, brokerOrderId(-1)
+			, permId(-1)
 			, clientId(0)
+			, createTime("")
+			, cancelTime("")
+			, fullSymbol("")
+			, account("")
+			, api("")
+			, source(-1)
+			, orderType("")
+			, orderStatus(OrderStatus::OS_UNKNOWN)
+			, orderFlag(OrderFlag::OF_OpenPosition)
 			, orderSize(0)
-			, limitPrice(DBL_MAX)
-			, stopPrice(DBL_MAX)
+			, filledSize(0)
+			, lastFilledPrice(0.0f)
+			, avgFilledPrice(0.0f)
+			, limitPrice(0.0f)			// DBL_MAX
+			, stopPrice(0.0f)
+			, trailPrice(0.0f)
+			, trailingPercent(0.0f)
+			, timeInForce("")
+			, outsideRegularTradingHour(false)
+			, hidden(false)
+			, allOrNone(false)
 		{
 		}
 
-		long orderId;
+		long serverOrderId;
+		long clientOrderId;
+		long brokerOrderId;
 		long clientId;
-		time_t createTime;
+		long permId;				// for IB use
+		string createTime;
+		string cancelTime;
 		string fullSymbol;
-		string account;					// TODO: support multiple accounts
-		string orderType;
-		OrderStatus orderStatus;				// submitted, canceled, etc
+		string account;
+		string api;						// IB, ctp etc
+		int source;						// sid, get from client; 0=mannual
+		string orderType;						// MKT, LMT, STP, etc
+		OrderStatus orderStatus;				// OS_NEWBORN, etc
 		OrderFlag orderFlag;
 		long orderSize;					// < 0 = short, order size != trade size
-		long filled = 0;
-		double lastFilledPrice = { 0.0f };
-		double avgFilledPrice = { 0.0f };
+		long filledSize;
+		double lastFilledPrice;
+		double avgFilledPrice;
 		double limitPrice;
 		double stopPrice;
 		double trailPrice;
@@ -51,7 +78,9 @@ namespace EliteQuant
 
 		template<class Archive>
 		void serialize(Archive & ar) {
-			ar(cereal::make_nvp("id", orderId),
+			ar(cereal::make_nvp("serverorderid", serverOrderId),
+				cereal::make_nvp("clientorderid", clientOrderId),
+				cereal::make_nvp("brokerorderid", brokerOrderId),
 				cereal::make_nvp("sym", fullSymbol),
 				cereal::make_nvp("type", orderType),
 				cereal::make_nvp("size", orderSize),
@@ -60,7 +89,7 @@ namespace EliteQuant
 				cereal::make_nvp("sp", stopPrice),
 				cereal::make_nvp("tp", trailPrice),
 				cereal::make_nvp("lfp", lastFilledPrice),
-				cereal::make_nvp("f", filled),
+				cereal::make_nvp("f", filledSize),
 				cereal::make_nvp("c", createTime)
 			);
 		}

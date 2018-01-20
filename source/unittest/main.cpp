@@ -2,8 +2,10 @@
 #include <sstream>
 #include <fstream>
 #include <time.h>
-#include <Common\Util\util.h>
+#include <Common/Util/util.h>
+#include <Common/Time/timeutil.h>
 #include <boost/filesystem.hpp>
+#include <boost/date_time/posix_time/conversion.hpp>
 
 using namespace std;
 
@@ -26,6 +28,10 @@ int main()
 	struct tm timeinfo;
 	time(&rawtime);				 /* get current time; same as: timer = time(NULL)  */
 	LOCALTIME_S(&timeinfo, &rawtime);
+	int t_date =  ((timeinfo.tm_year + 1900) * 10000) + ((timeinfo.tm_mon + 1) * 100) + timeinfo.tm_mday;
+	int t_time = (timeinfo.tm_hour * 10000) + (timeinfo.tm_min * 100) + (timeinfo.tm_sec);
+	ptime pt = boost::posix_time::from_time_t(rawtime);
+	string s_time = to_simple_string(pt);
 
 	char datestr[50];
 	sprintf(datestr, "%d-%d-%d %d:%d:%d", timeinfo.tm_year+1900, timeinfo.tm_mon+1, timeinfo.tm_mday,

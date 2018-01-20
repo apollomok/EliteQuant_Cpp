@@ -51,7 +51,7 @@ namespace EliteQuant
 		int lastbarorder = 0;
 		if (!bars_.empty())
 			lastbarorder = bars_.back().barorderinaday_;
-		if (bars_.empty() || (getBarOrder(k.time_) != lastbarorder))		// new bar
+		if (bars_.empty() || (getBarOrder(hmsf2inttime(k.time_)) != lastbarorder))		// new bar
 		{
 			Bar newBar;
 			newBar.fullsymbol_ = fullsymbol;
@@ -65,7 +65,7 @@ namespace EliteQuant
 
 			newBar.tradesinbar_ = 1;
 			newBar.interval_ = this->interval_;
-			newBar.barorderinaday_ = getBarOrder(k.time_);
+			newBar.barorderinaday_ = getBarOrder(hmsf2inttime(k.time_));
 			newBar.setBarStartTime();
 
 			// broadcast

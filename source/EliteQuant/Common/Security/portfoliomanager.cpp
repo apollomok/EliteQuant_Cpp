@@ -7,9 +7,9 @@ namespace EliteQuant {
 	PortfolioManager::~PortfolioManager()
 	{
 		// release all the positions
-		for (auto&& p : _positions) {
+		/*for (auto&& p : _positions) {
 			if (p.second != nullptr) delete p.second;
-		}
+		}*/
 	}
 
 	PortfolioManager& PortfolioManager::instance() {
@@ -27,9 +27,9 @@ namespace EliteQuant {
 	}
 
 	void PortfolioManager::reset() {
-		for (auto&& p : _positions) {
+		/*for (auto&& p : _positions) {
 			if (p.second != nullptr) delete p.second;
-		}
+		}*/
 
 		_positions.clear();
 		_count = 0;
@@ -39,17 +39,27 @@ namespace EliteQuant {
 		reset();
 	}
 
+	void PortfolioManager::Add(Position& pos) {
+		auto it = _positions.find(pos._fullsymbol);
+		if (it == _positions.end()) {
+			_positions.insert(std::pair<string, Position>(pos._fullsymbol, pos));
+		}
+		else {
+			_positions[pos._fullsymbol] = pos;
+		}
+	}
+
 	double PortfolioManager::Adjust(Fill& fill) {
 		auto it = _positions.find(fill.fullSymbol);
 		if (it == _positions.end()) {
-			Position* pos = new Position();
-			pos->_fullsymbol = fill.fullSymbol;
-			pos->_size = 0;
-			pos->_avgprice = 0;
-			_positions.insert(std::pair<string, Position*>(fill.fullSymbol, pos));
+			Position pos;
+			pos._fullsymbol = fill.fullSymbol;
+			pos._size = 0;
+			pos._avgprice = 0;
+			_positions.insert(std::pair<string, Position>(fill.fullSymbol, pos));
 
 		}
 
-		return _positions[fill.fullSymbol]->Adjust(fill);
+		return _positions[fill.fullSymbol].Adjust(fill);
 	}
 }

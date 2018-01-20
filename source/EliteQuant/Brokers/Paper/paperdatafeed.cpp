@@ -108,9 +108,7 @@ namespace EliteQuant
 				for (auto &s : CConfig::instance().securities)
 				{
 					Tick k;
-					time_t current_time;
-					time(&current_time);
-					k.time_ = tointtime(current_time);
+					k.time_ = hmsf();
 					k.fullsymbol_ = s;
 					k.datatype_ = DataType::DT_Trade;
 					k.price_ = (rand() % 100 + 1000) / 10.0;

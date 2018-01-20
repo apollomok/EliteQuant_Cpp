@@ -297,10 +297,8 @@ namespace EliteQuant
 		// TODO: add pDepthMarketData->ExchangeID to fullsymbol			ExchangeInstID=合约在交易所的代码
 		// TODO: use pDepthMarketData->UpdateTime instead of now	
 		FullTick k;
-		time_t current_time;
-		time(&current_time);
 
-		k.time_ = tointtime(current_time);
+		k.time_ = hmsf();
 		k.datatype_ = DataType::DT_Full;
 		k.fullsymbol_ = pDepthMarketData->InstrumentID;
 		k.price_ = pDepthMarketData->LastPrice;

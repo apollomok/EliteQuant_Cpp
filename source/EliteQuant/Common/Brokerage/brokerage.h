@@ -5,6 +5,7 @@
 #include <Common/Time/getRealTime.h>
 #include <Common/Time/heartbeat.h>
 #include <Common/Order/order.h>
+#include <Common/Security/position.h>
 #include <Common/Order/fill.h>
 #include <Common/Security/security.h>
 #include <Common/Msgq/msgq.h>
@@ -33,19 +34,16 @@ namespace EliteQuant
 
 	class brokerage : virtual public CHeartbeat {
 	protected:
+		long m_brokerOrderId;
 		struct timeval timeout;
 		std::unique_ptr<CMsgq> msgq_pair_;			// TODO: move it to DataManager to support multiple datasource
 
 		// outbound messages
-		void sendOrderCreated(long oid);
-		void sendOrderSubmitted(long oid);
-		void sendOrderAcknowledged(long oid);
 		void sendOrderFilled(Fill& t);
-		void sendOrderCancelled(long oid);
 		void sendOrderStatus(long oid);
-		void sendOpenPositionMessage(string symbol, double position, double averageCost, double unrealisedPNL, double realisedPNL);
+		void sendOpenPositionMessage(Position& pos);
 		void sendHistoricalBarMessage(string symbol, string time, double open, double high, double low, double close, int volume, int barcount = 0, double wap = 0);
-		void sendAccountMessage(string timeUpdated);
+		void sendAccountMessage();
 		void sendContractMessage(string sym, string local_name, string min_tick);
 		void sendGeneralMessage(std::string gm);
 
@@ -73,8 +71,8 @@ namespace EliteQuant
 		bool isAllOrdersCancelled(); //TODO
 
 		virtual void requestBrokerageAccountInformation(const string& account_) = 0;
-
-		virtual void requestOpenOrders() = 0;
+		virtual void requestOpenOrders(const string& account_) = 0;
+		virtual void requestOpenPositions(const string& account_) = 0;
 	};
 }
 

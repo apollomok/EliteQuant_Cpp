@@ -214,9 +214,7 @@ namespace EliteQuant
 
 						rapidjson::Value& s = d["id"];
 						Tick k;
-						time_t current_time;
-						time(&current_time);
-						k.time_ = tointtime(current_time);
+						k.time_ = hmsf();
 						s = d["t"];
 						k.fullsymbol_ = s.GetString();
 						k.fullsymbol_ = k.fullsymbol_ + " STK SMART";

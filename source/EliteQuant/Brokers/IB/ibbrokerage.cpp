@@ -93,7 +93,7 @@ namespace EliteQuant
 		unsigned int port = CConfig::instance().ib_port;
 		int clientId = 0;
 
-		PRINT_TO_FILE("INFO:[%s,%d][%s]Connecting to %s:%d clientId:%d.\n", __FILE__, __LINE__, __FUNCTION__, host, port, clientId);
+		PRINT_TO_FILE("INFO:[%s,%d][%s]F %s:%d clientId:%d.\n", __FILE__, __LINE__, __FUNCTION__, host, port, clientId);
 
 		bool bRes = m_pClient->eConnect(host, port, clientId, m_extraAuth);
 
@@ -105,7 +105,7 @@ namespace EliteQuant
 			_bkstate = BK_CONNECTED;
 			//m_pClient->setServerLogLevel(5);			// can not work on m_pClient before a loop process
 			if (clientId == 0) {
-				//m_pClient->reqAutoOpenOrders(true);		// associate TWS with the client
+				m_pClient->reqAllOpenOrders();		// associate TWS with the client
 			}
 			//_nServerVersion = m_pClient->serverVersion();
 
@@ -139,37 +139,38 @@ namespace EliteQuant
 
 	void IBBrokerage::placeOrder(std::shared_ptr<Order> o)
 	{
-		PRINT_TO_FILE("INFO:[%s,%d][%s]Place order, id = %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)o->orderId);
+		PRINT_TO_FILE("INFO:[%s,%d][%s]Place order, id = %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)o->serverOrderId);
 
 		IBOfficial::Order oib;			// local stack
 		Contract contract;				// local stack
 
 		if (o->fullSymbol.empty())
 		{
-			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Order is not valid %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)o->orderId);
+			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Order is not valid %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)o->serverOrderId);
 			return;
 		}
 
-		if (o->orderId == 0)
+		if (o->serverOrderId < 0)
 		{
-			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Order is not valid %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)o->orderId);
+			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Order is not valid %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)o->serverOrderId);
 			return;
 		}
 
-		/*if (o->orderStatus != OrderStatus::OS_NewBorn)		// in order to enable replacement order
+		if (o->orderStatus != OrderStatus::OS_NewBorn)		// in order to enable replacement order; this part needs to be commented out
 		{
-		PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Not a NewBorn order %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)o->orderId);
-		return;
-		}*/
+			PRINT_TO_FILE_AND_CONSOLE("ERROR:[%s,%d][%s]Not a NewBorn order %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)o->serverOrderId);
+			return;
+		}
 
 		SecurityFullNameToContract(o->fullSymbol, contract);
 		OrderToIBOfficialOrder(o, oib);
 
 		lock_guard<mutex> g(orderStatus_mtx);
+		o->api = "IB";
 		o->orderStatus = OrderStatus::OS_Submitted;
-		m_pClient->placeOrder(o->orderId, contract, oib);
+		m_pClient->placeOrder(o->brokerOrderId, contract, oib);
 
-		sendOrderSubmitted(o->orderId);
+		sendOrderStatus(o->serverOrderId);
 	}
 
 	void IBBrokerage::requestNextValidOrderID()
@@ -178,15 +179,22 @@ namespace EliteQuant
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Requesting next order id, reqId = %d\n", __FILE__, __LINE__, __FUNCTION__, tmp);
 		if (_bkstate < BK_GETORDERIDACK)
 			_bkstate = BK_GETORDERIDACK;
-		if (m_orderId == -1)
+		if (m_brokerOrderId == -1)
 			m_pClient->reqIds(tmp++);
 	}
 
 	//1.from web/distance too long/tws cancel?
 	void IBBrokerage::cancelOrder(int oid)
 	{
-		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Cancel Order %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)m_orderId);
-		m_pClient->cancelOrder(oid);
+		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Cancel Order %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)oid);
+		std::shared_ptr<Order> o = OrderManager::instance().retrieveOrderFromServerOrderId(oid);
+
+		if (o != nullptr) {
+			m_pClient->cancelOrder(o->brokerOrderId);
+		}
+		else {
+			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Cancel Order id not found. %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)oid);
+		}
 	}
 
 	// cancel all orders for this symbol
@@ -195,8 +203,8 @@ namespace EliteQuant
 		vector<std::shared_ptr<Order>> v = OrderManager::instance().retrieveNonFilledOrderPtr(symbol);
 
 		for (std::shared_ptr<Order> o : v) {
-			m_pClient->cancelOrder(o->orderId);
-			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Cancel Order %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)o->orderId);
+			m_pClient->cancelOrder(o->brokerOrderId);
+			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Cancel Order %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)o->serverOrderId);
 		}
 	}
 
@@ -205,17 +213,39 @@ namespace EliteQuant
 	///https://www.interactivebrokers.com/en/software/api/apiguide/java/updateportfolio.htm
 	void IBBrokerage::requestBrokerageAccountInformation(const string& account_)
 	{
-		PRINT_TO_FILE("INFO:[%s,%d][%s]Requesting brokerage account info: %s\n", __FILE__, __LINE__, __FUNCTION__, account_.c_str());
-		m_pClient->reqAccountUpdates(true, account_);  // trigger updateAccountValue()
+		//// already subscribed in requestMarketDataAccountInformation
+		// PRINT_TO_FILE("INFO:[%s,%d][%s]Requesting brokerage account info: %s\n", __FILE__, __LINE__, __FUNCTION__, account_.c_str());
+		// m_pClient->reqAccountUpdates(true, account_);  // trigger updateAccountValue()
+	}
+
+	void IBBrokerage::requestOpenOrders(const string& account_) {
+		PRINT_TO_FILE("INFO:[%s,%d][%s]Requesting open orders.\n", __FILE__, __LINE__, __FUNCTION__);
+		m_pClient->reqAllOpenOrders();
+	}
+
+	void IBBrokerage::requestOpenPositions(const string& account_) {
+		//// already subscribed in requestMarketDataAccountInformation
+		// PRINT_TO_FILE("INFO:[%s,%d][%s]Requesting open positions.\n", __FILE__, __LINE__, __FUNCTION__);
+		//// m_pClient->reqPositions();              // Requests all positions from all accounts
+		// m_pClient->reqAccountUpdates(true, account_); 	// triggers updatePortfolio()
 	}
 
 	void IBBrokerage::requestOpenOrders() {
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Requesting open orders.\n", __FILE__, __LINE__, __FUNCTION__);
-		m_pClient->reqOpenOrders();
+		m_pClient->reqAllOpenOrders();
+	}
+
+	void IBBrokerage::reqAllOpenOrders() {
+		PRINT_TO_FILE("INFO:[%s,%d][%s]Requesting all open orders.\n", __FILE__, __LINE__, __FUNCTION__);
+		m_pClient->reqAllOpenOrders();
+	}
+
+	void IBBrokerage::reqAutoOpenOrders(bool) {
+
 	}
 
 	void IBBrokerage::modifyOrder_SameT(uint64_t oid, double price, int quantity) {
-		std::shared_ptr<Order> po = OrderManager::instance().retrieveOrder(oid);
+		std::shared_ptr<Order> po = OrderManager::instance().retrieveOrderFromServerOrderId(oid);
 		po->orderSize = quantity;
 		po->limitPrice = price;
 
@@ -437,7 +467,8 @@ namespace EliteQuant
 	void IBBrokerage::requestMarketDataAccountInformation(const string& account) {
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Requesting market data account info.\n", __FILE__, __LINE__, __FUNCTION__);
 
-		m_pClient->reqAccountUpdates(true, account);		// it doesn't trigger updatePortfolio if no position
+		m_pClient->reqAccountUpdates(true, account);		// it doesn't trigger updatePortfolio if there is no position
+
 		if (_mkstate < MK_REQCONTRACT) {		// if _mkstate < MK_ACCOUNTACK
 			_mkstate = MK_REQCONTRACT;
 		}
@@ -473,9 +504,7 @@ namespace EliteQuant
 		k.price_ = 0;
 		k.size_ = size;
 
-		time_t current_time;
-		time(&current_time);
-		k.time_ = tointtime(current_time);
+		k.time_ = hmsf();
 
 		if (field == TickType::LAST_SIZE)
 		{
@@ -497,7 +526,7 @@ namespace EliteQuant
 			return;
 		}
 
-		marketdatafeed::msgq_pub_->sendmsg(k.serialize());
+		msgq_pub_->sendmsg(k.serialize());
 	}
 
 	///https://www.interactivebrokers.com/en/software/api/apiguide/java/orderstatus.htm
@@ -509,18 +538,25 @@ namespace EliteQuant
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Order status, oid = %ld.\n", __FILE__, __LINE__, __FUNCTION__, orderId);
 
 		if (status == "Cancelled") {
-			OrderManager::instance().gotCancel(orderId);
-			sendOrderCancelled(orderId);
+			std::shared_ptr<Order> o = OrderManager::instance().retrieveOrderFromBrokerOrderIdAndApi(orderId, "IB");
+
+			if (o != nullptr) {
+				OrderManager::instance().gotCancel(o->serverOrderId);
+				sendOrderStatus(o->serverOrderId);
+			}
+			else {
+				PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]canceled order not found, oid = %lu\n", __FILE__, __LINE__, __FUNCTION__, o->serverOrderId);
+			}
 		}
 	}
 
 	void IBBrokerage::openOrder(OrderId oid, const Contract& contract,
 		const IBOfficial::Order& order, const OrderState& ostat)
 	{
-		// Will be called at connection
+		// Will be called at connection; it seems all open orders have oid = 0
 		if (ostat.warningText.empty())
 		{
-			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Open orders, oid = %lu, status=%s.\n", __FILE__, __LINE__, __FUNCTION__, oid, ostat.status.c_str());
+			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Open orders, oid = %lu, status=%s, orderid=%lu, permid=%lu, clientid=%lu\n", __FILE__, __LINE__, __FUNCTION__, oid, ostat.status.c_str(), order.orderId, order.permId, order.clientId);
 		}
 		else
 		{
@@ -535,8 +571,53 @@ namespace EliteQuant
 		}
 		else
 		{
-			OrderManager::instance().gotOrder(oid);
-			sendOrderAcknowledged(oid);
+			std::shared_ptr<Order> o = OrderManager::instance().retrieveOrderFromBrokerOrderIdAndApi(oid, "IB");
+
+			// not found, or found but permId not equal (given permId not default -1) --> existing open order
+			if ((o == nullptr) || ((o->permId != order.permId) && (o->permId != -1))) {
+				PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]open order not yet tracked, oid = %lu\n", __FILE__, __LINE__, __FUNCTION__, oid);
+				string fullSymbol;
+				ContractToSecurityFullName(fullSymbol, contract);
+
+				// create an order
+				lock_guard<mutex> g(oid_mtx);
+				// assert(m_orderId >= 0);			// start with 0
+
+				std::shared_ptr<Order> o2 = make_shared<Order>();
+				o2->account = CConfig::instance().account;
+				o2->api = "IB";
+				o2->clientOrderId = -1;
+				o2->fullSymbol = fullSymbol;
+				o2->orderSize = (order.action == "BUY" ? order.totalQuantity : (-order.totalQuantity));            // BUY, SELL, SSHORT
+				o2->clientId = order.clientId;
+				o2->limitPrice = order.lmtPrice;
+				o2->stopPrice = order.auxPrice;
+				o2->permId = order.permId;
+				o2->orderStatus = OrderStatus::OS_Acknowledged;     // OrderManager::instance().gotOrder
+				o2->orderFlag = OrderFlag::OF_OpenPosition;
+
+				o2->serverOrderId = m_serverOrderId;
+				o2->brokerOrderId = oid;
+				o2->permId = order.permId;
+				o2->createTime = ymdhmsf();				// time(nullptr);
+				o2->orderType = order.orderType;
+
+				m_serverOrderId++;
+				// m_brokerOrderId++;
+				if (m_brokerOrderId <= (oid + 1))
+					m_brokerOrderId = oid + 1;
+
+				OrderManager::instance().trackOrder(o2);
+				sendOrderStatus(o2->serverOrderId);
+			}
+			else {
+				if (o->permId == -1) {
+					o->permId = order.permId;
+				}
+
+				OrderManager::instance().gotOrder(o->serverOrderId);
+				sendOrderStatus(o->serverOrderId);			// acknowledged
+			}
 		}
 	}
 
@@ -566,7 +647,16 @@ namespace EliteQuant
 		string symbol;
 		ContractToSecurityFullName(symbol, contract);
 		if (position != 0) {
-			sendOpenPositionMessage(symbol, position, averageCost, unrealizedPNL, realizedPNL);
+			Position pos;
+			pos._fullsymbol = symbol;
+			pos._size = position;
+			pos._avgprice = averageCost;
+			pos._openpl = unrealizedPNL;
+			pos._closedpl = realizedPNL;
+			pos._account = CConfig::instance().account;
+			pos._api = "IB";
+			PortfolioManager::instance().Add(pos);
+			sendOpenPositionMessage(pos);
 		}
 
 		if (_mkstate < MK_REQCONTRACT) {
@@ -579,15 +669,15 @@ namespace EliteQuant
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Update Account Time: %s \n", __FILE__, __LINE__, __FUNCTION__, timeStamp.c_str());
 		
 		// Trigger Account Message; once account has been updated.
-		sendAccountMessage(timeStamp);
+		sendAccountMessage();
 	}
 
 	void IBBrokerage::nextValidId(IBOfficial::OrderId orderid)
 	{
 		//if (orderid >= m_orderId) {		// it seems ib is connected twice
-		if (orderid > m_orderId) {
+		if (orderid > m_brokerOrderId) {
 			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]client id=%d next_valid_order_id = %ld\n", __FILE__, __LINE__, __FUNCTION__, m_pClient->clientId(), orderid);
-			m_orderId = orderid;
+			m_brokerOrderId = orderid;
 			_bkstate = BK_READYTOORDER;
 		}
 	}
@@ -626,18 +716,37 @@ namespace EliteQuant
 	{
 		PRINT_TO_FILE("INFO:[%s,%d][%s]Execution (Fill) details. reqid=%d.\n", __FILE__, __LINE__, __FUNCTION__, reqId);
 
-		time_t current_time;
-		time(&current_time);
-
 		Fill t;
 		ContractToSecurityFullName(t.fullSymbol, contract);
-		t.tradetime = tointtime(current_time);
-		t.orderId = execution.orderId;
-		t.tradeId = std::stoi(execution.execId);
+		t.tradetime = ymdhmsf();
+		t.brokerOrderId = execution.orderId;
+		t.tradeId = execution.permId;			// std::stoi(execution.execId);
 		t.tradePrice = execution.price;
 		t.tradeSize = (execution.side == "BOT" ? 1 : -1)*execution.shares;
-		OrderManager::instance().gotFill(t);
-		sendOrderFilled(t);		// BOT SLD
+
+		std::shared_ptr<Order> o = OrderManager::instance().retrieveOrderFromBrokerOrderIdAndApi(execution.orderId, "IB");
+
+		if (o != nullptr) {
+			t.serverOrderId = o->serverOrderId;
+			t.clientOrderId = o->clientOrderId;
+			t.brokerOrderId = o->brokerOrderId;
+			t.account = o->account;
+			t.api = o->api;
+
+			OrderManager::instance().gotFill(t);
+			// sendOrderStatus(o->serverOrderId);
+			sendOrderFilled(t);		// BOT SLD
+		}
+		else {
+			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Fill cant find matching order; brokerage id = %ld\n", __FILE__, __LINE__, __FUNCTION__, execution.orderId);
+
+			t.serverOrderId = -1;
+			t.clientOrderId = -1;
+			t.account = CConfig::instance().account;
+			t.api = "IB";
+
+			sendOrderFilled(t);		// BOT SLD
+		}
 	}
 
 	//Error Code: https://www.interactivebrokers.com/en/software/api/apiguide/tables/api_message_codes.htm
@@ -758,12 +867,15 @@ namespace EliteQuant
 		if ((c.multiplier == "1") || (c.multiplier == ""))
 			//sprintf(sym, "%s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.exchange.c_str());
 			if (c.secType == "CASH")
-				sprintf(sym, "%s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.exchange.c_str());
+				sprintf(sym, "%s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.primaryExchange.c_str());
 			else
 				sprintf(sym, "%s %s SMART", c.localSymbol.c_str(), c.secType.c_str());
 		else
 			//sprintf(sym, "%s %s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.exchange.c_str(), c.multiplier.c_str());
-			sprintf(sym, "%s %s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.exchange.c_str(), c.multiplier.c_str());
+			if (c.exchange == "")
+				sprintf(sym, "%s %s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.primaryExchange.c_str(), c.multiplier.c_str());
+			else
+				sprintf(sym, "%s %s %s %s", c.localSymbol.c_str(), c.secType.c_str(), c.exchange.c_str(), c.multiplier.c_str());
 
 		symbol = sym;
 	}
@@ -786,7 +898,7 @@ namespace EliteQuant
 
 		oib.account = o->account.empty() ? CConfig::instance().account : o->account;
 		// Set up IB order Id
-		oib.orderId = o->orderId;
+		oib.orderId = o->brokerOrderId;
 	}
 	// end of auxilliary functions
 	//********************************************************************************************//

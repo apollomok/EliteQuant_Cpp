@@ -3,6 +3,7 @@
 
 #include <chrono> //for msleep
 #include <thread> //for msleep
+#include <ctime>
 #include <mutex>
 #include <sstream>
 #include <iterator>
@@ -37,6 +38,9 @@ namespace EliteQuant {
 
 	string ymd();
 	string ymdhms();
+	string ymdhmsf();
+	string hmsf();
+	int hmsf2inttime(string hmsf);
 
 	void msleep(uint64_t _ms);
 	string nowMS();
@@ -46,6 +50,8 @@ namespace EliteQuant {
 	string time_t2str(time_t tt);
 	time_t ptime2time(ptime t);
 
+	int tointdate();
+	int tointtime();
 	int tointdate(time_t time);
 	int tointtime(time_t time);
 	int inttimetointtimespan(int time);							// convert to # of seconds

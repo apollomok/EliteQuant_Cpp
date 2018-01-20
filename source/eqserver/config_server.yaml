@@ -1,14 +1,14 @@
 #------------------ System Setting --------------#
 accounts:    # accounts active for trading
   #- 107957 
-  - DU15045
+  - DU15154
 msgq: nanomsg           # nanomsg kafka, zmq
 log_dir: d:/workspace/elitequant_cpp/log
 data_dir: d:/workspace/elitequant_cpp/data
 #------------------ End of System ---------------#
 
 #-------------- Interactive Brokers -------------#
-DU15045:
+DU15154:
   broker: IB                 # IB CTP SINA, GOOGLE, PAPER
   api: IB
   port: 7497
@@ -35,7 +35,7 @@ DU15146:
 107957:
   broker_id: 9999
   api: CTP
-  password: your_simnow_pass
+  password: 081214
   auth_code: NA             # NA or actual auth code
   user_prod_info: NA        # NA or actual user info
   md_address: tcp://180.168.146.187:10010
@@ -45,8 +45,15 @@ DU15146:
     - IC1801
     - IC1803
     - IF1801
-    - al1801
-    - cu1801
+    - al1802
+    - al1803
+    - cu1802
+    - cu1803
+    - i1805
+    - y1805
+    - v1805
+    - sn1805
+    - ru1805
 
 your_simnow_account2:
   broker_id: 9999

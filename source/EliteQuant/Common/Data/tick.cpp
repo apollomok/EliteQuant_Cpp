@@ -12,7 +12,7 @@ namespace EliteQuant
 
 		string s;
 		s = fullsymbol_ 
-			+ SERIALIZATION_SEPARATOR + to_string(time_)
+			+ SERIALIZATION_SEPARATOR + time_
 			+ SERIALIZATION_SEPARATOR + to_string(datatype_)
 			+ SERIALIZATION_SEPARATOR + to_string(price_)
 			+ SERIALIZATION_SEPARATOR + to_string(size_)
@@ -29,7 +29,7 @@ namespace EliteQuant
 
 		string s;
 		s = fullsymbol_
-			+ SERIALIZATION_SEPARATOR + to_string(time_)
+			+ SERIALIZATION_SEPARATOR + time_
 			+ SERIALIZATION_SEPARATOR + to_string(DataType::DT_Full)
 			+ SERIALIZATION_SEPARATOR + to_string(price_)
 			+ SERIALIZATION_SEPARATOR + to_string(size_)

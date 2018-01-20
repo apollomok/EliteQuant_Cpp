@@ -7,23 +7,45 @@ using namespace std;
 
 namespace EliteQuant {
 	struct Tick {
-		Tick() {}
+		Tick() 	: fullsymbol_("")
+			, time_("")
+			, datatype_(DataType::DT_Trade)
+			, price_(0.0)
+			, size_(0)
+			, depth_(1)		// default is L1 or 1
+		{
+		}
+
 		Tick(const string& s) :fullsymbol_(s) {}
 		~Tick() {
 		}
 
 		string fullsymbol_;
-		int time_;
+		string time_;
 		DataType datatype_;
 		double price_;
 		int size_;
-		int depth_ = 1;			// default is L1 or 1
+		int depth_;
 
 		virtual string serialize() const;
 	};
 
 	struct FullTick : Tick {
-		FullTick() {}
+		FullTick() : Tick()
+			, bidprice_L1_(0.0)
+			, bidsize_L1_(0)
+			, askprice_L1_(0.0)
+			, asksize_L1_(0)
+			, open_interest(0)
+			, open_(0.0)
+			, high_(0.0)
+			, low_(0.0)
+			, pre_close_(0.0)
+			, upper_limit_price_(0.0)
+			, lower_limit_price_(0.0)
+		{
+		}
+
 		FullTick(const string& s) : Tick(s) {}
 		~FullTick() {}
 

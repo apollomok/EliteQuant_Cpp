@@ -227,9 +227,7 @@ namespace EliteQuant
 						//cout << "symbol = " << symbol << " price = " << price << endl;
                         
 						Tick k;
-						time_t current_time;
-						time(&current_time);
-						k.time_ = tointtime(current_time);
+						k.time_ = hmsf();
 						k.datatype_ = DataType::DT_Trade;
                         
                         string price;

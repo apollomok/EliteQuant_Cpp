@@ -13,9 +13,9 @@
 using namespace std;
 
 namespace EliteQuant {
-	extern long m_orderId; //definition is hereglobal order id, should be initialized by broker, 
-	extern std::mutex oid_mtx;
-	extern std::mutex orderStatus_mtx;
+	extern long m_serverOrderId;				// unique order id on server side defined in ordermanager.cpp. Every broker has its own id;
+	extern std::mutex oid_mtx;					// mutex for increasing order id; defined in ordermanager.cpp
+	extern std::mutex orderStatus_mtx;			// mutex for changing order status; defined in ordermanager.cpp
 
 	// TODO: maintain order book
 	class OrderManager {
@@ -29,7 +29,6 @@ namespace EliteQuant {
 		//std::atomic_int _count = { 0 };
 		int _count = 0;
 		std::map<long, std::shared_ptr<Order>> _orders;
-		std::map<long, long> _sents;		// signed order size
 		std::map<long, long> _fills;       // signed filled size
 		std::map<long, bool> _cancels;    // if cancelled
 		mutex wlock;
@@ -39,7 +38,9 @@ namespace EliteQuant {
 		void gotOrder(long oid);						// order acknowledged
 		void gotFill(Fill& fill);
 		void gotCancel(long oid);
-		std::shared_ptr<Order> retrieveOrder(long oid);
+		std::shared_ptr<Order> retrieveOrderFromServerOrderId(long oid);
+		std::shared_ptr<Order> retrieveOrderFromBrokerOrderId(long oid);
+		std::shared_ptr<Order> retrieveOrderFromBrokerOrderIdAndApi(long oid, string api);
 		vector<std::shared_ptr<Order>> retrieveOrder(const string& fullsymbol);
 		vector<std::shared_ptr<Order>> retrieveNonFilledOrderPtr();
 		vector<std::shared_ptr<Order>> retrieveNonFilledOrderPtr(const string& fullsymbol);

@@ -40,25 +40,8 @@ namespace EliteQuant
 		virtual void cancelAllOrders();
 
 		virtual void requestBrokerageAccountInformation(const string& account_);
-
-		/*Call this function to request the open orders that were placed from this client.
-		Each open order will be fed back through the openOrder() and orderStatus() functions on the EWrapper.
-
-		Note: The client with a clientId of 0 will also receive the TWS-owned open orders.
-		These orders will be associated with the client and a new orderId will be generated.
-		This association will persist over multiple API and TWS sessions.*/
-		virtual void requestOpenOrders();
-		/*Call this function to request the open orders placed from all clients and also from TWS.
-		Each open order will be fed back through the openOrder() and orderStatus() functions on the EWrapper.
-		Note:  No association is made between the returned orders and the requesting client.*/
-		void reqAllOpenOrders();
-		/*Call this function to request that newly created TWS orders be implicitly associated with the client.
-		When a new TWS order is created, the order will be associated with the client,
-		and fed back through the openOrder() and orderStatus() functions on the EWrapper.
-		Note:  This request can only be made from a client with clientId of 0.
-		If set to TRUE, newly created TWS orders will be implicitly associated with the client.
-		If set to FALSE, no association will be made.*/
-		void reqAutoOpenOrders(bool);
+		virtual void requestOpenOrders(const string& account_);
+		virtual void requestOpenPositions(const string& account_);
 
 		///客户端认证请求
 		void requestAuthenticate(string userid, string authcode, string brokerid, string userproductinfo);
@@ -66,7 +49,6 @@ namespace EliteQuant
 		void requestUserLogin();
 		///用户登录请求
 		void requestUserLogout();
-		void requestOpenPositions();
 		void requestSettlementInfoConfirm();
 		// void requestAccount();		// see requestBrokerageAccountInformation
 	public:
@@ -431,6 +413,9 @@ namespace EliteQuant
 		string CtpSymbolToSecurityFullName(CThostFtdcInstrumentField * pInstrument);
 		//string UTF8ToGBK(const std::string & strUTF8);
 		//string GBKToUTF8(const std::string & strGBK);
+		OrderStatus CtpOrderStatusToOrderStatus(const char status);
+		OrderFlag CtpComboOffsetFlagToOrderFlag(const char flag);
+		char OrderFlagToCtpComboOffsetFlag(const OrderFlag flag);
 	};
 }
 

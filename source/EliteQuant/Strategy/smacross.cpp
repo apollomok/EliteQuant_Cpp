@@ -9,7 +9,7 @@ namespace EliteQuant
 	
 	void SmaCross::OnTick(Tick& k) {
 		//printf("SMA strat OnTick: [%s]\n", k.fullsymbol_.c_str());
-		if (k.time_ - order_time > 1000) {
+		if (hmsf2inttime(k.time_) - order_time > 1000) {
 			/*auto o = std::make_shared<Order>();
 			o->orderType = "LMT";
 			o->fullSymbol = "IF1710";

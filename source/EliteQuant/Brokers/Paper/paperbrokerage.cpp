@@ -38,33 +38,28 @@ namespace EliteQuant
 		if (order->orderStatus != OrderStatus::OS_NewBorn)
 			return;
 
-		sendOrderSubmitted(order->orderId);
-
-		// fill the order
-		{
-			lock_guard<mutex> g(orderStatus_mtx);			// lock_guard<mutex> used in gotFill as well
-			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Placing Order %ld: %s. \n", __FILE__, __LINE__, __FUNCTION__, order->orderId, order->fullSymbol.c_str());
-			order->orderStatus = OrderStatus::OS_Submitted;			// NewBorn --> Submitted --> OS_Acknowledged
-			order->orderStatus = OrderStatus::OS_Acknowledged;
-			order->orderStatus = OrderStatus::OS_Filled;			// filled immediately
-		}
+		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Placing Order %ld: %s. \n", __FILE__, __LINE__, __FUNCTION__, order->serverOrderId, order->fullSymbol.c_str());
 
 		Fill fill;
-		time_t rawtime;
-		time(&rawtime);
-		fill.tradeId = order->orderId;
-		fill.tradetime = tointtime(rawtime);
 		fill.fullSymbol = order->fullSymbol;
-		fill.account = order->account;
-		fill.tradePrice = DataManager::instance()._latestmarkets[order->fullSymbol].price_;			// TODO: assuming this security is tracked
+		fill.tradetime = ymdhmsf();
+		fill.serverOrderId = order->serverOrderId;
+		fill.clientOrderId = order->clientOrderId;
+		fill.brokerOrderId = order->brokerOrderId;
+		fill.tradeId = order->brokerOrderId;
+		fill.tradePrice = DataManager::instance()._latestmarkets[order->fullSymbol].price_;			// assuming this security is tracked
 		fill.tradeSize = order->orderSize;
+		fill.account = order->account;     // paper
+		fill.api = order->api;          // paper
 
+		OrderManager::instance().gotFill(fill);
 		sendOrderFilled(fill);
+		sendOrderStatus(order->serverOrderId);
 	}
 
 	void paperbrokerage::requestNextValidOrderID() {
 		lock_guard<mutex> g(oid_mtx);
-		m_orderId++;
+		m_brokerOrderId++;
 		_bkstate = BK_READYTOORDER;
 	}
 
@@ -74,7 +69,7 @@ namespace EliteQuant
 
 	// does not accept cancel order
 	void paperbrokerage::cancelOrder(int oid) {
-		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Cancel Order %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)m_orderId);
+		PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Cancel Order %ld\n", __FILE__, __LINE__, __FUNCTION__, (long)oid);
 	}
 
 	void paperbrokerage::cancelOrders(const string& symbol) {
@@ -89,14 +84,11 @@ namespace EliteQuant
 	void paperbrokerage::requestBrokerageAccountInformation(const string& account_) {
 	}
 
-	void paperbrokerage::requestOpenOrders() {
-	}
-
-	void paperbrokerage::reqAllOpenOrders() {
+	void paperbrokerage::requestOpenOrders(const string& account_) {
 
 	}
 
-	void paperbrokerage::reqAutoOpenOrders(bool) {
+	void paperbrokerage::requestOpenPositions(const string& account_) {
 
 	}
 }
