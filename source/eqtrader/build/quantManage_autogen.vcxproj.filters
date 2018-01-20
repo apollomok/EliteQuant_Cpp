@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\CMakeLists.txt" />
+    <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\qdarkstyle\style.qrc" />
+    <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.ui" />
+    <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\CMakeFiles\97738b0ce263c96afc6d5f7215d1cb30\quantManage_autogen.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\CMakeFiles\quantManage_autogen" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{67D88048-395D-3A53-844D-E19ED047D0C5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

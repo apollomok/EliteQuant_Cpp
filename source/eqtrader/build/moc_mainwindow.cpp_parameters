@@ -1,0 +1,11 @@
+-IC:/Anaconda3/Library/include/qt
+-IC:/Anaconda3/Library/include/qt/QtWidgets
+-IC:/Anaconda3/Library/include/qt/QtGui
+-IC:/Anaconda3/Library/include/qt/QtCore
+-IC:/Anaconda3/Library/./mkspecs/win32-msvc2015
+-ID:/Workspace/EliteQuant_Cpp/source/eqtrader
+-ID:/Workspace/EliteQuant_Cpp/source/eqtrader/build
+-DWIN32
+-o
+D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/moc_mainwindow.cpp
+D:/Workspace/EliteQuant_Cpp/source/eqtrader/mainwindow.h
