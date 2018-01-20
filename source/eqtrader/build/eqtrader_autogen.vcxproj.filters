@@ -4,12 +4,12 @@
     <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\CMakeLists.txt" />
     <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\qdarkstyle\style.qrc" />
     <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.ui" />
-    <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\CMakeFiles\97738b0ce263c96afc6d5f7215d1cb30\quantManage_autogen.rule">
+    <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\CMakeFiles\97738b0ce263c96afc6d5f7215d1cb30\eqtrader_autogen.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\CMakeFiles\quantManage_autogen" />
+    <None Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\CMakeFiles\eqtrader_autogen" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">

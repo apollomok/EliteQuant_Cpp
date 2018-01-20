@@ -1,24 +1,29 @@
-# quantMangeClient
+# eqtrader
 
-QT客户端。
+QT Trader Studio
 
-## 依赖库安装
+## dependency
     nanomsg
     yaml-cpp
     QT
 
-## 编译
+## linux
 
-    root@kali:~/quantManageClient# mkdir build
-    root@kali:~/quantManageClient# cd build/
-    root@kali:~/quantManageClient/build# cmake ..
-    root@kali:~/quantManageClient/build# make
+    mkdir build
+    cd build/
+    cmake ..
+    make
 
-## 运行
+## run
 
-    root@kali:~/quantManageClient/build# cp ../config_server.yaml ./
-    root@kali:~/quantManageClient/build# ./quantManage
-## 界面截图
+    cp ../config_server.yaml ./
+    ./eqtrader
+
+## windows
+    
+	mkdir build
+	cd build
+	cmake -G "Visual Studio 15 2017 Win64" ..
 
 
 

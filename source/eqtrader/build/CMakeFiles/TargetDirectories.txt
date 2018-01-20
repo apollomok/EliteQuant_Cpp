@@ -1,4 +1,4 @@
-D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/CMakeFiles/quantManage.dir
-D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/CMakeFiles/quantManage_autogen.dir
+D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/CMakeFiles/eqtrader.dir
+D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/CMakeFiles/eqtrader_autogen.dir
 D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/CMakeFiles/ALL_BUILD.dir
 D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/CMakeFiles/ZERO_CHECK.dir

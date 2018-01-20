@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{DB11D5BA-B30F-3938-A353-DE70CC7DE175}</ProjectGuid>
+    <ProjectGuid>{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
-    <ProjectName>quantManage</ProjectName>
+    <ProjectName>eqtrader</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -56,34 +56,34 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">quantManage.dir\Debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">quantManage</TargetName>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">eqtrader.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">eqtrader</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">quantManage.dir\Release\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">quantManage</TargetName>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">eqtrader.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">eqtrader</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">quantManage.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">quantManage</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">eqtrader.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">eqtrader</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">quantManage.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">quantManage</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">eqtrader.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">eqtrader</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;D:\Workspace\EliteQuant_Cpp\source\ThirdParty;D:\Workspace\EliteQuant_Cpp\source\ThirdParty\yaml-cpp\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutionDir)EliteQuant;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)\eqtrader\build;$(SolutionDir)\eqtrader;$(SolutionDir)\ThirdParty\yaml-cpp\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -100,10 +100,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -111,13 +111,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>D:\Workspace\EliteQuant_Cpp\source\ThirdParty\nanomsg\build\Release\nanomsg.lib;D:\Workspace\EliteQuant_Cpp\source\ThirdParty\yaml-cpp\build\Debug\libyaml-cppmdd.lib;C:\Anaconda3\Library\lib\Qt5Widgets.lib;C:\Anaconda3\Library\lib\Qt5Gui.lib;C:\Anaconda3\Library\lib\Qt5Core.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Anaconda3\libs\python3.lib;C:\Anaconda3\libs\python36.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmdd.lib;$(SolutionDir)$(Platform)\$(Configuration)\EliteQuant.lib;C:\Anaconda3\Library\lib\Qt5Widgets.lib;C:\Anaconda3\Library\lib\Qt5Gui.lib;C:\Anaconda3\Library\lib\Qt5Core.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Workspace\boost\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/Debug/quantManage.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/Debug/quantManage.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/Debug/eqtrader.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/Debug/eqtrader.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version>
       </Version>
@@ -128,14 +128,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutionDir)EliteQuant;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_NO_DEBUG;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -145,10 +145,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_NO_DEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -156,13 +156,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>nanomsg.lib;yaml-cpp.lib;C:\Anaconda3\Library\lib\Qt5Widgets.lib;C:\Anaconda3\Library\lib\Qt5Gui.lib;C:\Anaconda3\Library\lib\Qt5Core.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Anaconda3\libs\python3.lib;C:\Anaconda3\libs\python36.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmd.lib;$(SolutionDir)$(Platform)\$(Configuration)\EliteQuant.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;C:\Anaconda3\Library\lib\Qt5Widgets.lib;C:\Anaconda3\Library\lib\Qt5Gui.lib;C:\Anaconda3\Library\lib\Qt5Core.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Workspace\boost\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/Release/quantManage.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/Release/quantManage.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/Release/eqtrader.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/Release/eqtrader.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version>
       </Version>
@@ -173,7 +173,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -190,10 +190,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_NO_DEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -206,8 +206,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/MinSizeRel/quantManage.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/MinSizeRel/quantManage.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/MinSizeRel/eqtrader.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/MinSizeRel/eqtrader.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version>
       </Version>
@@ -218,7 +218,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -234,10 +234,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_NO_DEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Workspace\EliteQuant_Cpp\source\eqtrader\build;D:\Workspace\EliteQuant_Cpp\source\eqtrader;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -250,8 +250,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/RelWithDebInfo/quantManage.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/RelWithDebInfo/quantManage.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/RelWithDebInfo/eqtrader.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/RelWithDebInfo/eqtrader.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version>
       </Version>
@@ -439,12 +439,16 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\ctickevent.h" />
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\qrc_style.cpp" />
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\ui_mainwindow.h" />
-    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\mocs_compilation.cpp" />
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\mocs_compilation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\ZERO_CHECK.vcxproj">
       <Project>{524B50F8-1A49-3C8E-B11D-6D002F83DB9A}</Project>
       <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen.vcxproj">
+      <Project>{14EA752E-5BF8-39F2-8A9B-BAB3F66C4631}</Project>
+      <Name>eqtrader_autogen</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

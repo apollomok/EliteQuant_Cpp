@@ -164,9 +164,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{524B50F8-1A49-3C8E-B11D-6D002F83DB9A}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage.vcxproj">
-      <Project>{DB11D5BA-B30F-3938-A353-DE70CC7DE175}</Project>
-      <Name>quantManage</Name>
+    <ProjectReference Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader.vcxproj">
+      <Project>{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}</Project>
+      <Name>eqtrader</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

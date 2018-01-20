@@ -16,7 +16,7 @@
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\qrc_style.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\quantManage_autogen\mocs_compilation.cpp">
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\mocs_compilation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

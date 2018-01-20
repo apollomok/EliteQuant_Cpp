@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.6.2
+** Created by: Qt User Interface Compiler version 5.10.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -98,7 +98,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(800, 600);
+        MainWindow->resize(1145, 1098);
         QIcon icon;
         icon.addFile(QStringLiteral("../Downloads/EliteQuant-EliteQuant_Python-master/EliteQuant_Python/source/gui/image/logo.ico"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
@@ -200,6 +200,10 @@ public:
         formLayout->setWidget(3, QFormLayout::LabelRole, Label_3);
 
         ComboBoxContractType = new QComboBox(formLayoutWidget);
+        ComboBoxContractType->addItem(QString());
+        ComboBoxContractType->addItem(QString());
+        ComboBoxContractType->addItem(QString());
+        ComboBoxContractType->addItem(QString());
         ComboBoxContractType->setObjectName(QStringLiteral("ComboBoxContractType"));
 
         formLayout->setWidget(3, QFormLayout::FieldRole, ComboBoxContractType);
@@ -210,6 +214,8 @@ public:
         formLayout->setWidget(4, QFormLayout::LabelRole, Label_4);
 
         ComboBoxDirection = new QComboBox(formLayoutWidget);
+        ComboBoxDirection->addItem(QString());
+        ComboBoxDirection->addItem(QString());
         ComboBoxDirection->setObjectName(QStringLiteral("ComboBoxDirection"));
 
         formLayout->setWidget(4, QFormLayout::FieldRole, ComboBoxDirection);
@@ -220,6 +226,10 @@ public:
         formLayout->setWidget(5, QFormLayout::LabelRole, Label_5);
 
         ComboBox_BuyOrSell = new QComboBox(formLayoutWidget);
+        ComboBox_BuyOrSell->addItem(QString());
+        ComboBox_BuyOrSell->addItem(QString());
+        ComboBox_BuyOrSell->addItem(QString());
+        ComboBox_BuyOrSell->addItem(QString());
         ComboBox_BuyOrSell->setObjectName(QStringLiteral("ComboBox_BuyOrSell"));
 
         formLayout->setWidget(5, QFormLayout::FieldRole, ComboBox_BuyOrSell);
@@ -250,6 +260,8 @@ public:
         formLayout->setWidget(8, QFormLayout::LabelRole, Label_8);
 
         ComboBox_OrderType = new QComboBox(formLayoutWidget);
+        ComboBox_OrderType->addItem(QString());
+        ComboBox_OrderType->addItem(QString());
         ComboBox_OrderType->setObjectName(QStringLiteral("ComboBox_OrderType"));
 
         formLayout->setWidget(8, QFormLayout::FieldRole, ComboBox_OrderType);
@@ -411,7 +423,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 800, 21));
+        menuBar->setGeometry(QRect(0, 0, 1145, 26));
         menu = new QMenu(menuBar);
         menu->setObjectName(QStringLiteral("menu"));
         MainWindow->setMenuBar(menuBar);
@@ -431,94 +443,86 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "\347\276\244\350\213\261\351\207\217\345\214\226C++\347\211\210", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "\347\276\244\350\213\261\351\207\217\345\214\226C++\347\211\210", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\344\273\243\347\240\201", 0));
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\344\273\243\347\240\201", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\345\220\215\347\247\260", 0));
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\345\220\215\347\247\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\346\234\200\346\226\260\344\273\267", 0));
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\346\234\200\346\226\260\344\273\267", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "\346\210\220\344\272\244\351\207\217", 0));
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "\346\210\220\344\272\244\351\207\217", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "\346\214\201\344\273\223\351\207\217", 0));
+        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "\346\214\201\344\273\223\351\207\217", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = tableWidget->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "\346\226\260\345\273\272\345\210\227", 0));
+        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "\346\226\260\345\273\272\345\210\227", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = tableWidget->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "\344\271\260\344\270\200\344\273\267", 0));
+        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "\344\271\260\344\270\200\344\273\267", nullptr));
         QTableWidgetItem *___qtablewidgetitem7 = tableWidget->horizontalHeaderItem(7);
-        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "\345\215\226\344\270\200\344\273\267", 0));
+        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "\345\215\226\344\270\200\344\273\267", nullptr));
         QTableWidgetItem *___qtablewidgetitem8 = tableWidget->horizontalHeaderItem(8);
-        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "\345\215\226\344\270\200\351\207\217 ", 0));
+        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "\345\215\226\344\270\200\351\207\217 ", nullptr));
         QTableWidgetItem *___qtablewidgetitem9 = tableWidget->horizontalHeaderItem(9);
-        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "\346\230\250\346\224\266\344\273\267", 0));
+        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "\346\230\250\346\224\266\344\273\267", nullptr));
         QTableWidgetItem *___qtablewidgetitem10 = tableWidget->horizontalHeaderItem(10);
-        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "\345\274\200\347\233\230\344\273\267", 0));
+        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "\345\274\200\347\233\230\344\273\267", nullptr));
         QTableWidgetItem *___qtablewidgetitem11 = tableWidget->horizontalHeaderItem(11);
-        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "\346\234\200\351\253\230\344\273\267", 0));
+        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "\346\234\200\351\253\230\344\273\267", nullptr));
         QTableWidgetItem *___qtablewidgetitem12 = tableWidget->horizontalHeaderItem(12);
-        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "\346\234\200\344\275\216\344\273\267", 0));
+        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "\346\234\200\344\275\216\344\273\267", nullptr));
         QTableWidgetItem *___qtablewidgetitem13 = tableWidget->horizontalHeaderItem(13);
-        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "\346\227\266\351\227\264", 0));
+        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "\346\227\266\351\227\264", nullptr));
         QTableWidgetItem *___qtablewidgetitem14 = tableWidget->horizontalHeaderItem(14);
-        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "\346\235\245\346\272\220", 0));
-        label_2->setText(QApplication::translate("MainWindow", "\346\211\213\345\212\250\344\272\244\346\230\223", 0));
-        Label->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\344\273\243\347\240\201", 0));
-        Label_2->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\345\220\215\347\247\260", 0));
-        Label_3->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\347\261\273\345\236\213", 0));
-        ComboBoxContractType->clear();
-        ComboBoxContractType->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "\350\202\241\347\245\250", 0)
-         << QApplication::translate("MainWindow", "\346\234\237\350\264\247", 0)
-         << QApplication::translate("MainWindow", "\346\234\237\346\235\203", 0)
-         << QApplication::translate("MainWindow", "\345\244\226\346\261\207", 0)
-        );
-        Label_4->setText(QApplication::translate("MainWindow", "\346\226\271\345\220\221", 0));
-        ComboBoxDirection->clear();
-        ComboBoxDirection->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "\345\244\232", 0)
-         << QApplication::translate("MainWindow", "\347\251\272", 0)
-        );
-        Label_5->setText(QApplication::translate("MainWindow", "\345\274\200\345\271\263", 0));
-        ComboBox_BuyOrSell->clear();
-        ComboBox_BuyOrSell->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "\345\274\200\344\273\223", 0)
-         << QApplication::translate("MainWindow", "\345\271\263\344\273\223", 0)
-         << QApplication::translate("MainWindow", "\345\271\263\346\230\250", 0)
-         << QApplication::translate("MainWindow", "\345\271\263\344\273\212", 0)
-        );
-        Label_6->setText(QApplication::translate("MainWindow", "\344\273\267\346\240\274", 0));
-        Label_7->setText(QApplication::translate("MainWindow", "\346\225\260\351\207\217", 0));
-        Label_8->setText(QApplication::translate("MainWindow", "\346\214\207\344\273\244\347\261\273\345\236\213", 0));
-        ComboBox_OrderType->clear();
-        ComboBox_OrderType->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "\345\270\202\344\273\267\346\214\207\344\273\244", 0)
-         << QApplication::translate("MainWindow", "\351\231\220\344\273\267\346\214\207\344\273\244", 0)
-        );
-        Label_9->setText(QApplication::translate("MainWindow", "\344\272\244\346\230\223\346\211\200", 0));
-        Label_10->setText(QApplication::translate("MainWindow", "\350\264\246\346\210\267", 0));
-        pushButton_Order->setText(QApplication::translate("MainWindow", "\344\270\213\345\215\225", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "\346\227\245\345\277\227", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "\345\247\224\346\211\230", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "\346\210\220\344\272\244", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "\346\214\201\344\273\223", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "\345\270\220\346\210\267", 0));
-        label->setText(QApplication::translate("MainWindow", "\350\207\252\345\212\250\344\272\244\346\230\223", 0));
+        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "\346\235\245\346\272\220", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "\346\211\213\345\212\250\344\272\244\346\230\223", nullptr));
+        Label->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\344\273\243\347\240\201", nullptr));
+        Label_2->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\345\220\215\347\247\260", nullptr));
+        Label_3->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\347\261\273\345\236\213", nullptr));
+        ComboBoxContractType->setItemText(0, QApplication::translate("MainWindow", "\350\202\241\347\245\250", nullptr));
+        ComboBoxContractType->setItemText(1, QApplication::translate("MainWindow", "\346\234\237\350\264\247", nullptr));
+        ComboBoxContractType->setItemText(2, QApplication::translate("MainWindow", "\346\234\237\346\235\203", nullptr));
+        ComboBoxContractType->setItemText(3, QApplication::translate("MainWindow", "\345\244\226\346\261\207", nullptr));
+
+        Label_4->setText(QApplication::translate("MainWindow", "\346\226\271\345\220\221", nullptr));
+        ComboBoxDirection->setItemText(0, QApplication::translate("MainWindow", "\345\244\232", nullptr));
+        ComboBoxDirection->setItemText(1, QApplication::translate("MainWindow", "\347\251\272", nullptr));
+
+        Label_5->setText(QApplication::translate("MainWindow", "\345\274\200\345\271\263", nullptr));
+        ComboBox_BuyOrSell->setItemText(0, QApplication::translate("MainWindow", "\345\274\200\344\273\223", nullptr));
+        ComboBox_BuyOrSell->setItemText(1, QApplication::translate("MainWindow", "\345\271\263\344\273\223", nullptr));
+        ComboBox_BuyOrSell->setItemText(2, QApplication::translate("MainWindow", "\345\271\263\346\230\250", nullptr));
+        ComboBox_BuyOrSell->setItemText(3, QApplication::translate("MainWindow", "\345\271\263\344\273\212", nullptr));
+
+        Label_6->setText(QApplication::translate("MainWindow", "\344\273\267\346\240\274", nullptr));
+        Label_7->setText(QApplication::translate("MainWindow", "\346\225\260\351\207\217", nullptr));
+        Label_8->setText(QApplication::translate("MainWindow", "\346\214\207\344\273\244\347\261\273\345\236\213", nullptr));
+        ComboBox_OrderType->setItemText(0, QApplication::translate("MainWindow", "\345\270\202\344\273\267\346\214\207\344\273\244", nullptr));
+        ComboBox_OrderType->setItemText(1, QApplication::translate("MainWindow", "\351\231\220\344\273\267\346\214\207\344\273\244", nullptr));
+
+        Label_9->setText(QApplication::translate("MainWindow", "\344\272\244\346\230\223\346\211\200", nullptr));
+        Label_10->setText(QApplication::translate("MainWindow", "\350\264\246\346\210\267", nullptr));
+        pushButton_Order->setText(QApplication::translate("MainWindow", "\344\270\213\345\215\225", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "\346\227\245\345\277\227", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "\345\247\224\346\211\230", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "\346\210\220\344\272\244", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "\346\214\201\344\273\223", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "\345\270\220\346\210\267", nullptr));
+        label->setText(QApplication::translate("MainWindow", "\350\207\252\345\212\250\344\272\244\346\230\223", nullptr));
         QTableWidgetItem *___qtablewidgetitem15 = tableWidget_2->horizontalHeaderItem(0);
-        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "\347\255\226\347\225\245ID", 0));
+        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "\347\255\226\347\225\245ID", nullptr));
         QTableWidgetItem *___qtablewidgetitem16 = tableWidget_2->horizontalHeaderItem(1);
-        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "\347\255\226\347\225\245\345\220\215\347\247\260", 0));
+        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "\347\255\226\347\225\245\345\220\215\347\247\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem17 = tableWidget_2->horizontalHeaderItem(2);
-        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "\346\214\201\344\273\223\346\225\260\351\207\217", 0));
+        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "\346\214\201\344\273\223\346\225\260\351\207\217", nullptr));
         QTableWidgetItem *___qtablewidgetitem18 = tableWidget_2->horizontalHeaderItem(3);
-        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "\344\272\244\346\230\223\346\225\260", 0));
+        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "\344\272\244\346\230\223\346\225\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem19 = tableWidget_2->horizontalHeaderItem(4);
-        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "\347\212\266\346\200\201", 0));
-        pushButton->setText(QApplication::translate("MainWindow", "\345\274\200\345\220\257\347\255\226\347\225\245", 0));
-        pushButton_2->setText(QApplication::translate("MainWindow", "\346\232\202\345\201\234\347\255\226\347\225\245", 0));
-        pushButton_3->setText(QApplication::translate("MainWindow", "\345\201\234\346\255\242\347\255\226\347\225\245", 0));
-        pushButton_4->setText(QApplication::translate("MainWindow", "\346\270\205\344\273\223\347\255\226\347\225\245", 0));
-        menu->setTitle(QApplication::translate("MainWindow", "\346\226\207\344\273\266", 0));
+        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "\347\212\266\346\200\201", nullptr));
+        pushButton->setText(QApplication::translate("MainWindow", "\345\274\200\345\220\257\347\255\226\347\225\245", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "\346\232\202\345\201\234\347\255\226\347\225\245", nullptr));
+        pushButton_3->setText(QApplication::translate("MainWindow", "\345\201\234\346\255\242\347\255\226\347\225\245", nullptr));
+        pushButton_4->setText(QApplication::translate("MainWindow", "\346\270\205\344\273\223\347\255\226\347\225\245", nullptr));
+        menu->setTitle(QApplication::translate("MainWindow", "\346\226\207\344\273\266", nullptr));
     } // retranslateUi
 
 };

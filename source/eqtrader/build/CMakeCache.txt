@@ -73,7 +73,7 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=/INCREMENTAL:NO
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files/quantManage
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files/eqtrader
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=D:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.11.25503/bin/HostX86/x64/link.exe
@@ -94,7 +94,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=/INCREMENTAL:NO
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=quantManage
+CMAKE_PROJECT_NAME:STATIC=eqtrader
 
 //RC compiler
 CMAKE_RC_COMPILER:FILEPATH=rc
@@ -169,10 +169,10 @@ Qt5Gui_DIR:PATH=C:/Anaconda3/Library/lib/cmake/Qt5Gui
 Qt5Widgets_DIR:PATH=C:/Anaconda3/Library/lib/cmake/Qt5Widgets
 
 //Value Computed by CMake
-quantManage_BINARY_DIR:STATIC=D:/Workspace/EliteQuant_Cpp/source/eqtrader/build
+eqtrader_BINARY_DIR:STATIC=D:/Workspace/EliteQuant_Cpp/source/eqtrader/build
 
 //Value Computed by CMake
-quantManage_SOURCE_DIR:STATIC=D:/Workspace/EliteQuant_Cpp/source/eqtrader
+eqtrader_SOURCE_DIR:STATIC=D:/Workspace/EliteQuant_Cpp/source/eqtrader
 
 
 ########################

@@ -105,7 +105,7 @@
     <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\CMakeFiles\97738b0ce263c96afc6d5f7215d1cb30\generate.stamp.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Checking Build System</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HD:/Workspace/EliteQuant_Cpp/source/eqtrader -BD:/Workspace/EliteQuant_Cpp/source/eqtrader/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/quantManage.sln
+"C:\Program Files\CMake\bin\cmake.exe" -HD:/Workspace/EliteQuant_Cpp/source/eqtrader -BD:/Workspace/EliteQuant_Cpp/source/eqtrader/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/eqtrader.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -118,7 +118,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Checking Build System</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HD:/Workspace/EliteQuant_Cpp/source/eqtrader -BD:/Workspace/EliteQuant_Cpp/source/eqtrader/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/quantManage.sln
+"C:\Program Files\CMake\bin\cmake.exe" -HD:/Workspace/EliteQuant_Cpp/source/eqtrader -BD:/Workspace/EliteQuant_Cpp/source/eqtrader/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/eqtrader.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -131,7 +131,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Checking Build System</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HD:/Workspace/EliteQuant_Cpp/source/eqtrader -BD:/Workspace/EliteQuant_Cpp/source/eqtrader/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/quantManage.sln
+"C:\Program Files\CMake\bin\cmake.exe" -HD:/Workspace/EliteQuant_Cpp/source/eqtrader -BD:/Workspace/EliteQuant_Cpp/source/eqtrader/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/eqtrader.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -144,7 +144,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Checking Build System</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HD:/Workspace/EliteQuant_Cpp/source/eqtrader -BD:/Workspace/EliteQuant_Cpp/source/eqtrader/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/quantManage.sln
+"C:\Program Files\CMake\bin\cmake.exe" -HD:/Workspace/EliteQuant_Cpp/source/eqtrader -BD:/Workspace/EliteQuant_Cpp/source/eqtrader/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Workspace/EliteQuant_Cpp/source/eqtrader/build/eqtrader.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
