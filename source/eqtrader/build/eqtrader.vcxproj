@@ -435,7 +435,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\ctickevent.cpp" />
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.h" />
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.h" />
-    <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\enums.h" />
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\ctickevent.h" />
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\qrc_style.cpp" />
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\ui_mainwindow.h" />

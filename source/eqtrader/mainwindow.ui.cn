@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>EliteQuant</string>
+   <string>群英量化C++版</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -55,77 +55,77 @@
        <widget class="QTableWidget" name="tableWidget">
         <column>
          <property name="text">
-          <string>Symbol</string>
+          <string>合约代码</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Name</string>
+          <string>合约名称</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Last</string>
+          <string>最新价</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Volume</string>
+          <string>成交量</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Open Interest</string>
+          <string>持仓量</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Bid Size</string>
+          <string>新建列</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Bid</string>
+          <string>买一价</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Ask</string>
-         </property>
-        </column>
-         <column>
-           <property name="text">
-             <string>Ask Size</string>
-           </property>
-         </column>
-        <column>
-         <property name="text">
-          <string>Yest. Close</string>
+          <string>卖一价</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Open</string>
+          <string>卖一量 </string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>High</string>
+          <string>昨收价</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Low</string>
+          <string>开盘价</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Time</string>
+          <string>最高价</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Source</string>
+          <string>最低价</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>时间</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>来源</string>
          </property>
         </column>
        </widget>
@@ -134,14 +134,14 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Discretionary</string>
+            <string>手动交易</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="Label">
            <property name="text">
-            <string>Symbol</string>
+            <string>合约代码</string>
            </property>
           </widget>
          </item>
@@ -151,7 +151,7 @@
          <item row="2" column="0">
           <widget class="QLabel" name="Label_2">
            <property name="text">
-            <string>Name</string>
+            <string>合约名称</string>
            </property>
           </widget>
          </item>
@@ -161,7 +161,7 @@
          <item row="3" column="0">
           <widget class="QLabel" name="Label_3">
            <property name="text">
-            <string>Security Type</string>
+            <string>合约类型</string>
            </property>
           </widget>
          </item>
@@ -169,22 +169,22 @@
           <widget class="QComboBox" name="ComboBoxContractType">
            <item>
             <property name="text">
-             <string>Stock</string>
+             <string>股票</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Future</string>
+             <string>期货</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Option</string>
+             <string>期权</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Forex</string>
+             <string>外汇</string>
             </property>
            </item>
           </widget>
@@ -192,7 +192,7 @@
          <item row="4" column="0">
           <widget class="QLabel" name="Label_4">
            <property name="text">
-            <string>Direction</string>
+            <string>方向</string>
            </property>
           </widget>
          </item>
@@ -200,12 +200,12 @@
           <widget class="QComboBox" name="ComboBoxDirection">
            <item>
             <property name="text">
-             <string>Long</string>
+             <string>多</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Short</string>
+             <string>空</string>
             </property>
            </item>
           </widget>
@@ -213,7 +213,7 @@
          <item row="5" column="0">
           <widget class="QLabel" name="Label_5">
            <property name="text">
-            <string>Order Flag</string>
+            <string>开平</string>
            </property>
           </widget>
          </item>
@@ -221,22 +221,22 @@
           <widget class="QComboBox" name="ComboBox_BuyOrSell">
            <item>
             <property name="text">
-             <string>Open</string>
+             <string>开仓</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Close</string>
+             <string>平仓</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Close Yesterday</string>
+             <string>平昨</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Close Today</string>
+             <string>平今</string>
             </property>
            </item>
           </widget>
@@ -244,7 +244,7 @@
          <item row="6" column="0">
           <widget class="QLabel" name="Label_6">
            <property name="text">
-            <string>Price</string>
+            <string>价格</string>
            </property>
           </widget>
          </item>
@@ -254,7 +254,7 @@
          <item row="7" column="0">
           <widget class="QLabel" name="Label_7">
            <property name="text">
-            <string>Quantity</string>
+            <string>数量</string>
            </property>
           </widget>
          </item>
@@ -264,7 +264,7 @@
          <item row="8" column="0">
           <widget class="QLabel" name="Label_8">
            <property name="text">
-            <string>Order Type</string>
+            <string>指令类型</string>
            </property>
           </widget>
          </item>
@@ -272,12 +272,12 @@
           <widget class="QComboBox" name="ComboBox_OrderType">
            <item>
             <property name="text">
-             <string>Market</string>
+             <string>市价指令</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Limit</string>
+             <string>限价指令</string>
             </property>
            </item>
           </widget>
@@ -285,7 +285,7 @@
          <item row="9" column="0">
           <widget class="QLabel" name="Label_9">
            <property name="text">
-            <string>Exchange</string>
+            <string>交易所</string>
            </property>
           </widget>
          </item>
@@ -295,7 +295,7 @@
          <item row="10" column="0">
           <widget class="QLabel" name="Label_10">
            <property name="text">
-            <string>Account</string>
+            <string>账户</string>
            </property>
           </widget>
          </item>
@@ -305,7 +305,7 @@
          <item row="11" column="1">
           <widget class="QPushButton" name="pushButton_Order">
            <property name="text">
-            <string>Place Order</string>
+            <string>下单</string>
            </property>
           </widget>
          </item>
@@ -337,7 +337,7 @@
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
-          <string>Log</string>
+          <string>日志</string>
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
@@ -357,7 +357,7 @@
         </widget>
         <widget class="QWidget" name="tab_2">
          <attribute name="title">
-          <string>Order</string>
+          <string>委托</string>
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
@@ -367,7 +367,7 @@
         </widget>
         <widget class="QWidget" name="tab_3">
          <attribute name="title">
-          <string>Fill</string>
+          <string>成交</string>
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
@@ -377,7 +377,7 @@
         </widget>
         <widget class="QWidget" name="tab_4">
          <attribute name="title">
-          <string>Position</string>
+          <string>持仓</string>
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
@@ -387,7 +387,7 @@
         </widget>
         <widget class="QWidget" name="tab_5">
          <attribute name="title">
-          <string>Account</string>
+          <string>帐户</string>
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
@@ -401,7 +401,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Automatic</string>
+            <string>自动交易</string>
            </property>
           </widget>
          </item>
@@ -409,66 +409,56 @@
           <widget class="QTableWidget" name="tableWidget_2">
            <column>
             <property name="text">
-             <string>SID</string>
+             <string>策略ID</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Name</string>
+             <string>策略名称</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>nHoldings</string>
+             <string>持仓数量</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>nTrades</string>
+             <string>交易数</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Open PnL</string>
+             <string>状态</string>
             </property>
            </column>
-            <column>
-              <property name="text">
-                <string>Close PnL</string>
-              </property>
-            </column>
-            <column>
-              <property name="text">
-                <string>Status</string>
-              </property>
-            </column>
           </widget>
          </item>
          <item row="2" column="0">
           <widget class="QPushButton" name="pushButton">
            <property name="text">
-            <string>Start Strat</string>
+            <string>开启策略</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
           <widget class="QPushButton" name="pushButton_2">
            <property name="text">
-            <string>Pause Strat</string>
+            <string>暂停策略</string>
            </property>
           </widget>
          </item>
          <item row="2" column="2">
           <widget class="QPushButton" name="pushButton_3">
            <property name="text">
-            <string>Stop Strat</string>
+            <string>停止策略</string>
            </property>
           </widget>
          </item>
          <item row="2" column="3">
           <widget class="QPushButton" name="pushButton_4">
            <property name="text">
-            <string>Liquidate Strat</string>
+            <string>清仓策略</string>
            </property>
           </widget>
          </item>
@@ -490,7 +480,7 @@
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>File</string>
+     <string>文件</string>
     </property>
    </widget>
    <addaction name="menu"/>
