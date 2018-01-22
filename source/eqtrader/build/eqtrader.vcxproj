@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(solutionDir)EliteQuant;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(solutionDir)EliteQuant;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -440,6 +440,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.cpp" />
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\ctickevent.cpp" />
+    <ClInclude Include="..\util\util.h" />
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Qt\5.10.0\msvc2017_64\\bin\moc.exe "%(FullPath)" -o "%(RootDir)%(Directory)moc_%(Filename).cpp"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling %(Filename).%(Extension) using MOC</Message>

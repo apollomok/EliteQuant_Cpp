@@ -33,6 +33,9 @@
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\util\util.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\CMakeLists.txt" />
@@ -45,6 +48,9 @@
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{940F8213-0F2C-3828-B68C-5DCCBDA75704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{d50870af-cf27-45cc-a544-2278edaeb2b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

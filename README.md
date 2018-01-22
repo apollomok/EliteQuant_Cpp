@@ -56,14 +56,16 @@ is the most popular broker among retail traders. A lot of retail trading platfor
 **CTP**
 is the de-facto brokerage for Chinese futures market, including commodity futures and financial futures. They also offer free demo account [SimNow](http://simnow.com.cn/). After registration, you will get account, password, brokerid, along with market data and trading broker address. Replace them in EliteQuant config file accordingly.
 
+![Live Demo](/resource/ib_demo.gif?raw=true "Live Demo")
+
 ## Development Environment
 
 Below is the environment we are using
 
 * Visual Studio 2017 Community Edition on Windows
-* CodeLite 11.0.6 on Linux
+* Qt Creator 4.5.0 Commuity
 
-Visual C++ is a popular choice on Windows. CodeLite is a free Linux IDE, very close to Visual Studio in terms of user experience. Other choices are CLion, CMake, etc.
+Visual C++ is a popular choice on Windows. Qt Creator builds cross-plaform Qt user interface. Other choices are CLion, CMake, etc.
 
 ### Development on Ubuntu 16.04 64 bit System
 
@@ -196,5 +198,3 @@ enum OrderStatus {
 ![Code Structure](/resource/code_structure_en.png?raw=true "Code Structure")
 
 ## Todo List
-
-* QT GUI: currently it is purely command line based, the plan is to add QT user interface.

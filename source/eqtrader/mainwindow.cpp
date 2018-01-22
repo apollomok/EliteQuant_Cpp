@@ -1,12 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <util/util.h>
 #include <Common/Data/datatype.h>
 #include <yaml-cpp/yaml.h>
 #include <QDir>
 #include <iostream>
 #include <algorithm>
 #include <Common/config.h>
-#include <Common/Util/util.h>
 #include <common/Data/tick.h>
 
 using namespace EliteQuant;
@@ -104,36 +104,33 @@ void MainWindow::GetConfig()
 
 void MainWindow::ShowSingal(string sMessage)
 {
-	std::cout << sMessage << std::endl;
-	// vector<string> v = stringsplit(sMessage, SERIALIZATION_SEPARATOR);
+	// std::cout << sMessage << std::endl;
+	vector<string> v = stringsplit(sMessage, SERIALIZATION_SEPARATOR);
+	FullTick k;
 
-    // QStringList v  = sMessage.split('|');
-	// FullTick k;
+    k.fullsymbol_ = v[0];
+    k.time_ = v[1];
+    k.datatype_ = DataType(stoi(v[2]));
+	k.price_ = stof(v[3]);
+	k.size_ = stoi(v[4]);
+	k.depth_ = stoi(v[5]);
 
-    // k.fullsymbol_ = v[0];
-
-    //k.time_ = v[1];
-    //k.datatype_ = DataType(stoi(v[2].c_str()));
-	//k.price_ = stof(v[3].c_str());
-	//k.size_ = stoi(v[4].c_str());
-    //k.depth = v[5].toInt();
-
-    //if (k.datatype_ == DataType::DT_Full)
+    if (k.datatype_ == DataType::DT_Full)
     {
-        /*k.bid_price_L1 = v[6].toDouble();
-        k.bid_size_L1 = v[7].toInt();
-        k.ask_price_L1 = v[8].toDouble();
-        k.ask_size_L1 = v[9].toInt();
-        k.open_interest = v[10].toDouble();
-        k.open = v[11].toDouble();
-        k.high = v[12].toDouble();
-        k.low = v[13].toDouble();
-        k.pre_close = v[14].toDouble();
-        k.upper_limit_price = v[15].toDouble();
-        k.lower_limit_price = v[16].toDouble();*/
+		k.bidprice_L1_ = stoi(v[6]);
+		k.bidsize_L1_ = stoi(v[7]);
+		k.askprice_L1_ = stoi(v[8]);
+		k.asksize_L1_ = stoi(v[9]);
+		k.open_interest = stoi(v[10]);
+		k.open_ = stoi(v[11]);
+		k.high_ = stoi(v[12]);
+		k.low_ = stoi(v[13]);
+		k.pre_close_ = stoi(v[14]);
+		k.upper_limit_price_ = stoi(v[15]);
+		k.lower_limit_price_ = stoi(v[16]);
     }
 	
-    /*auto index =std::find(securities.begin(),securities.end(),QString(k.fullsymbol_.c_str()));
+    auto index =std::find(securities.begin(),securities.end(),QString(k.fullsymbol_.c_str()));
 
     if(index==securities.end())
     {
@@ -143,40 +140,40 @@ void MainWindow::ShowSingal(string sMessage)
 
     if (k.price_ > 0.0)
     {
-        //ui->tableWidget->item(row,1)->setText(k.full_symbol);
-		ui->tableWidget->item(row, 13)->setText(QString(k.time_.c_str()));*/
+        ui->tableWidget->item(row,1)->setText(QString(k.fullsymbol_.c_str()));
+		ui->tableWidget->item(row, 13)->setText(QString(k.time_.c_str()));
 
-		/*
+
         if (k.datatype_ == DataType::DT_Bid)
         {
-            ui->tableWidget->item(row,5)->setText(QString::number(k.size));
-            ui->tableWidget->item(row,6)->setText(QString::number(k.price));
+            ui->tableWidget->item(row,5)->setText(QString::number(k.size_));
+            ui->tableWidget->item(row,6)->setText(QString::number(k.price_));
         }
         else if (k.datatype_ == DataType::DT_Ask)
         {
-            ui->tableWidget->item(row,7)->setText(QString::number(k.price));
-            ui->tableWidget->item(row,8)->setText(QString::number(k.size));
+            ui->tableWidget->item(row,7)->setText(QString::number(k.price_));
+            ui->tableWidget->item(row,8)->setText(QString::number(k.size_));
         }
         else if(k.datatype_ ==DataType::DT_Trade)
         {
-            ui->tableWidget->item(row,2)->setText(QString::number(k.price));
-            ui->tableWidget->item(row,3)->setText(QString::number(k.size));
+            ui->tableWidget->item(row,2)->setText(QString::number(k.price_));
+            ui->tableWidget->item(row,3)->setText(QString::number(k.size_));
         }
         else if (k.datatype_ == DataType::DT_Full)
         {
-            ui->tableWidget->item(row,2)->setText(QString::number(k.price));
-            ui->tableWidget->item(row,3)->setText(QString::number(k.size));
+            ui->tableWidget->item(row,2)->setText(QString::number(k.price_));
+            ui->tableWidget->item(row,3)->setText(QString::number(k.size_));
             ui->tableWidget->item(row,4)->setText(QString::number(k.open_interest));
-            ui->tableWidget->item(row,5)->setText(QString::number(k.bid_size_L1));
-            ui->tableWidget->item(row,6)->setText(QString::number(k.bid_price_L1));
-            ui->tableWidget->item(row,7)->setText(QString::number(k.ask_price_L1));
-            ui->tableWidget->item(row,8)->setText(QString::number(k.ask_size_L1));
-            ui->tableWidget->item(row,9)->setText(QString::number(k.pre_close));
-            ui->tableWidget->item(row,10)->setText(QString::number(k.open));
-            ui->tableWidget->item(row,11)->setText(QString::number(k.high));
-            ui->tableWidget->item(row,12)->setText(QString::number(k.low));
-        }*/
-    //}
+            ui->tableWidget->item(row,5)->setText(QString::number(k.bidsize_L1_));
+            ui->tableWidget->item(row,6)->setText(QString::number(k.bidprice_L1_));
+            ui->tableWidget->item(row,7)->setText(QString::number(k.askprice_L1_));
+            ui->tableWidget->item(row,8)->setText(QString::number(k.asksize_L1_));
+            ui->tableWidget->item(row,9)->setText(QString::number(k.pre_close_));
+            ui->tableWidget->item(row,10)->setText(QString::number(k.open_));
+            ui->tableWidget->item(row,11)->setText(QString::number(k.high_));
+            ui->tableWidget->item(row,12)->setText(QString::number(k.low_));
+        }
+    }
 }
 
 void MainWindow::on_pushButton_Order_clicked()

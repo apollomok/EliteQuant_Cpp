@@ -2,11 +2,13 @@
 #define __EliteQuant_Common_Tick_H_
 
 #include <string>
+#include <Common/config.h>
 #include <Common/Data/datatype.h>
 using namespace std;
 
 namespace EliteQuant {
-	struct Tick {
+	class DLL_EXPORT_IMPORT Tick {
+	public:
 		Tick() 	: fullsymbol_("")
 			, time_("")
 			, datatype_(DataType::DT_Trade)
@@ -30,7 +32,8 @@ namespace EliteQuant {
 		virtual string serialize() const;
 	};
 
-	struct FullTick : Tick {
+	class DLL_EXPORT_IMPORT FullTick : public Tick {
+	public:
 		FullTick() : Tick()
 			, bidprice_L1_(0.0)
 			, bidsize_L1_(0)
