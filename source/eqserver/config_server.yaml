@@ -1,7 +1,7 @@
 #------------------ System Setting --------------#
 accounts:    # accounts active for trading
-  #- 107957 
-  - DU15057
+  - 107957 
+  #- DU15057
 msgq: nanomsg           # nanomsg kafka, zmq
 log_dir: d:/workspace/elitequant_cpp/log
 data_dir: d:/workspace/elitequant_cpp/data

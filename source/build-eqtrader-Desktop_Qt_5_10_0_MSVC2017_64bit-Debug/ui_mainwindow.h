@@ -98,7 +98,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1145, 1098);
+        MainWindow->resize(800, 600);
         QIcon icon;
         icon.addFile(QStringLiteral("../Downloads/EliteQuant-EliteQuant_Python-master/EliteQuant_Python/source/gui/image/logo.ico"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
@@ -379,8 +379,8 @@ public:
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
         tableWidget_2 = new QTableWidget(layoutWidget);
-        if (tableWidget_2->columnCount() < 5)
-            tableWidget_2->setColumnCount(5);
+        if (tableWidget_2->columnCount() < 7)
+            tableWidget_2->setColumnCount(7);
         QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
         tableWidget_2->setHorizontalHeaderItem(0, __qtablewidgetitem15);
         QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
@@ -391,6 +391,10 @@ public:
         tableWidget_2->setHorizontalHeaderItem(3, __qtablewidgetitem18);
         QTableWidgetItem *__qtablewidgetitem19 = new QTableWidgetItem();
         tableWidget_2->setHorizontalHeaderItem(4, __qtablewidgetitem19);
+        QTableWidgetItem *__qtablewidgetitem20 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(5, __qtablewidgetitem20);
+        QTableWidgetItem *__qtablewidgetitem21 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(6, __qtablewidgetitem21);
         tableWidget_2->setObjectName(QStringLiteral("tableWidget_2"));
 
         gridLayout->addWidget(tableWidget_2, 1, 0, 1, 4);
@@ -423,7 +427,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1145, 26));
+        menuBar->setGeometry(QRect(0, 0, 800, 21));
         menu = new QMenu(menuBar);
         menu->setObjectName(QStringLiteral("menu"));
         MainWindow->setMenuBar(menuBar);
@@ -443,86 +447,90 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "\347\276\244\350\213\261\351\207\217\345\214\226C++\347\211\210", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "EliteQuant", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\344\273\243\347\240\201", nullptr));
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Symbol", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\345\220\215\347\247\260", nullptr));
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Name", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "\346\234\200\346\226\260\344\273\267", nullptr));
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Last", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "\346\210\220\344\272\244\351\207\217", nullptr));
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Volume", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "\346\214\201\344\273\223\351\207\217", nullptr));
+        ___qtablewidgetitem4->setText(QApplication::translate("MainWindow", "Open Interest", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = tableWidget->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "\346\226\260\345\273\272\345\210\227", nullptr));
+        ___qtablewidgetitem5->setText(QApplication::translate("MainWindow", "Bid Size", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = tableWidget->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "\344\271\260\344\270\200\344\273\267", nullptr));
+        ___qtablewidgetitem6->setText(QApplication::translate("MainWindow", "Bid", nullptr));
         QTableWidgetItem *___qtablewidgetitem7 = tableWidget->horizontalHeaderItem(7);
-        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "\345\215\226\344\270\200\344\273\267", nullptr));
+        ___qtablewidgetitem7->setText(QApplication::translate("MainWindow", "Ask", nullptr));
         QTableWidgetItem *___qtablewidgetitem8 = tableWidget->horizontalHeaderItem(8);
-        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "\345\215\226\344\270\200\351\207\217 ", nullptr));
+        ___qtablewidgetitem8->setText(QApplication::translate("MainWindow", "Ask Size", nullptr));
         QTableWidgetItem *___qtablewidgetitem9 = tableWidget->horizontalHeaderItem(9);
-        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "\346\230\250\346\224\266\344\273\267", nullptr));
+        ___qtablewidgetitem9->setText(QApplication::translate("MainWindow", "Yest. Close", nullptr));
         QTableWidgetItem *___qtablewidgetitem10 = tableWidget->horizontalHeaderItem(10);
-        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "\345\274\200\347\233\230\344\273\267", nullptr));
+        ___qtablewidgetitem10->setText(QApplication::translate("MainWindow", "Open", nullptr));
         QTableWidgetItem *___qtablewidgetitem11 = tableWidget->horizontalHeaderItem(11);
-        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "\346\234\200\351\253\230\344\273\267", nullptr));
+        ___qtablewidgetitem11->setText(QApplication::translate("MainWindow", "High", nullptr));
         QTableWidgetItem *___qtablewidgetitem12 = tableWidget->horizontalHeaderItem(12);
-        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "\346\234\200\344\275\216\344\273\267", nullptr));
+        ___qtablewidgetitem12->setText(QApplication::translate("MainWindow", "Low", nullptr));
         QTableWidgetItem *___qtablewidgetitem13 = tableWidget->horizontalHeaderItem(13);
-        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "\346\227\266\351\227\264", nullptr));
+        ___qtablewidgetitem13->setText(QApplication::translate("MainWindow", "Time", nullptr));
         QTableWidgetItem *___qtablewidgetitem14 = tableWidget->horizontalHeaderItem(14);
-        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "\346\235\245\346\272\220", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "\346\211\213\345\212\250\344\272\244\346\230\223", nullptr));
-        Label->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\344\273\243\347\240\201", nullptr));
-        Label_2->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\345\220\215\347\247\260", nullptr));
-        Label_3->setText(QApplication::translate("MainWindow", "\345\220\210\347\272\246\347\261\273\345\236\213", nullptr));
-        ComboBoxContractType->setItemText(0, QApplication::translate("MainWindow", "\350\202\241\347\245\250", nullptr));
-        ComboBoxContractType->setItemText(1, QApplication::translate("MainWindow", "\346\234\237\350\264\247", nullptr));
-        ComboBoxContractType->setItemText(2, QApplication::translate("MainWindow", "\346\234\237\346\235\203", nullptr));
-        ComboBoxContractType->setItemText(3, QApplication::translate("MainWindow", "\345\244\226\346\261\207", nullptr));
+        ___qtablewidgetitem14->setText(QApplication::translate("MainWindow", "Source", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Discretionary", nullptr));
+        Label->setText(QApplication::translate("MainWindow", "Symbol", nullptr));
+        Label_2->setText(QApplication::translate("MainWindow", "Name", nullptr));
+        Label_3->setText(QApplication::translate("MainWindow", "Security Type", nullptr));
+        ComboBoxContractType->setItemText(0, QApplication::translate("MainWindow", "Stock", nullptr));
+        ComboBoxContractType->setItemText(1, QApplication::translate("MainWindow", "Future", nullptr));
+        ComboBoxContractType->setItemText(2, QApplication::translate("MainWindow", "Option", nullptr));
+        ComboBoxContractType->setItemText(3, QApplication::translate("MainWindow", "Forex", nullptr));
 
-        Label_4->setText(QApplication::translate("MainWindow", "\346\226\271\345\220\221", nullptr));
-        ComboBoxDirection->setItemText(0, QApplication::translate("MainWindow", "\345\244\232", nullptr));
-        ComboBoxDirection->setItemText(1, QApplication::translate("MainWindow", "\347\251\272", nullptr));
+        Label_4->setText(QApplication::translate("MainWindow", "Direction", nullptr));
+        ComboBoxDirection->setItemText(0, QApplication::translate("MainWindow", "Long", nullptr));
+        ComboBoxDirection->setItemText(1, QApplication::translate("MainWindow", "Short", nullptr));
 
-        Label_5->setText(QApplication::translate("MainWindow", "\345\274\200\345\271\263", nullptr));
-        ComboBox_BuyOrSell->setItemText(0, QApplication::translate("MainWindow", "\345\274\200\344\273\223", nullptr));
-        ComboBox_BuyOrSell->setItemText(1, QApplication::translate("MainWindow", "\345\271\263\344\273\223", nullptr));
-        ComboBox_BuyOrSell->setItemText(2, QApplication::translate("MainWindow", "\345\271\263\346\230\250", nullptr));
-        ComboBox_BuyOrSell->setItemText(3, QApplication::translate("MainWindow", "\345\271\263\344\273\212", nullptr));
+        Label_5->setText(QApplication::translate("MainWindow", "Order Flag", nullptr));
+        ComboBox_BuyOrSell->setItemText(0, QApplication::translate("MainWindow", "Open", nullptr));
+        ComboBox_BuyOrSell->setItemText(1, QApplication::translate("MainWindow", "Close", nullptr));
+        ComboBox_BuyOrSell->setItemText(2, QApplication::translate("MainWindow", "Close Yesterday", nullptr));
+        ComboBox_BuyOrSell->setItemText(3, QApplication::translate("MainWindow", "Close Today", nullptr));
 
-        Label_6->setText(QApplication::translate("MainWindow", "\344\273\267\346\240\274", nullptr));
-        Label_7->setText(QApplication::translate("MainWindow", "\346\225\260\351\207\217", nullptr));
-        Label_8->setText(QApplication::translate("MainWindow", "\346\214\207\344\273\244\347\261\273\345\236\213", nullptr));
-        ComboBox_OrderType->setItemText(0, QApplication::translate("MainWindow", "\345\270\202\344\273\267\346\214\207\344\273\244", nullptr));
-        ComboBox_OrderType->setItemText(1, QApplication::translate("MainWindow", "\351\231\220\344\273\267\346\214\207\344\273\244", nullptr));
+        Label_6->setText(QApplication::translate("MainWindow", "Price", nullptr));
+        Label_7->setText(QApplication::translate("MainWindow", "Quantity", nullptr));
+        Label_8->setText(QApplication::translate("MainWindow", "Order Type", nullptr));
+        ComboBox_OrderType->setItemText(0, QApplication::translate("MainWindow", "Market", nullptr));
+        ComboBox_OrderType->setItemText(1, QApplication::translate("MainWindow", "Limit", nullptr));
 
-        Label_9->setText(QApplication::translate("MainWindow", "\344\272\244\346\230\223\346\211\200", nullptr));
-        Label_10->setText(QApplication::translate("MainWindow", "\350\264\246\346\210\267", nullptr));
-        pushButton_Order->setText(QApplication::translate("MainWindow", "\344\270\213\345\215\225", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "\346\227\245\345\277\227", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "\345\247\224\346\211\230", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "\346\210\220\344\272\244", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "\346\214\201\344\273\223", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "\345\270\220\346\210\267", nullptr));
-        label->setText(QApplication::translate("MainWindow", "\350\207\252\345\212\250\344\272\244\346\230\223", nullptr));
+        Label_9->setText(QApplication::translate("MainWindow", "Exchange", nullptr));
+        Label_10->setText(QApplication::translate("MainWindow", "Account", nullptr));
+        pushButton_Order->setText(QApplication::translate("MainWindow", "Place Order", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Log", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "Order", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Fill", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Position", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Account", nullptr));
+        label->setText(QApplication::translate("MainWindow", "Automatic", nullptr));
         QTableWidgetItem *___qtablewidgetitem15 = tableWidget_2->horizontalHeaderItem(0);
-        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "\347\255\226\347\225\245ID", nullptr));
+        ___qtablewidgetitem15->setText(QApplication::translate("MainWindow", "SID", nullptr));
         QTableWidgetItem *___qtablewidgetitem16 = tableWidget_2->horizontalHeaderItem(1);
-        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "\347\255\226\347\225\245\345\220\215\347\247\260", nullptr));
+        ___qtablewidgetitem16->setText(QApplication::translate("MainWindow", "Name", nullptr));
         QTableWidgetItem *___qtablewidgetitem17 = tableWidget_2->horizontalHeaderItem(2);
-        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "\346\214\201\344\273\223\346\225\260\351\207\217", nullptr));
+        ___qtablewidgetitem17->setText(QApplication::translate("MainWindow", "nHoldings", nullptr));
         QTableWidgetItem *___qtablewidgetitem18 = tableWidget_2->horizontalHeaderItem(3);
-        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "\344\272\244\346\230\223\346\225\260", nullptr));
+        ___qtablewidgetitem18->setText(QApplication::translate("MainWindow", "nTrades", nullptr));
         QTableWidgetItem *___qtablewidgetitem19 = tableWidget_2->horizontalHeaderItem(4);
-        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "\347\212\266\346\200\201", nullptr));
-        pushButton->setText(QApplication::translate("MainWindow", "\345\274\200\345\220\257\347\255\226\347\225\245", nullptr));
-        pushButton_2->setText(QApplication::translate("MainWindow", "\346\232\202\345\201\234\347\255\226\347\225\245", nullptr));
-        pushButton_3->setText(QApplication::translate("MainWindow", "\345\201\234\346\255\242\347\255\226\347\225\245", nullptr));
-        pushButton_4->setText(QApplication::translate("MainWindow", "\346\270\205\344\273\223\347\255\226\347\225\245", nullptr));
-        menu->setTitle(QApplication::translate("MainWindow", "\346\226\207\344\273\266", nullptr));
+        ___qtablewidgetitem19->setText(QApplication::translate("MainWindow", "Open PnL", nullptr));
+        QTableWidgetItem *___qtablewidgetitem20 = tableWidget_2->horizontalHeaderItem(5);
+        ___qtablewidgetitem20->setText(QApplication::translate("MainWindow", "Close PnL", nullptr));
+        QTableWidgetItem *___qtablewidgetitem21 = tableWidget_2->horizontalHeaderItem(6);
+        ___qtablewidgetitem21->setText(QApplication::translate("MainWindow", "Status", nullptr));
+        pushButton->setText(QApplication::translate("MainWindow", "Start Strat", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Pause Strat", nullptr));
+        pushButton_3->setText(QApplication::translate("MainWindow", "Stop Strat", nullptr));
+        pushButton_4->setText(QApplication::translate("MainWindow", "Liquidate Strat", nullptr));
+        menu->setTitle(QApplication::translate("MainWindow", "File", nullptr));
     } // retranslateUi
 
 };

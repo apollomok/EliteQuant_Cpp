@@ -111,8 +111,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>C:\Anaconda3\libs\python3.lib;C:\Anaconda3\libs\python36.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmdd.lib;$(SolutionDir)$(Platform)\$(Configuration)\EliteQuant.lib;C:\Anaconda3\Library\lib\Qt5Widgets.lib;C:\Anaconda3\Library\lib\Qt5Gui.lib;C:\Anaconda3\Library\lib\Qt5Core.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Workspace\boost\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmdd.lib;$(SolutionDir)$(Platform)\$(Configuration)\EliteQuant.lib;C:\Anaconda3\Library\lib\Qt5Widgets.lib;C:\Anaconda3\Library\lib\Qt5Gui.lib;C:\Anaconda3\Library\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Workspace\boost\stage\lib;$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -430,11 +430,26 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\main.cpp" />
-    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.cpp" />
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.cpp">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </Outputs>
+    </ClCompile>
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.cpp" />
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\ctickevent.cpp" />
-    <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.h" />
-    <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.h" />
+    <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Qt\5.10.0\msvc2017_64\\bin\moc.exe "%(FullPath)" -o "%(RootDir)%(Directory)moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling %(Filename).%(Extension) using MOC</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RootDir)%(Directory)moc_%(Filename).cpp</Outputs>
+    </ClInclude>
+    <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Qt\5.10.0\msvc2017_64\bin\moc.exe "%(FullPath)" -o "%(RootDir)%(Directory)moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compiling %(Filename).%(Extension) using MOC</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(RootDir)%(Directory)moc_%(Filename).cpp</Outputs>
+    </ClInclude>
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\ctickevent.h" />
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\qrc_style.cpp" />
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\ui_mainwindow.h" />

@@ -20,7 +20,7 @@ public:
 protected:
     void run();
 signals:
-    void UpdateSignal(QString msg);
+    void UpdateSignal(string msg);
 
 public slots:
         void PlaceOrderSlot(QString order);

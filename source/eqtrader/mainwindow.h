@@ -84,7 +84,7 @@ signals:
     void PlaceOrder(QString order);
 
 public slots:
-    void    ShowSingal(QString   sMessage);
+    void    ShowSingal(string   sMessage);
 private slots:
     void on_pushButton_Order_clicked();
 };

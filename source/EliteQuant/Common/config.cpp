@@ -65,7 +65,7 @@ namespace EliteQuant {
 			}
 			else if (api == "CTP") {
 				_broker = BROKERS::CTP;
-				ctp_broker_id = config[s]["broker_id"].as<std::string>();
+				ctp_broker_id = config[s]["broker"].as<std::string>();
 				ctp_user_id = s;
 				ctp_password = config[s]["password"].as<std::string>();
 				ctp_auth_code = config[s]["auth_code"].as<std::string>();

@@ -40,8 +40,8 @@ void ClientMQ::run()
         int bytes = nn_recv (tick_sock, &buf, NN_MSG, 0);
         if(bytes>0)
         {
-            QString marketmsg=QString(buf);
-            if(marketmsg.indexOf('|')>0)
+			string marketmsg= string(buf);
+            //if(marketmsg.indexOf('|')>0)
             {
                 emit UpdateSignal(marketmsg);
                 /*

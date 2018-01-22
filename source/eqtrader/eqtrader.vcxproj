@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3E103D62-1B6C-3B22-A226-2840B0680A6A}</ProjectGuid>
+    <RootNamespace>quantManage4</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;" Label="Configuration">
+    <PlatformToolset>v141</PlatformToolset>
+    <OutputDirectory>release\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>quantManage4</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;" Label="Configuration">
+    <PlatformToolset>v141</PlatformToolset>
+    <OutputDirectory>debug\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>quantManage4</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists(&apos;$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props&apos;)" />
+  </ImportGroup>
+  <ImportGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists(&apos;$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props&apos;)" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\</OutDir>
+    <IntDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\</IntDir>
+    <TargetName Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">quantManage4</TargetName>
+    <IgnoreImportLibrary Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">false</LinkIncremental>
+    <OutDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\</OutDir>
+    <IntDir Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\</IntDir>
+    <TargetName Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">quantManage4</TargetName>
+    <IgnoreImportLibrary Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\..\..\..\QT\5.10.0\MSVC2017_64\include;..\..\..\..\QT\5.10.0\MSVC2017_64\include\QtWidgets;..\..\..\..\QT\5.10.0\MSVC2017_64\include\QtGui;..\..\..\..\QT\5.10.0\MSVC2017_64\include\QtANGLE;..\..\..\..\QT\5.10.0\MSVC2017_64\include\QtCore;release;.;\include;..\..\..\..\QT\5.10.0\MSVC2017_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>release\</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName></ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>D:\QT\5.10.0\MSVC2017_64\lib\qtmain.lib;shell32.lib;nanomsg.lib;yaml-cpp.lib;D:\QT\5.10.0\MSVC2017_64\lib\Qt5Widgets.lib;D:\QT\5.10.0\MSVC2017_64\lib\Qt5Gui.lib;D:\QT\5.10.0\MSVC2017_64\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\QT\5.10.0\MSVC2017_64\lib;C:\utils\my_sql\my_sql\lib;C:\utils\postgresql\pgsql\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\quantManage4.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_NO_DEBUG;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;..\..\..\..\QT\5.10.0\MSVC2017_64\include;..\..\..\..\QT\5.10.0\MSVC2017_64\include\QtWidgets;..\..\..\..\QT\5.10.0\MSVC2017_64\include\QtGui;..\..\..\..\QT\5.10.0\MSVC2017_64\include\QtANGLE;..\..\..\..\QT\5.10.0\MSVC2017_64\include\QtCore;debug;.;\include;..\..\..\..\QT\5.10.0\MSVC2017_64\mkspecs\win32-msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>debug\</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>D:\QT\5.10.0\MSVC2017_64\lib\qtmaind.lib;shell32.lib;nanomsg.lib;yaml-cpp.lib;D:\QT\5.10.0\MSVC2017_64\lib\Qt5Widgetsd.lib;D:\QT\5.10.0\MSVC2017_64\lib\Qt5Guid.lib;D:\QT\5.10.0\MSVC2017_64\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\QT\5.10.0\MSVC2017_64\lib;C:\utils\my_sql\my_sql\lib;C:\utils\postgresql\pgsql\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\quantManage4.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;WIN64;QT_DEPRECATED_WARNINGS;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="clientmq.cpp" />
+    <ClCompile Include="ctickevent.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="clientmq.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">clientmq.h;release\moc_predefs.h;D:\QT\5.10.0\MSVC2017_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">D:\QT\5.10.0\MSVC2017_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include release/moc_predefs.h -ID:/QT/5.10.0/MSVC2017_64/mkspecs/win32-msvc -ID:/Workspace/EliteQuant_Cpp/source/eqtrader -ID:/QT/5.10.0/MSVC2017_64/include -ID:/QT/5.10.0/MSVC2017_64/include/QtWidgets -ID:/QT/5.10.0/MSVC2017_64/include/QtGui -ID:/QT/5.10.0/MSVC2017_64/include/QtANGLE -ID:/QT/5.10.0/MSVC2017_64/include/QtCore clientmq.h -o release\moc_clientmq.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC clientmq.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_clientmq.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">clientmq.h;debug\moc_predefs.h;D:\QT\5.10.0\MSVC2017_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">D:\QT\5.10.0\MSVC2017_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include debug/moc_predefs.h -ID:/QT/5.10.0/MSVC2017_64/mkspecs/win32-msvc -ID:/Workspace/EliteQuant_Cpp/source/eqtrader -ID:/QT/5.10.0/MSVC2017_64/include -ID:/QT/5.10.0/MSVC2017_64/include/QtWidgets -ID:/QT/5.10.0/MSVC2017_64/include/QtGui -ID:/QT/5.10.0/MSVC2017_64/include/QtANGLE -ID:/QT/5.10.0/MSVC2017_64/include/QtCore clientmq.h -o debug\moc_clientmq.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC clientmq.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_clientmq.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <ClInclude Include="ctickevent.h" />
+    <ClInclude Include="enums.h" />
+    <CustomBuild Include="mainwindow.h">
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">mainwindow.h;release\moc_predefs.h;D:\QT\5.10.0\MSVC2017_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">D:\QT\5.10.0\MSVC2017_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include release/moc_predefs.h -ID:/QT/5.10.0/MSVC2017_64/mkspecs/win32-msvc -ID:/Workspace/EliteQuant_Cpp/source/eqtrader -ID:/QT/5.10.0/MSVC2017_64/include -ID:/QT/5.10.0/MSVC2017_64/include/QtWidgets -ID:/QT/5.10.0/MSVC2017_64/include/QtGui -ID:/QT/5.10.0/MSVC2017_64/include/QtANGLE -ID:/QT/5.10.0/MSVC2017_64/include/QtCore mainwindow.h -o release\moc_mainwindow.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">MOC mainwindow.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_mainwindow.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">mainwindow.h;debug\moc_predefs.h;D:\QT\5.10.0\MSVC2017_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">D:\QT\5.10.0\MSVC2017_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_DEPRECATED_WARNINGS -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include debug/moc_predefs.h -ID:/QT/5.10.0/MSVC2017_64/mkspecs/win32-msvc -ID:/Workspace/EliteQuant_Cpp/source/eqtrader -ID:/QT/5.10.0/MSVC2017_64/include -ID:/QT/5.10.0/MSVC2017_64/include/QtWidgets -ID:/QT/5.10.0/MSVC2017_64/include/QtGui -ID:/QT/5.10.0/MSVC2017_64/include/QtANGLE -ID:/QT/5.10.0/MSVC2017_64/include/QtCore mainwindow.h -o debug\moc_mainwindow.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">MOC mainwindow.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_mainwindow.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="debug\moc_clientmq.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_clientmq.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="debug\moc_mainwindow.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\moc_mainwindow.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">..\..\..\..\QT\5.10.0\MSVC2017_64\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">cl -Bx&quot;$(QTDIR)\bin\qmake.exe&quot; -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zi -MDd -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E ..\..\..\..\QT\5.10.0\MSVC2017_64\mkspecs\features\data\dummy.cpp 2>NUL >debug\moc_predefs.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">Generate moc_predefs.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\moc_predefs.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">..\..\..\..\QT\5.10.0\MSVC2017_64\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">cl -Bx&quot;$(QTDIR)\bin\qmake.exe&quot; -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -O2 -MD -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E ..\..\..\..\QT\5.10.0\MSVC2017_64\mkspecs\features\data\dummy.cpp 2>NUL >release\moc_predefs.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">Generate moc_predefs.h</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_predefs.h;%(Outputs)</Outputs>
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
+    </CustomBuild>
+    <ClCompile Include="debug\qrc_style.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\qrc_style.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClInclude Include="ui_mainwindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="mainwindow.ui">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">mainwindow.ui;D:\QT\5.10.0\MSVC2017_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">D:\QT\5.10.0\MSVC2017_64\bin\uic.exe mainwindow.ui -o ui_mainwindow.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">UIC mainwindow.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">ui_mainwindow.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">mainwindow.ui;D:\QT\5.10.0\MSVC2017_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">D:\QT\5.10.0\MSVC2017_64\bin\uic.exe mainwindow.ui -o ui_mainwindow.h</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">UIC mainwindow.ui</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">ui_mainwindow.h;%(Outputs)</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="qdarkstyle\rc\Hmovetoolbar.png" />
+    <None Include="qdarkstyle\rc\Hsepartoolbar.png" />
+    <None Include="qdarkstyle\rc\Vmovetoolbar.png" />
+    <None Include="qdarkstyle\rc\Vsepartoolbar.png" />
+    <None Include="qdarkstyle\rc\branch_closed-on.png" />
+    <None Include="qdarkstyle\rc\branch_closed.png" />
+    <None Include="qdarkstyle\rc\branch_open-on.png" />
+    <None Include="qdarkstyle\rc\branch_open.png" />
+    <None Include="qdarkstyle\rc\checkbox_checked.png" />
+    <None Include="qdarkstyle\rc\checkbox_checked_disabled.png" />
+    <None Include="qdarkstyle\rc\checkbox_checked_focus.png" />
+    <None Include="qdarkstyle\rc\checkbox_indeterminate.png" />
+    <None Include="qdarkstyle\rc\checkbox_indeterminate_focus.png" />
+    <None Include="qdarkstyle\rc\checkbox_unchecked.png" />
+    <None Include="qdarkstyle\rc\checkbox_unchecked_disabled.png" />
+    <None Include="qdarkstyle\rc\checkbox_unchecked_focus.png" />
+    <None Include="qdarkstyle\rc\close-hover.png" />
+    <None Include="qdarkstyle\rc\close-pressed.png" />
+    <None Include="qdarkstyle\rc\close.png" />
+    <None Include="qdarkstyle\rc\down_arrow.png" />
+    <None Include="qdarkstyle\rc\down_arrow_disabled.png" />
+    <None Include="qdarkstyle\rc\left_arrow.png" />
+    <None Include="qdarkstyle\rc\left_arrow_disabled.png" />
+    <None Include="qdarkstyle\rc\radio_checked.png" />
+    <None Include="qdarkstyle\rc\radio_checked_disabled.png" />
+    <None Include="qdarkstyle\rc\radio_checked_focus.png" />
+    <None Include="qdarkstyle\rc\radio_unchecked.png" />
+    <None Include="qdarkstyle\rc\radio_unchecked_disabled.png" />
+    <None Include="qdarkstyle\rc\radio_unchecked_focus.png" />
+    <None Include="qdarkstyle\rc\right_arrow.png" />
+    <None Include="qdarkstyle\rc\right_arrow_disabled.png" />
+    <None Include="qdarkstyle\rc\sizegrip.png" />
+    <CustomBuild Include="qdarkstyle\style.qrc">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">qdarkstyle\style.qrc;D:\QT\5.10.0\MSVC2017_64\bin\rcc.exe;qdarkstyle\rc\Vsepartoolbar.png;qdarkstyle\rc\close-pressed.png;qdarkstyle\rc\Hmovetoolbar.png;qdarkstyle\rc\up_arrow.png;qdarkstyle\rc\left_arrow_disabled.png;qdarkstyle\rc\close-hover.png;qdarkstyle\rc\checkbox_unchecked.png;qdarkstyle\rc\radio_unchecked_disabled.png;qdarkstyle\rc\radio_checked.png;qdarkstyle\rc\checkbox_checked_disabled.png;qdarkstyle\rc\Hsepartoolbar.png;qdarkstyle\rc\sizegrip.png;qdarkstyle\rc\down_arrow.png;qdarkstyle\rc\stylesheet-branch-more.png;qdarkstyle\rc\radio_unchecked.png;qdarkstyle\rc\branch_closed-on.png;qdarkstyle\rc\checkbox_unchecked_disabled.png;qdarkstyle\rc\branch_open.png;qdarkstyle\rc\left_arrow.png;qdarkstyle\rc\stylesheet-branch-end.png;qdarkstyle\rc\undock.png;qdarkstyle\rc\right_arrow.png;qdarkstyle\rc\checkbox_indeterminate.png;qdarkstyle\rc\checkbox_checked_focus.png;qdarkstyle\rc\stylesheet-vline.png;qdarkstyle\rc\radio_checked_focus.png;qdarkstyle\rc\branch_closed.png;qdarkstyle\rc\right_arrow_disabled.png;qdarkstyle\rc\down_arrow_disabled.png;qdarkstyle\rc\branch_open-on.png;qdarkstyle\rc\radio_unchecked_focus.png;qdarkstyle\rc\Vmovetoolbar.png;qdarkstyle\rc\transparent.png;qdarkstyle\rc\close.png;qdarkstyle\rc\radio_checked_disabled.png;qdarkstyle\rc\checkbox_checked.png;qdarkstyle\rc\up_arrow_disabled.png;qdarkstyle\rc\checkbox_indeterminate_focus.png;qdarkstyle\rc\checkbox_unchecked_focus.png;qdarkstyle\style.qss;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">D:\QT\5.10.0\MSVC2017_64\bin\rcc.exe -name style qdarkstyle\style.qrc -o release\qrc_style.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">RCC qdarkstyle/style.qrc</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\qrc_style.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">qdarkstyle\style.qrc;D:\QT\5.10.0\MSVC2017_64\bin\rcc.exe;qdarkstyle\rc\Vsepartoolbar.png;qdarkstyle\rc\close-pressed.png;qdarkstyle\rc\Hmovetoolbar.png;qdarkstyle\rc\up_arrow.png;qdarkstyle\rc\left_arrow_disabled.png;qdarkstyle\rc\close-hover.png;qdarkstyle\rc\checkbox_unchecked.png;qdarkstyle\rc\radio_unchecked_disabled.png;qdarkstyle\rc\radio_checked.png;qdarkstyle\rc\checkbox_checked_disabled.png;qdarkstyle\rc\Hsepartoolbar.png;qdarkstyle\rc\sizegrip.png;qdarkstyle\rc\down_arrow.png;qdarkstyle\rc\stylesheet-branch-more.png;qdarkstyle\rc\radio_unchecked.png;qdarkstyle\rc\branch_closed-on.png;qdarkstyle\rc\checkbox_unchecked_disabled.png;qdarkstyle\rc\branch_open.png;qdarkstyle\rc\left_arrow.png;qdarkstyle\rc\stylesheet-branch-end.png;qdarkstyle\rc\undock.png;qdarkstyle\rc\right_arrow.png;qdarkstyle\rc\checkbox_indeterminate.png;qdarkstyle\rc\checkbox_checked_focus.png;qdarkstyle\rc\stylesheet-vline.png;qdarkstyle\rc\radio_checked_focus.png;qdarkstyle\rc\branch_closed.png;qdarkstyle\rc\right_arrow_disabled.png;qdarkstyle\rc\down_arrow_disabled.png;qdarkstyle\rc\branch_open-on.png;qdarkstyle\rc\radio_unchecked_focus.png;qdarkstyle\rc\Vmovetoolbar.png;qdarkstyle\rc\transparent.png;qdarkstyle\rc\close.png;qdarkstyle\rc\radio_checked_disabled.png;qdarkstyle\rc\checkbox_checked.png;qdarkstyle\rc\up_arrow_disabled.png;qdarkstyle\rc\checkbox_indeterminate_focus.png;qdarkstyle\rc\checkbox_unchecked_focus.png;qdarkstyle\style.qss;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">D:\QT\5.10.0\MSVC2017_64\bin\rcc.exe -name style qdarkstyle\style.qrc -o debug\qrc_style.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">RCC qdarkstyle/style.qrc</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\qrc_style.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
+    <None Include="qdarkstyle\style.qss" />
+    <None Include="qdarkstyle\rc\stylesheet-branch-end.png" />
+    <None Include="qdarkstyle\rc\stylesheet-branch-more.png" />
+    <None Include="qdarkstyle\rc\stylesheet-vline.png" />
+    <None Include="qdarkstyle\rc\transparent.png" />
+    <None Include="qdarkstyle\rc\undock.png" />
+    <None Include="qdarkstyle\rc\up_arrow.png" />
+    <None Include="qdarkstyle\rc\up_arrow_disabled.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

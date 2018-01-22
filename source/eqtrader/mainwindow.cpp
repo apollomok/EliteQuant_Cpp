@@ -5,6 +5,9 @@
 #include <QDir>
 #include <iostream>
 #include <algorithm>
+#include <Common/config.h>
+#include <Common/Util/util.h>
+#include <common/Data/tick.h>
 
 using namespace EliteQuant;
 
@@ -33,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowState(Qt::WindowMaximized);
     clientMQ=new ClientMQ();
     connect(this, SIGNAL(PlaceOrder(QString)),clientMQ, SLOT(PlaceOrderSlot(QString)));
-    connect(clientMQ, SIGNAL(UpdateSignal(QString)),this, SLOT(ShowSingal(QString)));
+    connect(clientMQ, SIGNAL(UpdateSignal(string)),this, SLOT(ShowSingal(string)));
     clientMQ->start();
 
 }
@@ -99,23 +102,24 @@ void MainWindow::GetConfig()
     }
 }
 
-void MainWindow::ShowSingal(QString sMessage)
+void MainWindow::ShowSingal(string sMessage)
 {
-    QStringList v  = sMessage.split('|');
-    TickEvent k;
+	vector<string> v = stringsplit(sMessage, SERIALIZATION_SEPARATOR);
 
+    // QStringList v  = sMessage.split('|');
+	FullTick k;
 
-    k.full_symbol = v[0];
+    k.fullsymbol_ = v[0];
 
-    k.timestamp = v[1];
-    k.tick_type = DataType(v[2].toInt());
-    k.price = v[3].toDouble();
-    k.size = v[4].toInt();
-    k.depth = v[5].toInt();
+    //k.time_ = v[1];
+    //k.datatype_ = DataType(stoi(v[2].c_str()));
+	//k.price_ = stof(v[3].c_str());
+	//k.size_ = stoi(v[4].c_str());
+    //k.depth = v[5].toInt();
 
-    if (k.tick_type == DataType::DT_Full)
+    //if (k.datatype_ == DataType::DT_Full)
     {
-        k.bid_price_L1 = v[6].toDouble();
+        /*k.bid_price_L1 = v[6].toDouble();
         k.bid_size_L1 = v[7].toInt();
         k.ask_price_L1 = v[8].toDouble();
         k.ask_size_L1 = v[9].toInt();
@@ -125,37 +129,39 @@ void MainWindow::ShowSingal(QString sMessage)
         k.low = v[13].toDouble();
         k.pre_close = v[14].toDouble();
         k.upper_limit_price = v[15].toDouble();
-        k.lower_limit_price = v[16].toDouble();
+        k.lower_limit_price = v[16].toDouble();*/
     }
 	
-    auto index =std::find(securities.begin(),securities.end(),k.full_symbol);
+    /*auto index =std::find(securities.begin(),securities.end(),QString(k.fullsymbol_.c_str()));
+
     if(index==securities.end())
     {
         return;
     }
     int row =index-securities.begin();
 
-    if (k.price > 0.0)
+    if (k.price_ > 0.0)
     {
-        ui->tableWidget->item(row,1)->setText(k.full_symbol);
-        ui->tableWidget->item(row,13)->setText(k.timestamp);
+        //ui->tableWidget->item(row,1)->setText(k.full_symbol);
+		ui->tableWidget->item(row, 13)->setText(QString(k.time_.c_str()));*/
 
-        if (k.tick_type == DataType::DT_Bid)
+		/*
+        if (k.datatype_ == DataType::DT_Bid)
         {
             ui->tableWidget->item(row,5)->setText(QString::number(k.size));
             ui->tableWidget->item(row,6)->setText(QString::number(k.price));
         }
-        else if (k.tick_type == DataType::DT_Ask)
+        else if (k.datatype_ == DataType::DT_Ask)
         {
             ui->tableWidget->item(row,7)->setText(QString::number(k.price));
             ui->tableWidget->item(row,8)->setText(QString::number(k.size));
         }
-        else if(k.tick_type ==DataType::DT_Trade)
+        else if(k.datatype_ ==DataType::DT_Trade)
         {
             ui->tableWidget->item(row,2)->setText(QString::number(k.price));
             ui->tableWidget->item(row,3)->setText(QString::number(k.size));
         }
-        else if (k.tick_type == DataType::DT_Full)
+        else if (k.datatype_ == DataType::DT_Full)
         {
             ui->tableWidget->item(row,2)->setText(QString::number(k.price));
             ui->tableWidget->item(row,3)->setText(QString::number(k.size));
@@ -168,9 +174,8 @@ void MainWindow::ShowSingal(QString sMessage)
             ui->tableWidget->item(row,10)->setText(QString::number(k.open));
             ui->tableWidget->item(row,11)->setText(QString::number(k.high));
             ui->tableWidget->item(row,12)->setText(QString::number(k.low));
-        }
-    }
-
+        }*/
+    //}
 }
 
 void MainWindow::on_pushButton_Order_clicked()
