@@ -104,12 +104,13 @@ void MainWindow::GetConfig()
 
 void MainWindow::ShowSingal(string sMessage)
 {
-	vector<string> v = stringsplit(sMessage, SERIALIZATION_SEPARATOR);
+	std::cout << sMessage << std::endl;
+	// vector<string> v = stringsplit(sMessage, SERIALIZATION_SEPARATOR);
 
     // QStringList v  = sMessage.split('|');
-	FullTick k;
+	// FullTick k;
 
-    k.fullsymbol_ = v[0];
+    // k.fullsymbol_ = v[0];
 
     //k.time_ = v[1];
     //k.datatype_ = DataType(stoi(v[2].c_str()));

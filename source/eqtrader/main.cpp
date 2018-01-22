@@ -18,6 +18,8 @@ int main(int argc, char *argv[])
 		}
 	};
 
+	qRegisterMetaType<string>("string");           // register std::string
+
     QApplication a(argc, argv);
 
     QFile f(":qdarkstyle/style.qss");
