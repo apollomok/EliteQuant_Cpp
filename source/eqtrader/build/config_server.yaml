@@ -1,7 +1,7 @@
 #------------------ System Setting --------------#
 accounts:    # accounts active for trading
-  #- 107957 
-  - DU15057
+  - 107957 
+  #- DU15057
 msgq: nanomsg           # nanomsg kafka, zmq
 log_dir: d:/workspace/elitequant_cpp/log
 data_dir: d:/workspace/elitequant_cpp/data
@@ -33,7 +33,7 @@ DU15146:
 
 #----------------- Ctp --------------------------#
 107957:
-  broker_id: 9999
+  broker: 9999
   api: CTP
   password: 081214
   auth_code: NA             # NA or actual auth code
@@ -56,7 +56,7 @@ DU15146:
     - ru1805
 
 your_simnow_account2:
-  broker_id: 9999
+  broker: 9999
   api: CTP
   password: your_simnow_pass2
   auth_code: NA             # NA or actual auth code

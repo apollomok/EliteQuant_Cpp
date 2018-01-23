@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <util/util.h>
+#include <boost/filesystem.hpp>
 #include <Common/Data/datatype.h>
 #include <yaml-cpp/yaml.h>
 #include <QDir>
@@ -67,11 +68,13 @@ void MainWindow::InitMarket()
 void MainWindow::GetConfig()
 {
 
-    QString path;
+    //QString path;
     //QDir dir;
     //path=dir.currentPath().append("/config_server.yaml");
 	//std::cout << QDir::currentPath().toStdString() << std::endl;
-    YAML::Node config = YAML::LoadFile("d:/workspace/elitequant_cpp/source/eqserver/config_server.yaml");
+	string path = boost::filesystem::current_path().string() + "/config_server.yaml";
+	std::cout << "eqserver running in path " << path << std::endl;
+	YAML::Node config = YAML::LoadFile(path);
 
     const std::vector<string> accounts = config["accounts"].as<std::vector<string>>();
     for (auto s : accounts) {
@@ -83,7 +86,7 @@ void MainWindow::GetConfig()
         }
         else if (api == "CTP") {
 
-            ctp_broker_id = config[s]["broker_id"].as<std::string>();
+            ctp_broker_id = config[s]["broker"].as<std::string>();
             ctp_user_id = s;
             ctp_password = config[s]["password"].as<std::string>();
             ctp_auth_code = config[s]["auth_code"].as<std::string>();

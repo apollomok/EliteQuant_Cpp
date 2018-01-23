@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;$(solutionDir)EliteQuant;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(solutionDir)EliteQuant;$(SolutionDir)\eqtrader;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\include;C:\Anaconda3\Library\include\qt;C:\Anaconda3\Library\include\qt\QtWidgets;C:\Anaconda3\Library\include\qt\QtGui;C:\Anaconda3\Library\include\qt\QtCore;C:\Anaconda3\Library\.\mkspecs\win32-msvc2015;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
