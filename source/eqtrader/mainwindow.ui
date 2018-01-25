@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1116</width>
+    <height>833</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,7 +52,7 @@
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="tableWidgetMarket">
         <column>
          <property name="text">
           <string>Symbol</string>
@@ -93,11 +93,11 @@
           <string>Ask</string>
          </property>
         </column>
-         <column>
-           <property name="text">
-             <string>Ask Size</string>
-           </property>
-         </column>
+        <column>
+         <property name="text">
+          <string>Ask Size</string>
+         </property>
+        </column>
         <column>
          <property name="text">
           <string>Yest. Close</string>
@@ -331,9 +331,9 @@
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
-       <widget class="QTabWidget" name="tabWidget">
+       <widget class="QTabWidget" name="tabWidgetAccount">
         <property name="currentIndex">
-         <number>0</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -341,16 +341,17 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QTextBrowser" name="textBrowser">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
+           <widget class="QTableWidget" name="tableWidgetLog">
+            <column>
+             <property name="text">
+              <string>Time</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Content</string>
+             </property>
+            </column>
            </widget>
           </item>
          </layout>
@@ -361,7 +362,83 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QTextBrowser" name="textBrowser_2"/>
+           <widget class="QTableWidget" name="tableWidgetOrder">
+            <column>
+             <property name="text">
+              <string>Order ID</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Symbol</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Security Type</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Direction</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Order Flag</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Price</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Quantity</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Filled</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Status</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Order Time</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Cancel Time</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Exchange</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Account</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Source</string>
+             </property>
+            </column>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -371,7 +448,73 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QTextBrowser" name="textBrowser_3"/>
+           <widget class="QTableWidget" name="tableWidgetFill">
+            <column>
+             <property name="text">
+              <string>Order ID</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Fill ID</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Symbol</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Security Type</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Direction</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Order Flag</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Fill Price</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Filled</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Fill Time</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Exchange</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Account</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Source</string>
+             </property>
+            </column>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -381,7 +524,73 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
-           <widget class="QTextBrowser" name="textBrowser_4"/>
+           <widget class="QTableWidget" name="tableWidgetPosition">
+            <column>
+             <property name="text">
+              <string>Symbol</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Security Type</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Direction</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Quantity</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Yest. Quantity</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Freezed</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Average Price</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Open PnL</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Closed PnL</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Account</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Source</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Time</string>
+             </property>
+            </column>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -391,7 +600,63 @@
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <widget class="QTextBrowser" name="textBrowser_5"/>
+           <widget class="QTableWidget" name="tableWidgetAccount">
+            <column>
+             <property name="text">
+              <string>AccountID</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Yest. Net</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Net</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Available</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Commission</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Margin</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Closed PnL</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Open PnL</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Brokerage</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>API</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Time</string>
+             </property>
+            </column>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -406,7 +671,7 @@
           </widget>
          </item>
          <item row="1" column="0" colspan="4">
-          <widget class="QTableWidget" name="tableWidget_2">
+          <widget class="QTableWidget" name="tableWidgetStrategy">
            <column>
             <property name="text">
              <string>SID</string>
@@ -432,16 +697,16 @@
              <string>Open PnL</string>
             </property>
            </column>
-            <column>
-              <property name="text">
-                <string>Close PnL</string>
-              </property>
-            </column>
-            <column>
-              <property name="text">
-                <string>Status</string>
-              </property>
-            </column>
+           <column>
+            <property name="text">
+             <string>Close PnL</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Status</string>
+            </property>
+           </column>
           </widget>
          </item>
          <item row="2" column="0">
@@ -484,7 +749,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1116</width>
      <height>21</height>
     </rect>
    </property>

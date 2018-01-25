@@ -11,7 +11,6 @@ namespace EliteQuant {
 
 	OrderManager::OrderManager() : _count(0)
 	{
-		// set up stocks from config
 		reset();
 	}
 

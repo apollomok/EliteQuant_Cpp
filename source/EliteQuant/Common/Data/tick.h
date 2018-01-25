@@ -7,15 +7,15 @@
 using namespace std;
 
 namespace EliteQuant {
-	class DLL_EXPORT_IMPORT Tick {
+	class DLL_EXPORT_IMPORT Tick : public BaseData {
 	public:
 		Tick() 	: fullsymbol_("")
 			, time_("")
-			, datatype_(DataType::DT_Trade)
 			, price_(0.0)
 			, size_(0)
 			, depth_(1)		// default is L1 or 1
 		{
+			datatype_ = DataType::DT_Trade;
 		}
 
 		Tick(const string& s) :fullsymbol_(s) {}
@@ -24,12 +24,12 @@ namespace EliteQuant {
 
 		string fullsymbol_;
 		string time_;
-		DataType datatype_;
 		double price_;
 		int size_;
 		int depth_;
 
 		virtual string serialize() const;
+		virtual void deserialize(string& s);
 	};
 
 	class DLL_EXPORT_IMPORT FullTick : public Tick {
@@ -47,6 +47,7 @@ namespace EliteQuant {
 			, upper_limit_price_(0.0)
 			, lower_limit_price_(0.0)
 		{
+			datatype_ = DataType::DT_Full;
 		}
 
 		FullTick(const string& s) : Tick(s) {}
@@ -67,6 +68,7 @@ namespace EliteQuant {
 		double lower_limit_price_;
 
 		virtual string serialize() const;		// overriding
+		virtual void deserialize(string& s);
 	};
 }
 

@@ -25,7 +25,8 @@ namespace EliteQuant {
 		DT_OpenInterest = 15,
 		DT_Bar = 16,
 		DT_Account = 17,
-		DT_Position = 18
+		DT_Position = 18,
+		DT_Contract = 19
 	};
 
 	/// xxxTypeString is the string name of xxxType
@@ -46,6 +47,11 @@ namespace EliteQuant {
 		"Account",
 		"Position",
 		"OrderId"
+	};
+
+	class BaseData {
+	public:
+		DataType datatype_;
 	};
 }
 

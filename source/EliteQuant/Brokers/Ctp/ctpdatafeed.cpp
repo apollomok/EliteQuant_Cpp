@@ -299,7 +299,6 @@ namespace EliteQuant
 		FullTick k;
 
 		k.time_ = hmsf();
-		k.datatype_ = DataType::DT_Full;
 		k.fullsymbol_ = pDepthMarketData->InstrumentID;
 		k.price_ = pDepthMarketData->LastPrice;
 		k.size_ = pDepthMarketData->Volume;			// not valid without volume

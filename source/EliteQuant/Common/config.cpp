@@ -5,7 +5,6 @@
 #include <boost/filesystem.hpp>
 #include <Common/config.h>
 //#include <Common/Util/util.h>
-#include <yaml-cpp/yaml.h>
 
 namespace bpt = boost::property_tree;
 namespace bpo = boost::program_options;
@@ -36,6 +35,7 @@ namespace EliteQuant {
 #endif
 		string path = boost::filesystem::current_path().string() + "/config_server.yaml";
 		YAML::Node config = YAML::LoadFile(path);
+		config_server_ = config;			// save config in memory
 
 		_config_dir = boost::filesystem::current_path().string();
 		_log_dir = config["log_dir"].as<std::string>();

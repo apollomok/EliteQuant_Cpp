@@ -5,6 +5,7 @@
 #include <regex>
 
 #include <Common/config.h>
+#include <Common/Data/datatype.h>
 #include <Common/Data/tick.h>
 #include <cereal/types/unordered_map.hpp>
 #include <cereal/types/memory.hpp>
@@ -16,7 +17,8 @@
 using namespace std;
 
 namespace EliteQuant {
-	struct Bar {
+	class DLL_EXPORT_IMPORT Bar : public BaseData {
+	public:
 		Bar();
 		Bar(const string& s);
 		~Bar() {}

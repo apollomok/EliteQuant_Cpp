@@ -6,11 +6,13 @@
 #include <sstream>
 #include <regex>
 #include <Common/config.h>
+#include <Common/Data/datatype.h>
 
 namespace EliteQuant
 {
-	struct AccountInfo {
+	class DLL_EXPORT_IMPORT AccountInfo : public BaseData {
 	public:
+		AccountInfo() { datatype_ = DataType::DT_Account; }
 		string AccountID;
 		string AccountType;				//INDIVIDUAL
 		
@@ -29,6 +31,10 @@ namespace EliteQuant
 
 		double RealizedPnL = 0.0;
 		double UnrealizedPnL = 0.0;
+
+		string brokerage;
+		string api;
+		string timestamp;
 
 		template<class Archive>
 		void serialize(Archive & ar) {

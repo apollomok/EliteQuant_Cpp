@@ -11,6 +11,7 @@
 #include <cereal/types/vector.hpp>
 #include <cereal/types/string.hpp>
 #include <cereal/types/map.hpp>
+#include <Common/Data/datatype.h>
 
 using std::string;
 
@@ -18,11 +19,13 @@ namespace EliteQuant
 {
 	// Full Symbol = Serialization = Symbol + Security Type + Exchange (+ Multiplier, default is 1)
 	// It's the Full Symbol that is used throughout the program;
-	struct Security {
+	class DLL_EXPORT_IMPORT Security : public BaseData {
+	public:
 		Security()
 			: symbol("")
 			, securityType("")
 		{
+			datatype_ = DataType::DT_Contract;
 		}
 
 		Security(string sym, string sectype, string exch = "", int mply = 1)
@@ -36,6 +39,7 @@ namespace EliteQuant
 		}
 
 		// long internalId;
+		string fullSymbol;
 		string symbol;
 		string securityType;
 		string exchange;
@@ -50,14 +54,14 @@ namespace EliteQuant
 		string right;		// "C" or "P" or ""
 		string expiryDate;
 
-		string fullSymbol() {
+		void composeFullSymbol() {
 			std::stringstream ss;
 			ss << symbol << " " << securityType << " " << exchange;
 			if (securityType == "FUT")
 				ss << " " << multiplier;
 
 			std::string s = ss.str();
-			return s;
+			fullSymbol = s;
 		}
 
 		template<class Archive>

@@ -27,14 +27,14 @@
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\ctickevent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\util\util.h">
+      <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\util\util.h">
-      <Filter>util</Filter>
+    <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

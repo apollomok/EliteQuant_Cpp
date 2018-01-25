@@ -11,6 +11,7 @@
 #include <Common/config.h>
 #include <Common/Account/accountinfo.h>
 #include <Common/Security/position.h>
+#include <Common/Security/security.h>
 #include <Common/Order/orderstatus.h>
 #include <Common/Order/order.h>
 #include <Common/Logger/logger.h>
@@ -18,7 +19,7 @@
 using namespace std;
 
 namespace EliteQuant {
-	class PortfolioManager {
+	class DLL_EXPORT_IMPORT PortfolioManager {
 	public:
 		PortfolioManager();
 		~PortfolioManager();
@@ -29,12 +30,14 @@ namespace EliteQuant {
 		uint64_t _count = 0;
 		AccountInfo _account;
 
+		map<string, Security> _securities;			// fullsymbol --> sec info
 		map<string, Position> _positions;			// fullsymbol --> size
 		double _cash;
 
 		void reset();
 		void rebuild();
 
+		void onSecurity(Security& sec);
 		void Add(Position& pos);
 		double Adjust(Fill& fill);
 	};

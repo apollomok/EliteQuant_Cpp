@@ -4,6 +4,7 @@
 namespace EliteQuant
 {
 	Bar::Bar() {
+		datatype_ = DataType::DT_Bar;
 		interval_ = 300;         // 5 mins = 300s
 
 		open_ = 0;
@@ -15,6 +16,7 @@ namespace EliteQuant
 	}
 
 	Bar::Bar(const string& s) : fullsymbol_(s) {
+		datatype_ = DataType::DT_Bar;
 		interval_ = 300;         // 5 mins = 300s
 
 		open_ = 0;

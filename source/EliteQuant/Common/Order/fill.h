@@ -80,6 +80,10 @@ namespace EliteQuant
 			return str;
 		}
 
+		void deserialize(string fill) {
+
+		}
+
 		string toJson(const std::regex& p) {
 			std::stringstream ss;
 			{

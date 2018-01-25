@@ -30,7 +30,7 @@ namespace EliteQuant {
 		/*for (auto&& p : _positions) {
 			if (p.second != nullptr) delete p.second;
 		}*/
-
+		_securities.clear();
 		_positions.clear();
 		_count = 0;
 	}
@@ -61,5 +61,17 @@ namespace EliteQuant {
 		}
 
 		return _positions[fill.fullSymbol].Adjust(fill);
+	}
+
+	void PortfolioManager::onSecurity(Security& sec) {
+		auto it = _securities.find(sec.fullSymbol);
+		if (it == _securities.end()) {
+			_securities[sec.fullSymbol] = sec;
+
+			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Contract %s info received.\n", __FILE__, __LINE__, __FUNCTION__, sec.fullSymbol.c_str());
+		}
+		else {
+			PRINT_TO_FILE_AND_CONSOLE("INFO:[%s,%d][%s]Contract %s info received again.\n", __FILE__, __LINE__, __FUNCTION__, sec.fullSymbol.c_str());
+		}
 	}
 }

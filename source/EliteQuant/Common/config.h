@@ -24,6 +24,7 @@
 #include <cereal/include/cereal/types/vector.hpp>
 #include <cereal/include/cereal/types/string.hpp>
 #include <cereal/include/cereal/types/map.hpp>
+#include <yaml-cpp/yaml.h>
 #include <Common/Logger/logger.h>
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -98,6 +99,7 @@ printf("%s ",ymdhmsf().c_str());printf(__VA_ARGS__);\
 
 		static CConfig& instance();
 
+		YAML::Node config_server_;			// save config
 		void readConfig();
 
 		string _config_dir;

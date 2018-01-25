@@ -20,10 +20,10 @@ public:
 protected:
     void run();
 signals:
-    void UpdateSignal(string msg);
-
+    void IncomingMarketSignal(string msg);
+	void IncomingGeneralSignal(string msg);
 public slots:
-        void PlaceOrderSlot(QString order);
+        void OutgoingMessageSlot(string msg);
 };
 
 #endif // CLIENTMQ_H

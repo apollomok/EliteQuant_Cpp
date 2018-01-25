@@ -27,7 +27,7 @@ namespace EliteQuant {
 		virtual string recmsg(int blockingflags = 1) = 0;
 	};
 
-	class CMsgqNanomsg : public CMsgq {
+	class DLL_EXPORT_IMPORT CMsgqNanomsg : public CMsgq {
 	private:
 		int sock_ = -1;
 		int eid_ = 0;

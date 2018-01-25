@@ -11,6 +11,7 @@
 #include <nanomsg/pair.h>
 #endif
 #include <time.h>
+#include <iostream>
 #include <queue>
 #include <QStringList>
 
@@ -18,11 +19,14 @@
 ClientMQ::ClientMQ()
 {
     msg = "";
+	int to = 100;
+
     tick_sock=nn_socket(AF_SP,NN_SUB);
     msg_sock=nn_socket(AF_SP,NN_PAIR);
 
+	nn_setsockopt(tick_sock, NN_SOL_SOCKET, NN_RCVTIMEO, &to, sizeof(to));
     nn_setsockopt (tick_sock, NN_SUB, NN_SUB_SUBSCRIBE, "", 0);
-    //nn_setsockopt (msg_sock, NN_PAIR, NN_SUB_SUBSCRIBE, "", 0);
+	nn_setsockopt(msg_sock, NN_SOL_SOCKET, NN_RCVTIMEO, &to, sizeof(to));
 
     nn_connect (tick_sock, "tcp://127.0.0.1:55555") ;
     nn_connect (msg_sock, "tcp://127.0.0.1:55558") ;
@@ -43,7 +47,7 @@ void ClientMQ::run()
 			string marketmsg= string(buf);
             //if(marketmsg.indexOf('|')>0)
             {
-                emit UpdateSignal(marketmsg);
+                emit IncomingMarketSignal(marketmsg);
                 /*
                 QStringList v  = marketmsg.split('|');
                 TickEvent k=new TickEvent();
@@ -75,9 +79,12 @@ void ClientMQ::run()
         }
 
         char *buf1 = NULL;
-        int bytes1 = nn_recv (tick_sock, &buf1, NN_MSG, 0);
+        int bytes1 = nn_recv (msg_sock, &buf1, NN_MSG, 0);
         if(bytes1>0)
         {
+			//std::cout << buf1 << std::endl;
+			string msg = string(buf1);
+			emit IncomingGeneralSignal(msg);
             /*
 
                                m = GeneralEvent()
@@ -117,9 +124,9 @@ void ClientMQ::run()
     }
 }
 
-void ClientMQ::PlaceOrderSlot(QString order)
+void ClientMQ::OutgoingMessageSlot(string order)
 {
-    outgoing_queue.push(order);
+    // outgoing_queue.push(order);
 }
 ClientMQ::~ClientMQ()
 {
