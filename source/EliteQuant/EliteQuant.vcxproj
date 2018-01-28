@@ -22,7 +22,7 @@
     <ProjectGuid>{2E1B1DCB-761A-48D8-A4BC-152F1D67EAEF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>EliteQuant</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -72,10 +72,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\boost;C:\Program Files (x86)\Python36-32\include;$(IncludePath)</IncludePath>
+    <ReferencePath>$(VC_ReferencesPath_x86);$(ReferencePath)；</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <ReferencePath>$(ReferencePath)</ReferencePath>
+    <IncludePath>D:\boost;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -90,10 +93,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ELITEQUANT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)EliteQuant\;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;$(SolutionDir)ThirdParty\websocketpp\;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\rapidjson\include\;C:\Anaconda3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>C:\Program Files (x86)\Python36-32\libs\python36.lib;C:\Program Files (x86)\Python36-32\libs\python3.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thostmduserapi.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thosttraderapi.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmdd.lib;$(SolutionDir)ThirdParty\zeromq\bin\$(Platform)\$(Configuration)\v141\dynamic\libzmq.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\boost\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -156,6 +162,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Brokers\Backtest\backtestdatafeed.cpp" />
+    <ClCompile Include="Brokers\BtcChina\btcchinadatafeed.cpp" />
     <ClCompile Include="Brokers\Ctp\ctpbrokerage.cpp" />
     <ClCompile Include="Brokers\Ctp\ctpdatafeed.cpp" />
     <ClCompile Include="Brokers\Google\googledatafeed.cpp" />
@@ -181,6 +188,7 @@
     <ClCompile Include="Brokers\IB\Official\StdAfx.cpp" />
     <ClCompile Include="Brokers\IB\Official\TimeCondition.cpp" />
     <ClCompile Include="Brokers\IB\Official\VolumeCondition.cpp" />
+    <ClCompile Include="Brokers\OkCoin\okcoindatafeed.cpp" />
     <ClCompile Include="Brokers\Paper\paperbrokerage.cpp" />
     <ClCompile Include="Brokers\Paper\paperdatafeed.cpp" />
     <ClCompile Include="Brokers\Sina\sinadatafeed.cpp" />
@@ -224,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Brokers\Backtest\backtestdatafeed.h" />
+    <ClInclude Include="Brokers\BtcChina\btcchinadatafeed.h" />
     <ClInclude Include="Brokers\Ctp\ctpbrokerage.h" />
     <ClInclude Include="Brokers\Ctp\ctpdatafeed.h" />
     <ClInclude Include="Brokers\Ctp\ThostFtdcMdApi.h" />
@@ -270,6 +279,7 @@
     <ClInclude Include="Brokers\IB\Official\TimeCondition.h" />
     <ClInclude Include="Brokers\IB\Official\TwsSocketClientErrors.h" />
     <ClInclude Include="Brokers\IB\Official\VolumeCondition.h" />
+    <ClInclude Include="Brokers\OkCoin\okcoindatafeed.h" />
     <ClInclude Include="Brokers\Paper\paperbrokerage.h" />
     <ClInclude Include="Brokers\Paper\paperdatafeed.h" />
     <ClInclude Include="Brokers\Sina\sinadatafeed.h" />

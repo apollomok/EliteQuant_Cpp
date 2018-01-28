@@ -21,6 +21,7 @@ endif()
 include(CheckCXXCompilerFlag)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(BUILD_USE_64BITS on)
 
 ###
 ### Project settings
