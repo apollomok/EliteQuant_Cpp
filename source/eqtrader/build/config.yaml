@@ -1,0 +1,47 @@
+# exchange_id, broker_id, trader_id, trader_pwd, order_id, order_ticker
+broker: IB # IB CTP SINA, GOOGLE, PAPER
+msgq: nanomsg
+account: DU15031
+ibport: 7497
+ctp_broker_id: 9999
+ctp_user_id: 067425
+ctp_password: 780505
+ctp_md_address: tcp://180.168.212.228:41213
+ctp_td_address: tcp://180.168.146.187:10000
+tickers:
+  # - IF1707
+  # - IF1709
+  # - rb1709
+  # - i1709
+  # - j1709
+  # - cu1707C39000
+  - SPY STK SMART
+  - AAPL STK SMART
+  - AMZN STK SMART
+  - TSLA STK SMART
+  - GOOGL STK SMART
+  - FB STK SMART
+  - BIDU STK SMART
+  - BABA STK SMART
+  - GS STK SMART
+  - JPM STK SMART
+  - ESZ7 FUT GLOBEX 50
+  - EUR.USD CASH IDEALPRO
+  - GBP.USD CASH IDEALPRO
+  #- sh600028
+  #- sh601857
+  #- sh600036
+  #- sh601668
+  #- sh601988
+  #- sh601166
+  #- sh601377
+  #- sh600958
+  #- sh600028		# 中国石化
+  #- sh601857		# 中国石油
+  #- sh600036		# 招商银行
+  #- sh601668		# 中国建筑	
+  #- sh601988  		# 中国银行
+  #- sh601166  		# 兴业银行
+  #- sh601377  		# 兴业证券
+  #- sh600958  		# 东方证券
+  

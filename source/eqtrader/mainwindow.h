@@ -45,6 +45,8 @@ private:
     Ui::MainWindow *ui;
 
     vector<QString> securities;
+    vector<QString> orderids;
+    map<string, string> contracts;
     void readConfig();
     void InitMarket();
 
