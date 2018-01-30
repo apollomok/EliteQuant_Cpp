@@ -6,6 +6,22 @@
 #include <boost/property_tree/ptree.hpp>  
 #include <boost/algorithm/string/find.hpp>
 
+#include "Poco/Net/HTMLForm.h"  
+#include "Poco/URI.h"  
+#include "Poco/Net/HTTPClientSession.h"  
+#include "Poco/Net/HTTPRequest.h"  
+#include "Poco/Net/HTTPResponse.h"  
+#include "Poco/StreamCopier.h"  
+#include "Poco/Net/NetException.h"  
+
+#include "Poco/JSON/Object.h"  
+#include "Poco/JSON/Parser.h"  
+#include "Poco/Dynamic/Var.h"  
+
+#include "Poco/Net/HTTPSClientSession.h"  
+#include "Poco/Net/Context.h"  
+#include "Poco/Net/SSLException.h"  
+
 #include <iostream>
 #include <istream>
 #include <ostream>
@@ -120,85 +136,21 @@ namespace EliteQuant
 
 		while (!gShutdown) {
 			try {
-				boost::asio::io_service io_service;
+				Poco::URI purl("https://www.okcoin.com/api/v1/ticker.do?symbol=btc_usd");
+				Poco::Net::Context::Ptr context = new Poco::Net::Context(Poco::Net::Context::CLIENT_USE, "", "", "", Poco::Net::Context::VERIFY_NONE, 9, false);
+				Poco::Net::HTTPSClientSession session(context);
+				session.setHost(purl.getHost());
+				session.setPort(purl.getPort());
+				Poco::Net::HTTPRequest req(Poco::Net::HTTPRequest::HTTP_GET, purl.getPathAndQuery(), Poco::Net::HTTPMessage::HTTP_1_1);
+				std::ostream& ostr = session.sendRequest(req);
+				Poco::Net::HTTPResponse res;
+				std::istream& istr = session.receiveResponse(res);
+
+				std::string temp;
+				Poco::StreamCopier::copyToString(istr, temp);
 				
-				// Get a list of endpoints corresponding to the server name.
-				tcp::resolver resolver(io_service);
-				tcp::resolver::query query(_host, "http");
-				tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
-				tcp::resolver::iterator end;
-
-				// Try each endpoint until we successfully establish a connection.
-				tcp::socket socket(io_service);
-				boost::system::error_code error = boost::asio::error::host_not_found;
-				while (error && endpoint_iterator != end) {
-					socket.close();
-					socket.connect(*endpoint_iterator++, error);
-				}
-
-				if (error) { throw boost::system::system_error(error); }
-
-				// Form the request. We specify the "Connection: close" header so that the server will close the socket 
-				// after transmitting the response. This will allow us to treat all data up until the EOF as the content.
-				boost::asio::streambuf request;
-				std::ostream request_stream(&request);
-				request_stream << "GET /api/v1/ticker.do?symbol=btc_usd HTTP/1.1\r\n";
-				request_stream << "Host: " << _host << "\r\n";
-				request_stream << "Accept: */*\r\n";
-				request_stream << "Connection: close\r\n\r\n";
-
-				// Send the request.
-				boost::asio::write(socket, request);
-
-				// Read the response status line.
-				boost::asio::streambuf response;
-				boost::asio::read_until(socket, response, "\r\n");
-
-				// Check that response is OK.
-				std::istream response_stream(&response);
-
-				std::string http_version;
-				response_stream >> http_version;
-
-				unsigned int status_code;
-				response_stream >> status_code;
-
-				std::string status_message;
-				std::getline(response_stream, status_message);
-				if (!response_stream || http_version.substr(0, 5) != "HTTP/") {
-					std::cout << "Invalid response\n";
-				}
-				if (status_code != 200) {
-					std::cout << "Response returned with status code " << status_code << "\n";
-				}
-
-				// Read the response headers, which are terminated by a blank line.
-				boost::asio::read_until(socket, response, "\r\n\r\n");
-
-				// Write whatever content we already have to output.
-				if (response.size() > 0) {
-					std::ostringstream oss;
-					oss << &response;
-					res = oss.str();
-				}
-				
-				//std::cout << res << std::endl;
-
-				// Read until EOF, writing data to output as we go.
-				while (boost::asio::read(socket, response, boost::asio::transfer_at_least(1), error)) {
-					//std::cout << &response; // don't want to print just return
-					std::ostringstream oss;
-					oss << &response;
-					res += oss.str();
-				}
-				
-				string result=res.substr(boost::algorithm::find_first(res, "\r\n\r\n").end()-res.begin());
-				//std::cout << res << std::endl;
-
-				if (error != boost::asio::error::eof) { throw boost::system::system_error(error); }
-
 				std::istringstream iss;
-				iss.str(result.c_str());
+				iss.str(temp);
 				boost::property_tree::ptree parser;
 				boost::property_tree::json_parser::read_json(iss, parser);
 				boost::property_tree::ptree ticker = parser.get_child("ticker");
@@ -240,6 +192,10 @@ namespace EliteQuant
 				msgq_pub_->sendmsg(k.serialize());
 				msleep(50);
 					
+			}
+			catch (const Poco::Net::SSLException& e)
+			{
+				std::cerr << e.what() << ": " << e.message() << std::endl;
 			}
 			catch (std::exception& e) {
 				std::cout << "Exception: " << e.what() << "\n";
