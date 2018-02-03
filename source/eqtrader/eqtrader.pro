@@ -45,3 +45,6 @@ FORMS += \
 
 RESOURCES += \
     qdarkstyle/style.qrc
+
+TRANSLATIONS+=en.ts \
+			  cn.ts

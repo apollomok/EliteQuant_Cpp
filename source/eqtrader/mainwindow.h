@@ -73,6 +73,8 @@ private slots:
 	void PauseStrategy();
 	void StopStrategy();
 	void LiquidateStrategy();
+	void TranslateToEnglish();
+	void TranslateToChinese();
 };
 
 #endif // MAINWINDOW_H

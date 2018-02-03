@@ -1,6 +1,6 @@
 #include "strategybase.h"
 
-StrategyBase::StrategyBase()
+Strategy::Strategy()
 {
 
 }

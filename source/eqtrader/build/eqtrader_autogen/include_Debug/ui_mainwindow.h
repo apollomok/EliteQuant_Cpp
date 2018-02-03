@@ -35,6 +35,8 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionEnglish;
+    QAction *actionChinese;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QSplitter *splitter_3;
@@ -102,6 +104,10 @@ public:
         icon.addFile(QStringLiteral("../Downloads/EliteQuant-EliteQuant_Python-master/EliteQuant_Python/source/gui/image/logo.ico"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
         MainWindow->setStyleSheet(QStringLiteral(""));
+        actionEnglish = new QAction(MainWindow);
+        actionEnglish->setObjectName(QStringLiteral("actionEnglish"));
+        actionChinese = new QAction(MainWindow);
+        actionChinese->setObjectName(QStringLiteral("actionChinese"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -538,6 +544,9 @@ public:
         MainWindow->setStatusBar(statusBar);
 
         menuBar->addAction(menu->menuAction());
+        menu->addSeparator();
+        menu->addAction(actionEnglish);
+        menu->addAction(actionChinese);
 
         retranslateUi(MainWindow);
 
@@ -550,6 +559,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "EliteQuant", 0));
+        actionEnglish->setText(QApplication::translate("MainWindow", "English", 0));
+        actionChinese->setText(QApplication::translate("MainWindow", "Chinese", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidgetMarket->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Symbol", 0));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidgetMarket->horizontalHeaderItem(1);

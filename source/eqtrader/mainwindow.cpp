@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <Common/config.h>
 #include <common/Data/tick.h>
+#include <QTranslator>
 
 using namespace EliteQuant;
 
@@ -47,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
     clientMQ=new ClientMQ();
     strategyManager=new StrategyManager(clientMQ);
 	// https://stackoverflow.com/questions/37057042/how-to-know-in-which-thread-qt-executes-slots
+    connect(ui->actionEnglish, SIGNAL(triggered()), this, SLOT(TranslateToEnglish()));
+	connect(ui->actionChinese, SIGNAL(triggered()), this, SLOT(TranslateToChinese()));
     connect(this, SIGNAL(OutgoingMessageSignal(string)),clientMQ, SLOT(OutgoingMessageSlot(string)));
     connect(clientMQ, SIGNAL(IncomingMarketSignal(string)),this, SLOT(IncomingMarketSlot(string)));
 	connect(clientMQ, SIGNAL(IncomingGeneralSignal(string)), this, SLOT(IncomingGeneralSlot(string)));
@@ -77,6 +80,25 @@ void MainWindow::SetParamsToOrderWidget(int row,int column)
     ui->LineEdit_Price->setText(askprice);
 
 }
+
+void MainWindow::TranslateToEnglish()
+{
+	QTranslator translator;
+	translator.load("en.qm");
+	qApp->installTranslator(&translator);
+	ui->retranslateUi(this);
+
+}
+void MainWindow::TranslateToChinese()
+{
+    QTranslator translator;
+    translator.load("cn.qm");
+    qApp->installTranslator(&translator);
+    ui->retranslateUi(this);
+
+}
+
+
 void MainWindow::StartStrategy()
 {
     bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
@@ -89,13 +111,12 @@ void MainWindow::StartStrategy()
 }
 void MainWindow::PauseStrategy()
 {
-    bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
-    if(focus)
-    {
-      int row1 = ui->tableWidgetStrategy->currentItem()->row(); // 当前选中行
-      //todo: PauseStrategy
-    }
-
+	bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
+	if (focus)
+	{
+		int row1 = ui->tableWidgetStrategy->currentItem()->row(); // 当前选中行
+																  //todo: startStratey
+	}
 }
 void MainWindow::StopStrategy()
 {
