@@ -486,10 +486,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\strategymanager.cpp" />
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\main.cpp" />
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.cpp" />
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.cpp" />
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\ctickevent.cpp" />
+    <ClInclude Include="..\strategybase.h" />
+    <ClInclude Include="..\strategymanager.h" />
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.h" />
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\mainwindow.h" />
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\enums.h" />

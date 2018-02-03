@@ -28,13 +28,17 @@ SOURCES += \
     ctickevent.cpp \
     clientmq.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    strategymanager.cpp \
+    strategybase.cpp
 
 HEADERS += \
     enums.h \
     clientmq.h \
     ctickevent.h \
-    mainwindow.h
+    mainwindow.h \
+    strategymanager.h \
+    strategybase.h
 
 FORMS += \
         mainwindow.ui

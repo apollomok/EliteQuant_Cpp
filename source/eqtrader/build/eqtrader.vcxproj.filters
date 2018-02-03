@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\main.cpp">
@@ -19,6 +19,9 @@
     <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\eqtrader_autogen\mocs_compilation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\strategymanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\clientmq.h">
@@ -34,6 +37,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\eqtrader\build\ui_mainwindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\strategybase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\strategymanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

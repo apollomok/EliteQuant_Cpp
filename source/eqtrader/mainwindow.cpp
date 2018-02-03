@@ -45,10 +45,17 @@ MainWindow::MainWindow(QWidget *parent) :
     this->InitMarket();
     setWindowState(Qt::WindowMaximized);
     clientMQ=new ClientMQ();
+    strategyManager=new StrategyManager(clientMQ);
 	// https://stackoverflow.com/questions/37057042/how-to-know-in-which-thread-qt-executes-slots
     connect(this, SIGNAL(OutgoingMessageSignal(string)),clientMQ, SLOT(OutgoingMessageSlot(string)));
     connect(clientMQ, SIGNAL(IncomingMarketSignal(string)),this, SLOT(IncomingMarketSlot(string)));
 	connect(clientMQ, SIGNAL(IncomingGeneralSignal(string)), this, SLOT(IncomingGeneralSlot(string)));
+    connect(ui->tableWidgetMarket,SIGNAL(cellClicked(int,int)),this,SLOT(SetParamsToOrderWidget(int,int)));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(StartStrategy()));
+    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(PauseStrategy()));
+    connect(ui->pushButton_3, SIGNAL(clicked()), this, SLOT(StopStrategy()));
+    connect(ui->pushButton_4, SIGNAL(clicked()), this, SLOT(LiquidateStrategy()));
+
     clientMQ->start();
 
 }
@@ -56,6 +63,60 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::SetParamsToOrderWidget(int row,int column)
+{
+    QString symbol=ui->tableWidgetMarket->item(row,0)->text();
+    ui->LineEditCode->setText(symbol);
+
+    QString name=ui->tableWidgetMarket->item(row,1)->text();
+    ui->LineEditName->setText(name);
+
+    QString askprice=ui->tableWidgetMarket->item(row,7)->text();
+    ui->LineEdit_Price->setText(askprice);
+
+}
+void MainWindow::StartStrategy()
+{
+    bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
+    if(focus)
+    {
+      int row1 = ui->tableWidgetStrategy->currentItem()->row(); // 当前选中行
+      //todo: startStratey
+    }
+
+}
+void MainWindow::PauseStrategy()
+{
+    bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
+    if(focus)
+    {
+      int row1 = ui->tableWidgetStrategy->currentItem()->row(); // 当前选中行
+      //todo: PauseStrategy
+    }
+
+}
+void MainWindow::StopStrategy()
+{
+    bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
+    if(focus)
+    {
+      int row1 = ui->tableWidgetStrategy->currentItem()->row(); // 当前选中行
+      //todo: StopStrategy
+    }
+
+}
+
+void MainWindow::LiquidateStrategy()
+{
+    bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
+    if(focus)
+    {
+      int row1 = ui->tableWidgetStrategy->currentItem()->row(); // 当前选中行
+      //todo: LiquidateStrategy
+    }
+
 }
 
 void MainWindow::InitMarket()
