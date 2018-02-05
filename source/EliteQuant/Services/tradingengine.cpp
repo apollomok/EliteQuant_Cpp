@@ -80,6 +80,20 @@ namespace EliteQuant
 						CConfig::instance().ib_client_id++));
 					threads.push_back(new thread(TickRecordingService));
 				}
+				else if (_broker == BROKERS::BTCC)
+				{
+					pmkdata = make_shared<btcchinadatafeed>();
+					threads.push_back(new thread(MarketDataService, pmkdata,
+						CConfig::instance().ib_client_id++));
+					threads.push_back(new thread(TickRecordingService));
+				}
+				else if (_broker == BROKERS::OKCOIN)
+				{
+					pmkdata = make_shared<okcoindatafeed>();
+					threads.push_back(new thread(MarketDataService, pmkdata,
+						CConfig::instance().ib_client_id++));
+					threads.push_back(new thread(TickRecordingService));
+				}
 			}
 			else if (mode == RUN_MODE::REPLAY_MODE) {
 				printf("REPLAY_MODE\n");
@@ -130,6 +144,24 @@ namespace EliteQuant
 				else if (_broker == BROKERS::PAPER)
 				{
 					pmkdata = make_shared<sinadatafeed>();
+					threads.push_back(new thread(MarketDataService, pmkdata,
+						CConfig::instance().ib_client_id++));
+					threads.push_back(new thread(TickRecordingService));
+					pbrokerage = make_shared<paperbrokerage>();
+					threads.push_back(new thread(BrokerageService, pbrokerage, 0));
+				}
+				else if (_broker == BROKERS::BTCC)
+				{
+					pmkdata = make_shared<btcchinadatafeed>();
+					threads.push_back(new thread(MarketDataService, pmkdata,
+						CConfig::instance().ib_client_id++));
+					threads.push_back(new thread(TickRecordingService));
+					pbrokerage = make_shared<paperbrokerage>();
+					threads.push_back(new thread(BrokerageService, pbrokerage, 0));
+				}
+				else if (_broker == BROKERS::OKCOIN)
+				{
+					pmkdata = make_shared<okcoindatafeed>();
 					threads.push_back(new thread(MarketDataService, pmkdata,
 						CConfig::instance().ib_client_id++));
 					threads.push_back(new thread(TickRecordingService));

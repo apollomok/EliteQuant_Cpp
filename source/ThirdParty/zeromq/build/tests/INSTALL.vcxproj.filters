@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\build\CMakeFiles\2c9fb7cc21e1b0260fe98498af444ee2\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{BA391BD7-DFED-3E74-955E-007DFE8CAE8A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

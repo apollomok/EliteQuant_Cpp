@@ -6,6 +6,8 @@
 #include <Common/config.h>
 #include <Common/Brokerage/brokerage.h>
 #include <Brokers/Sina/sinadatafeed.h>
+#include <Brokers/BtcChina/btcchinadatafeed.h>
+#include <Brokers/OkCoin/okcoindatafeed.h>
 #include <Brokers/Google/googledatafeed.h>
 #include <Brokers/Paper/paperdatafeed.h>
 #include <Brokers/Ctp/ctpdatafeed.h>

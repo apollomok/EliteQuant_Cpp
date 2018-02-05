@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\address.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\clock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\ctx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\curve_client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\curve_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\dealer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\devpoll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\dist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\epoll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\err.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\fq.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\io_object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\io_thread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\ip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\ipc_address.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\ipc_connecter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\ipc_listener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\kqueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\lb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\mailbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\mechanism.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\metadata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\msg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\mtrie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\own.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\null_mechanism.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\pair.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\pgm_receiver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\pgm_sender.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\pgm_socket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\pipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\plain_client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\plain_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\poll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\poller_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\precompiled.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\proxy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\pub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\pull.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\push.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\raw_encoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\raw_decoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\reaper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\rep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\req.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\router.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\select.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\session_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\signaler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\socket_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\socks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\socks_connecter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\stream_engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\sub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\tcp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\tcp_address.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\tcp_connecter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\tcp_listener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\thread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\trie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\v1_decoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\v1_encoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\v2_decoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\v2_encoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\xpub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\xsub.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\zmq.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\zmq_utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\tweetnacl\src\tweetnacl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\tweetnacl\contrib\randombytes\winrandom.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\src\config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\build\platform.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\Workspace\EliteQuant_Cpp\source\ThirdParty\zeromq\build\version.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{B8CC20A9-895B-3DCD-BD36-44A05A07124F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{6B8FEC2F-978D-3349-BC26-BB97146FEDB4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

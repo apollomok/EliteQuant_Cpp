@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <Common/config.h>
 #include <common/Data/tick.h>
+#include <QTranslator>
 
 using namespace EliteQuant;
 
@@ -45,10 +46,19 @@ MainWindow::MainWindow(QWidget *parent) :
     this->InitMarket();
     setWindowState(Qt::WindowMaximized);
     clientMQ=new ClientMQ();
+    strategyManager=new StrategyManager(clientMQ);
 	// https://stackoverflow.com/questions/37057042/how-to-know-in-which-thread-qt-executes-slots
+    connect(ui->actionEnglish, SIGNAL(triggered()), this, SLOT(TranslateToEnglish()));
+	connect(ui->actionChinese, SIGNAL(triggered()), this, SLOT(TranslateToChinese()));
     connect(this, SIGNAL(OutgoingMessageSignal(string)),clientMQ, SLOT(OutgoingMessageSlot(string)));
     connect(clientMQ, SIGNAL(IncomingMarketSignal(string)),this, SLOT(IncomingMarketSlot(string)));
 	connect(clientMQ, SIGNAL(IncomingGeneralSignal(string)), this, SLOT(IncomingGeneralSlot(string)));
+    connect(ui->tableWidgetMarket,SIGNAL(cellClicked(int,int)),this,SLOT(SetParamsToOrderWidget(int,int)));
+    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(StartStrategy()));
+    connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(PauseStrategy()));
+    connect(ui->pushButton_3, SIGNAL(clicked()), this, SLOT(StopStrategy()));
+    connect(ui->pushButton_4, SIGNAL(clicked()), this, SLOT(LiquidateStrategy()));
+
     clientMQ->start();
 
 }
@@ -56,6 +66,78 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::SetParamsToOrderWidget(int row,int column)
+{
+    QString symbol=ui->tableWidgetMarket->item(row,0)->text();
+    ui->LineEditCode->setText(symbol);
+
+    QString name=ui->tableWidgetMarket->item(row,1)->text();
+    ui->LineEditName->setText(name);
+
+    QString askprice=ui->tableWidgetMarket->item(row,7)->text();
+    ui->LineEdit_Price->setText(askprice);
+
+}
+
+void MainWindow::TranslateToEnglish()
+{
+	QTranslator translator;
+	translator.load("en.qm");
+	qApp->installTranslator(&translator);
+	ui->retranslateUi(this);
+
+}
+void MainWindow::TranslateToChinese()
+{
+    QTranslator translator;
+    translator.load("cn.qm");
+    qApp->installTranslator(&translator);
+    ui->retranslateUi(this);
+
+}
+
+
+void MainWindow::StartStrategy()
+{
+    bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
+    if(focus)
+    {
+      int row1 = ui->tableWidgetStrategy->currentItem()->row(); // 当前选中行
+      //todo: startStratey
+    }
+
+}
+void MainWindow::PauseStrategy()
+{
+	bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
+	if (focus)
+	{
+		int row1 = ui->tableWidgetStrategy->currentItem()->row(); // 当前选中行
+																  //todo: startStratey
+	}
+}
+void MainWindow::StopStrategy()
+{
+    bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
+    if(focus)
+    {
+      int row1 = ui->tableWidgetStrategy->currentItem()->row(); // 当前选中行
+      //todo: StopStrategy
+    }
+
+}
+
+void MainWindow::LiquidateStrategy()
+{
+    bool focus = ui->tableWidgetStrategy->isItemSelected(ui->tableWidgetStrategy->currentItem()); // 判断是否选中一行
+    if(focus)
+    {
+      int row1 = ui->tableWidgetStrategy->currentItem()->row(); // 当前选中行
+      //todo: LiquidateStrategy
+    }
+
 }
 
 void MainWindow::InitMarket()
@@ -232,27 +314,104 @@ void MainWindow::on_pushButton_Order_clicked()
 }
 
 void MainWindow::OrderStatusHandler(string& msg) {
+    //update order status
+    vector<string> v = stringsplit(msg, '|');
 
+    auto index =std::find(orderids.begin(),orderids.end(),QString(v[1].c_str())); //broker_order_id
+
+    if(index==orderids.end())
+    {
+        return;
+    }
+    int row =index-orderids.begin();
+    ui->tableWidgetOrder->setItem(row, 9, new QTableWidgetItem(v[2].c_str()));
 }
 
 void MainWindow::FillHandler(string& msg) {
+    //update fill table
+    ui->tableWidgetFill->insertRow(0);
+
+	vector<string> v = stringsplit(msg, '|');
+    //m.broker_order_id = v[1]
+    //m.internal_order_id = v[1]
+    //m.timestamp = v[2]
+    //m.fill_price = v[3]
+    //m.fill_size = v[4]
+    //self.setItem(0, 0, QtWidgets.QTableWidgetItem(fillevent.broker_order_id))
+    //self.setItem(0, 2, QtWidgets.QTableWidgetItem(fillevent.full_symbol))
+    //self.setItem(0, 7, QtWidgets.QTableWidgetItem(fillevent.fill_price))
+    //self.setItem(0, 8, QtWidgets.QTableWidgetItem(fillevent.fill_size))
+    //self.setItem(0, 9, QtWidgets.QTableWidgetItem(fillevent.timestamp))
+    ui->tableWidgetFill->setItem(0, 0, new QTableWidgetItem(v[1].c_str()));
+    ui->tableWidgetFill->setItem(0, 2, new QTableWidgetItem(v[1].c_str()));
+    ui->tableWidgetFill->setItem(0, 7, new QTableWidgetItem(v[3].c_str()));
+    ui->tableWidgetFill->setItem(0, 8, new QTableWidgetItem(v[4].c_str()));
+    ui->tableWidgetFill->setItem(0, 9, new QTableWidgetItem(v[2].c_str()));
 
 }
 
 void MainWindow::PositionHandler(string& msg) {
+    //update position table
+    ui->tableWidgetPosition ->insertRow(0);
+
+    vector<string> v = stringsplit(msg, '|');
+    ui->tableWidgetPosition->setItem(0, 0, new QTableWidgetItem(v[1].c_str()));
+    ui->tableWidgetPosition->setItem(0, 2, new QTableWidgetItem(v[1].c_str()));
+    ui->tableWidgetPosition->setItem(0, 7, new QTableWidgetItem(v[3].c_str()));
+    ui->tableWidgetPosition->setItem(0, 8, new QTableWidgetItem(v[4].c_str()));
+    ui->tableWidgetPosition->setItem(0, 9, new QTableWidgetItem(v[2].c_str()));
 
 }
 
 
 void MainWindow::HistoricalHandler(string& msg) {
 
+    //string msg = CConfig::instance().hist_msg
+    //            + SERIALIZATION_SEPARATOR + symbol
+    //            + SERIALIZATION_SEPARATOR + time
+    //            + SERIALIZATION_SEPARATOR + std::to_string(open)
+    //            + SERIALIZATION_SEPARATOR + std::to_string(high)
+    //            + SERIALIZATION_SEPARATOR + std::to_string(low)
+    //            + SERIALIZATION_SEPARATOR + std::to_string(close)
+    //            + SERIALIZATION_SEPARATOR + std::to_string(volume)
+    //            + SERIALIZATION_SEPARATOR + std::to_string(barcount)
+    //            + SERIALIZATION_SEPARATOR + std::to_string(wap);
+    vector<string> v = stringsplit(msg, '|');
+    //todo: save historical data to local storage
+
 }
 
 void MainWindow::AccountHandler(string& msg) {
+    //update position table
+    ui->tableWidgetAccount ->insertRow(0);
+
+    vector<string> v = stringsplit(msg, '|');
+    for (int j = 0; j < 8 ; j++)
+    {
+        ui->tableWidgetAccount->setItem(0, j, new QTableWidgetItem(v[j+1].c_str()));
+    }
+    //timestamp
+    ui->tableWidgetAccount->setItem(0, 10, new QTableWidgetItem(v[8].c_str()));
 
 }
 
 void MainWindow::ContractHandler(string& msg) {
+    //string msg = CConfig::instance().contract_msg
+    //            + SERIALIZATION_SEPARATOR + symbol
+    //            + SERIALIZATION_SEPARATOR + local_name
+    //            + SERIALIZATION_SEPARATOR + min_tick;
+    vector<string> v = stringsplit(msg, '|');
+    map<string, string>::iterator it_find;
+    it_find = contracts.find(v[1]);
+    if(it_find != contracts.end())
+    {
+        it_find->second=v[3];
+    }
+    else
+    {
+        contracts.insert(pair<string, string>(v[1], v[3]));
+    }
+    //todo: need to show on UI.
 
 }
 

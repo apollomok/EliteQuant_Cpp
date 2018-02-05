@@ -24,7 +24,6 @@
 #include <cereal/include/cereal/types/vector.hpp>
 #include <cereal/include/cereal/types/string.hpp>
 #include <cereal/include/cereal/types/map.hpp>
-#include <yaml-cpp/yaml.h>
 #include <Common/Logger/logger.h>
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -61,12 +60,12 @@ namespace EliteQuant {
 #define PRINT_TO_FILE logger::instance().Printf2File
 
 #define PRINT_TO__CONSOLE(...) do{\
-printf("%s ",ymdhmsf().c_str());printf(__VA_ARGS__);\
+printf("%s ",ymdhms().c_str());printf(__VA_ARGS__);\
 }while (0)
 
 #define PRINT_TO_FILE_AND_CONSOLE(...) do{\
 logger::instance().Printf2File(__VA_ARGS__);\
-printf("%s ",ymdhmsf().c_str());printf(__VA_ARGS__);\
+printf("%s ",ymdhms().c_str());printf(__VA_ARGS__);\
 }while (0)
 
 #define PRINT_SHUTDOWN_MESSAGE printf("\n Thank you for using EliteQuant http://www.elitequant.com. Goodbye! \n");
@@ -76,7 +75,7 @@ printf("%s ",ymdhmsf().c_str());printf(__VA_ARGS__);\
 	};
 
 	enum class BROKERS : uint8_t {
-		IB = 0, CTP, GOOGLE, SINA, PAPER
+		IB = 0, CTP, GOOGLE, SINA, PAPER, BTCC, OKCOIN
 	};
 
 	enum class MSGQ : uint8_t {
@@ -99,7 +98,6 @@ printf("%s ",ymdhmsf().c_str());printf(__VA_ARGS__);\
 
 		static CConfig& instance();
 
-		YAML::Node config_server_;			// save config
 		void readConfig();
 
 		string _config_dir;
