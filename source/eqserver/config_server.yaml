@@ -84,5 +84,5 @@ your_simnow_account2:
   port: 7498          # Two IB accounts should have different ports
   base_currency: USD
   tickers:
-    - BTCUSD
+    - btc_usd
 # ----------------- End of OKCOIN  ------------------#
