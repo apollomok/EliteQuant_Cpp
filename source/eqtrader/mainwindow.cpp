@@ -382,7 +382,7 @@ void MainWindow::HistoricalHandler(string& msg) {
 }
 
 void MainWindow::AccountHandler(string& msg) {
-    //update position table
+    //update account table
     ui->tableWidgetAccount ->insertRow(0);
 
     vector<string> v = stringsplit(msg, '|');
