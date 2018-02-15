@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EliteQuant", "EliteQuant\EliteQuant.vcxproj", "{2E1B1DCB-761A-48D8-A4BC-152F1D67EAEF}"
 EndProject
@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "eqserver", "eqserver\eqserv
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unittest", "unittest\unittest.vcxproj", "{EAD34D81-07A5-4B62-B547-E2CD45680D66}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "eqtrader", "eqtrader\build\eqtrader.vcxproj", "{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "eqtrader", "eqtrader\eqtrader.vcxproj", "{3E103D62-1B6C-3B22-A226-2840B0680A6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,18 +75,20 @@ Global
 		{EAD34D81-07A5-4B62-B547-E2CD45680D66}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
 		{EAD34D81-07A5-4B62-B547-E2CD45680D66}.RelWithDebInfo|x86.Build.0 = Release|Win32
 		{EAD34D81-07A5-4B62-B547-E2CD45680D66}.RelWithDebInfo|x86.Deploy.0 = Release|Win32
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.Debug|x64.ActiveCfg = Debug|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.Debug|x64.Build.0 = Debug|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.Debug|x86.ActiveCfg = Debug|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.MinSizeRel|x86.ActiveCfg = MinSizeRel|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.Release|x64.ActiveCfg = Release|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.Release|x64.Build.0 = Release|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.Release|x86.ActiveCfg = Release|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
-		{3A19A0C8-E911-32CB-A4DC-AAB0CA5EE274}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.Debug|x64.ActiveCfg = Debug|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.Debug|x64.Build.0 = Debug|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.Debug|x86.ActiveCfg = Debug|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.MinSizeRel|x64.Build.0 = Release|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.MinSizeRel|x86.ActiveCfg = Release|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.MinSizeRel|x86.Build.0 = Release|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.Release|x64.ActiveCfg = Release|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.Release|x64.Build.0 = Release|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.Release|x86.ActiveCfg = Release|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.RelWithDebInfo|x86.ActiveCfg = Release|x64
+		{3E103D62-1B6C-3B22-A226-2840B0680A6A}.RelWithDebInfo|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

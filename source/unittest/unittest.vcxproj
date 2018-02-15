@@ -25,7 +25,7 @@
     <ProjectGuid>{EAD34D81-07A5-4B62-B547-E2CD45680D66}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>libtest</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -115,7 +115,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Workspace\boost\stage\lib;$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\Anaconda3\libs\python3.lib;C:\Anaconda3\libs\python36.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmdd.lib;$(SolutionDir)$(Platform)\$(Configuration)\EliteQuant.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>D:\ProgramData\Anaconda3\libs\python3.lib;D:\ProgramData\Anaconda3\libs\python36.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmdd.lib;$(SolutionDir)$(Platform)\$(Configuration)\EliteQuant.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

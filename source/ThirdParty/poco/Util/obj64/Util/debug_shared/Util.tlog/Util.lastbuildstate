@@ -1,0 +1,2 @@
+#TargetFrameworkVersion=v4.0:PlatformToolSet=v141:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.15063.0
+debug_shared|x64|D:\Workspace\EliteQuant_Cpp\source\ThirdParty\poco\Util\|

@@ -85,6 +85,9 @@
     <Filter Include="Brokers\BTC">
       <UniqueIdentifier>{361eea30-7254-4346-a6c4-f79f4a7d14f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Brokers\OkCoin">
+      <UniqueIdentifier>{6fe168cb-4e70-4daf-af54-c6d9234ef2a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brokers\Google\googledatafeed.cpp">

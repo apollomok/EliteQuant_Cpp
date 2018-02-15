@@ -22,7 +22,7 @@
     <ProjectGuid>{2E1B1DCB-761A-48D8-A4BC-152F1D67EAEF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>EliteQuant</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -93,7 +93,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ELITEQUANT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)EliteQuant\;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;$(SolutionDir)ThirdParty\websocketpp\;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\rapidjson\include\;C:\Anaconda3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)EliteQuant\;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;$(SolutionDir)ThirdParty\websocketpp\;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\rapidjson\include\;D:\ProgramData\Anaconda3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -109,7 +109,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>BOOST_PYTHON_STATIC_LIB;IB_USE_STD_STRING;DLL_EXPORT;_DEBUG;_WINDOWS;_USRDLL;ELITEQUANT_EXPORTS;TWSAPIDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)EliteQuant\;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;$(SolutionDir)ThirdParty\websocketpp\;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\rapidjson\include\;C:\Anaconda3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)EliteQuant\;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;$(SolutionDir)ThirdParty\websocketpp\;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\rapidjson\include\;D:\OpenSSL-Win64\include\;$(SolutionDir)ThirdParty\poco\Foundation\include\;$(SolutionDir)ThirdParty\poco\Net\include\;$(SolutionDir)ThirdParty\poco\NetSSL_OpenSSL\include\;$(SolutionDir)ThirdParty\poco\JSON\include\;$(SolutionDir)ThirdParty\poco\Crypto\include\;D:\ProgramData\Anaconda3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>-D_WIN32_WINNT=0x0501 %(AdditionalOptions)</AdditionalOptions>
@@ -117,8 +117,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\OpenSSL\lib;D:\Workspace\poco-1.8.1-all\lib64;D:\Workspace\boost\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\Anaconda3\libs\python36.lib;C:\Anaconda3\libs\python3.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thostmduserapi.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thosttraderapi.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmdd.lib;$(SolutionDir)ThirdParty\zeromq\bin\$(Platform)\$(Configuration)\v141\dynamic\libzmq.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Workspace\boost\stage\lib;D:\OpenSSL-Win64\lib;$(SolutionDir)ThirdParty\poco\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\ProgramData\Anaconda3\libs\python36.lib;D:\ProgramData\Anaconda3\libs\python3.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thostmduserapi.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thosttraderapi.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmdd.lib;$(SolutionDir)ThirdParty\zeromq\bin\$(Platform)\$(Configuration)\v141\dynamic\libzmq.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,7 +147,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>BOOST_PYTHON_STATIC_LIB;IB_USE_STD_STRING;DLL_EXPORT;NDEBUG;_WINDOWS;_USRDLL;ELITEQUANT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)EliteQuant\;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;$(SolutionDir)ThirdParty\websocketpp\;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\rapidjson\include\;C:\Anaconda3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)EliteQuant\;D:\Workspace\boost;$(SolutionDir)ThirdParty;$(SolutionDir)ThirdParty\cereal\include\;$(SolutionDir)ThirdParty\yaml-cpp\include\;$(SolutionDir)ThirdParty\websocketpp\;$(SolutionDir)ThirdParty\zeromq\include\;$(SolutionDir)ThirdParty\rapidjson\include\;d:\OpenSSL-Win64\include;$(SolutionDir)ThirdParty\poco\Foundation\include\;$(SolutionDir)ThirdParty\poco\Net\include\;$(SolutionDir)ThirdParty\poco\NetSSL_OpenSSL\include\;$(SolutionDir)ThirdParty\poco\JSON\include\;$(SolutionDir)ThirdParty\poco\Crypto\include\;D:\ProgramData\Anaconda3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>-D_WIN32_WINNT=0x0501 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -156,8 +156,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Workspace\boost\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\Anaconda3\libs\python36.lib;C:\Anaconda3\libs\python3.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thostmduserapi.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thosttraderapi.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmd.lib;$(SolutionDir)ThirdParty\zeromq\bin\$(Platform)\$(Configuration)\v141\dynamic\libzmq.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Workspace\boost\stage\lib;d:\OpenSSL-Win64\lib;$(SolutionDir)ThirdParty\poco\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\ProgramData\Anaconda3\libs\python36.lib;D:\ProgramData\Anaconda3\libs\python3.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thostmduserapi.lib;$(SolutionDir)EliteQuant\Brokers\Ctp\thosttraderapi.lib;$(SolutionDir)ThirdParty\nanomsg\build\$(Configuration)\nanomsg.lib;$(SolutionDir)ThirdParty\yaml-cpp\build\$(Configuration)\libyaml-cppmd.lib;$(SolutionDir)ThirdParty\zeromq\bin\$(Platform)\$(Configuration)\v141\dynamic\libzmq.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
