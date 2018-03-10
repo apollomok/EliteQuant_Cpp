@@ -74,4 +74,4 @@ set(EliteQuantCppSrc
 #    IMPORTED_LOCATION /usr/lib/x86_64-linux-gnu/libboost_python.a)
 add_library(elitequant SHARED ${EliteQuantCppSrc})
 set_target_properties(elitequant  PROPERTIES COMPILE_FLAGS "-fPIC")
-target_link_libraries(elitequant  boost_python-py35  boost_system boost_filesystem boost_date_time python3.5m yaml-cpp zmq thosttraderapi thostmduserapi zmq yaml-cpp sandbox_vs_dll nanomsg pthread dl util m PocoNet PocoUtil PocoJSON PocoXML PocoFoundation)
+target_link_libraries(elitequant  boost_python-py35  boost_system boost_filesystem boost_date_time python3.5m yaml-cpp zmq thosttraderapi thostmduserapi zmq yaml-cpp sandbox_vs_dll nanomsg pthread dl util m PocoUtil PocoFoundation PocoXML PocoJSON  PocoNetSSL PocoNet )

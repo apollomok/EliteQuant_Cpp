@@ -6,21 +6,21 @@
 #include <boost/property_tree/ptree.hpp>  
 #include <boost/algorithm/string/find.hpp>
 
-#include "Poco/Net/HTMLForm.h"  
-#include "Poco/URI.h"  
-#include "Poco/Net/HTTPClientSession.h"  
-#include "Poco/Net/HTTPRequest.h"  
-#include "Poco/Net/HTTPResponse.h"  
-#include "Poco/StreamCopier.h"  
-#include "Poco/Net/NetException.h"  
+#include <Poco/Net/HTMLForm.h>
+#include <Poco/URI.h>  
+#include <Poco/Net/HTTPClientSession.h>  
+#include <Poco/Net/HTTPRequest.h>  
+#include <Poco/Net/HTTPResponse.h>  
+#include <Poco/StreamCopier.h>  
+#include <Poco/Net/NetException.h>  
 
-#include "Poco/JSON/Object.h"  
-#include "Poco/JSON/Parser.h"  
-#include "Poco/Dynamic/Var.h"  
+#include <Poco/JSON/Object.h>  
+#include <Poco/JSON/Parser.h>  
+#include <Poco/Dynamic/Var.h>  
 
-#include "Poco/Net/HTTPSClientSession.h"  
-#include "Poco/Net/Context.h"  
-#include "Poco/Net/SSLException.h"  
+#include <Poco/Net/HTTPSClientSession.h>  
+#include <Poco/Net/Context.h>  
+#include <Poco/Net/SSLException.h>  
 
 #include <iostream>
 #include <istream>
@@ -153,7 +153,7 @@ namespace EliteQuant
 				iss.str(temp);
 				boost::property_tree::ptree parser;
 				boost::property_tree::json_parser::read_json(iss, parser);
-			
+				boost::property_tree::ptree ticker = parser.get_child("ticker");
 				/*
 				# Request
 					GET https ://www.okcoin.com/api/v1/ticker.do?symbol=ltc_usd
@@ -178,9 +178,6 @@ namespace EliteQuant
 				vol: 成交量(最近的24小时)
 				*/
 				FullTick k;
-				k.time_ = parser.get<std::string>("date");
-				boost::property_tree::ptree ticker = parser.get_child("ticker");
-				k.fullsymbol_ = "btc_usd";
 				k.bidprice_L1_=ticker.get<double>("buy");
 				k.askprice_L1_=ticker.get<double>("sell");
 				//k.open_=ticker.get<double>("");
