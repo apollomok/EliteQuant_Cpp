@@ -32,7 +32,7 @@ namespace EliteQuant {
 			AccountInfo a;
 			a.AccountID = s;
 			a.api = config[s]["api"].as<std::string>();
-			a.brokerage = config[s]["broker"].as<std::string>();
+			a.brokerage = config[s]["broker_id"].as<std::string>();
 			accounts_[s] = a;
 		}
 	}

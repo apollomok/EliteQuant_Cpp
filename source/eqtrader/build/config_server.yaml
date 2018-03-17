@@ -1,14 +1,14 @@
 #------------------ System Setting --------------#
 accounts:    # accounts active for trading
   #- 107957 
-  - DU15011
+  - 107957
 msgq: nanomsg           # nanomsg kafka, zmq
 log_dir: d:/workspace/elitequant_cpp/log
 data_dir: d:/workspace/elitequant_cpp/data
 #------------------ End of System ---------------#
 
 #-------------- Interactive Brokers -------------#
-DU15011:
+DU15045:
   broker: IB                 # IB CTP SINA, GOOGLE, PAPER
   api: IB
   port: 7497
@@ -32,19 +32,20 @@ DU15146:
 # ----------------- End of IB  ------------------#
 
 #----------------- Ctp --------------------------#
+#----------------- Ctp --------------------------#
 107957:
-  broker: 9999
+  broker_id: 9999
   api: CTP
-  password: 081214
+  password: your_simnow_pass
   auth_code: NA             # NA or actual auth code
   user_prod_info: NA        # NA or actual user info
   md_address: tcp://180.168.146.187:10010
   td_address: tcp://180.168.146.187:10001
   base_currency: CNY
   tickers:
-    - IC1801
+    - IC1802
     - IC1803
-    - IF1801
+    - IF1803
     - al1802
     - al1803
     - cu1802
@@ -56,7 +57,7 @@ DU15146:
     - ru1805
 
 your_simnow_account2:
-  broker: 9999
+  broker_id: 9999
   api: CTP
   password: your_simnow_pass2
   auth_code: NA             # NA or actual auth code
@@ -75,3 +76,12 @@ your_simnow_account2:
     - cu1712
     - cu1801
 # ---------------- End of CTP  ------------------#
+#----------------- BTCC --------------------------#
+100000:
+  broker: BTCC
+  api: BTCC
+  port: 7498          # Two IB accounts should have different ports
+  base_currency: USD
+  tickers:
+    - BTCUSD
+# ----------------- End of BTCC  ------------------#
