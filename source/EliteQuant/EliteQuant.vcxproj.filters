@@ -82,6 +82,9 @@
     <Filter Include="Brokers\IB\Official">
       <UniqueIdentifier>{ad327dc9-4ad0-4edb-bad8-a14d3761fcaf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Brokers\BTC">
+      <UniqueIdentifier>{361eea30-7254-4346-a6c4-f79f4a7d14f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brokers\Google\googledatafeed.cpp">
@@ -281,6 +284,12 @@
     </ClCompile>
     <ClCompile Include="Brokers\IB\Official\VolumeCondition.cpp">
       <Filter>Brokers\IB\Official</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\BtcChina\btcchinadatafeed.cpp">
+      <Filter>Brokers\BTC</Filter>
+    </ClCompile>
+    <ClCompile Include="Brokers\OkCoin\okcoindatafeed.cpp">
+      <Filter>Brokers\BTC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -580,6 +589,12 @@
     </ClInclude>
     <ClInclude Include="Brokers\IB\Official\VolumeCondition.h">
       <Filter>Brokers\IB\Official</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\BtcChina\btcchinadatafeed.h">
+      <Filter>Brokers\BTC</Filter>
+    </ClInclude>
+    <ClInclude Include="Brokers\OkCoin\okcoindatafeed.h">
+      <Filter>Brokers\BTC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

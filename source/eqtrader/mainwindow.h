@@ -22,6 +22,7 @@
 #include <Common/Account/accountmanager.h>
 
 #include "clientmq.h"
+#include "strategymanager.h"
 
 namespace Ui {
 class MainWindow;
@@ -45,6 +46,9 @@ private:
     Ui::MainWindow *ui;
 
     vector<QString> securities;
+    vector<QString> orderids;
+    map<string, string> contracts;
+    StrategyManager *strategyManager;
     void readConfig();
     void InitMarket();
 
@@ -64,6 +68,13 @@ public slots:
 	void    IncomingGeneralSlot(string   sMessage);
 private slots:
     void on_pushButton_Order_clicked();
+	void SetParamsToOrderWidget(int row, int column);
+	void StartStrategy();
+	void PauseStrategy();
+	void StopStrategy();
+	void LiquidateStrategy();
+	void TranslateToEnglish();
+	void TranslateToChinese();
 };
 
 #endif // MAINWINDOW_H

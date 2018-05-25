@@ -113,20 +113,20 @@ void ClientMQ::run()
 
         }
 
-        /*if(outgoing_queue.size()>0)
+        if(outgoing_queue.size()>0)
         {
             QString msg3 = outgoing_queue.front();
             outgoing_queue.pop();
             string msg3stdstr=msg3.toStdString();
             printf("send order msg: %s",msg3stdstr.c_str());
             nn_send(msg_sock,msg3stdstr.c_str(), msg3stdstr.size(),0);
-        }*/
+        }
     }
 }
 
 void ClientMQ::OutgoingMessageSlot(string order)
 {
-    // outgoing_queue.push(order);
+    outgoing_queue.push(QString::fromStdString(order));
 }
 ClientMQ::~ClientMQ()
 {
